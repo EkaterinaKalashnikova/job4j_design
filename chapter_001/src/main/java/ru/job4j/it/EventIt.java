@@ -34,7 +34,11 @@ public class EventIt implements Iterator<Integer> {
      */
     @Override
     public boolean hasNext() {
-        return index < numbers.length && numbers[ index ] != 0;
+        while (numbers[ index ] % 2 != 0) {
+            index++;
+        }
+        return false;
+       // return index < numbers.length && numbers[ index ] != 0;
     }
 
     /**
