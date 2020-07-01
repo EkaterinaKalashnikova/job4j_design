@@ -57,9 +57,10 @@ public class MatrixIt implements Iterator<Integer> {
         } else if (column < data[ row ].length) {
             column = 0;
             row++;
-            return data[ row ][ column++ ];
+            //return data[ row ][ column++ ];
         }
-        return data[ row++ ][ column ];
+       // return data[ row++ ][ column ];
+        return data[ row ][ column++ ];
     }
 }
 
