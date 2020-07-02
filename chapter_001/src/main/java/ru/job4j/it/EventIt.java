@@ -34,10 +34,14 @@ public class EventIt implements Iterator<Integer> {
      */
     @Override
     public boolean hasNext() {
-        while (numbers[ index ] % 2 != 0) {
-            index++;
-        }
-        return false;
+        while (index < numbers.length) {
+         //   if (this.printEvenNumbers() == 0) {
+                if (numbers[ index ] % 2 == 0) {
+                break;
+                }
+              index++;
+            }
+        return true;
        // return index < numbers.length && numbers[ index ] != 0;
     }
 
@@ -58,7 +62,7 @@ public class EventIt implements Iterator<Integer> {
     /**
      * Метод вывода четных значений в массиве
      */
-    public void printEvenNumbers() {
+    private int printEvenNumbers() {
         int result = -1;
         for (int i = this.index; i < this.numbers.length; i++) {
             if (this.numbers[ i ] % 2 == 0) {
@@ -66,5 +70,6 @@ public class EventIt implements Iterator<Integer> {
                 result++;
             }
         }
+        return result;
     }
 }
