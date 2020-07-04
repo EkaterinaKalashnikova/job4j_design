@@ -37,14 +37,13 @@ public class EventIt implements Iterator<Integer> {
     @Override
     public boolean hasNext() {
         while (index < numbers.length && numbers[ index ] != 0) {
+           // if (numbers[index] % 2 == 0) {
             if (this.printEvenNumbers() == 0) {
-               // if ( numbers[ index ] % 2 == 0 ){
                     break;
                 }
                 index++;
             }
             return false;
-            // return index < numbers.length && numbers[ index ] != 0;
         }
 
 
@@ -71,7 +70,7 @@ public class EventIt implements Iterator<Integer> {
                 if (this.numbers[ i ] % 2 == 0) {
                     this.index = i;
                     result++;
-                    // break;
+                    break;
                 }
             }
             return result;
