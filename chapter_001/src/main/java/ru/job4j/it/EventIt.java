@@ -22,6 +22,7 @@ public class EventIt implements Iterator<Integer> {
 
     /**
      * Конструктор инициализации массива
+     *
      * @param numbers
      */
     public EventIt(final int[] numbers) {
@@ -29,47 +30,50 @@ public class EventIt implements Iterator<Integer> {
     }
 
     /**
-     *Метод проверяет есть ли следующий элемент в массиве
+     * Метод проверяет есть ли следующий элемент в массиве
+     *
      * @return возвращает позицию
      */
     @Override
     public boolean hasNext() {
-        while (index < numbers.length) {
-         //   if (this.printEvenNumbers() == 0) {
-                if (numbers[ index ] % 2 == 0) {
-                break;
+        while (index < numbers.length && numbers[ index ] != 0) {
+            if (this.printEvenNumbers() == 0) {
+               // if ( numbers[ index ] % 2 == 0 ){
+                    break;
                 }
-              index++;
+                index++;
             }
-        return true;
-       // return index < numbers.length && numbers[ index ] != 0;
-    }
-
-    /**
-     * Метод возвращает четное значение или если его нет: сообщает
-     * @return четные значения
-     * @throws NoSuchElementException
-     */
-    @Override
-    public Integer next() throws NoSuchElementException {
-        if (!this.hasNext()) {
-            throw new NoSuchElementException("Четные элементы закончились)");
-        } else {
-            return this.numbers[ this.index++ ];
+            return false;
+            // return index < numbers.length && numbers[ index ] != 0;
         }
-    }
 
-    /**
-     * Метод вывода четных значений в массиве
-     */
-    private int printEvenNumbers() {
-        int result = -1;
-        for (int i = this.index; i < this.numbers.length; i++) {
-            if (this.numbers[ i ] % 2 == 0) {
-                this.index = i;
-                result++;
+
+        /**
+         * Метод возвращает четное значение или если его нет: сообщает
+         * @return четные значения
+         * @throws NoSuchElementException
+         */
+        @Override
+        public Integer next() throws NoSuchElementException {
+            if (this.hasNext()) {
+                return this.numbers[ this.index++ ];
+            } else {
+                throw new NoSuchElementException("Четные элементы закончились)");
             }
         }
-        return result;
+
+        /**
+         * Метод вывода четных значений в массиве
+         */
+        private int printEvenNumbers() {
+            int result = -1;
+            for (int i = this.index; i < this.numbers.length; i++) {
+                if (this.numbers[ i ] % 2 == 0) {
+                    this.index = i;
+                    result++;
+                    // break;
+                }
+            }
+            return result;
+        }
     }
-}
