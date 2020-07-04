@@ -32,20 +32,15 @@ public class EventIt implements Iterator<Integer> {
     /**
      * Метод проверяет есть ли следующий элемент в массиве
      *
-     * @return возвращает позицию
+     * @return возвращает четные элементы, которые есть до указателя
      */
     @Override
     public boolean hasNext() {
-        while (index < numbers.length && numbers[ index ] != 0) {
-           // if (numbers[index] % 2 == 0) {
-            if (this.printEvenNumbers() == 0) {
-                    break;
-                }
+        if (this.printEvenNumbers() != 0) {
                 index++;
             }
-            return false;
+           return index < numbers.length;
         }
-
 
         /**
          * Метод возвращает четное значение или если его нет: сообщает
