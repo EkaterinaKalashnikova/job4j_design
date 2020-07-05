@@ -36,11 +36,8 @@ public class EventIt implements Iterator<Integer> {
      */
     @Override
     public boolean hasNext() {
-        if (this.printEvenNumbers() != 0) {
-                index++;
-            }
-           return index < numbers.length;
-        }
+        return this.printEvenNumbers() == 0;
+    }
 
         /**
          * Метод возвращает четное значение или если его нет: сообщает
@@ -51,9 +48,8 @@ public class EventIt implements Iterator<Integer> {
         public Integer next() throws NoSuchElementException {
             if (this.hasNext()) {
                 return this.numbers[ this.index++ ];
-            } else {
-                throw new NoSuchElementException("Четные элементы закончились)");
             }
+            throw new NoSuchElementException("Четные элементы закончились)");
         }
 
         /**
