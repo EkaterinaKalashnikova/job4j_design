@@ -10,24 +10,20 @@ import java.util.NoSuchElementException;
  * @science 28.06.2020
  */
 
+
 public class MatrixIt implements Iterator<Integer> {
     /**
      * Двумерный массив
-     */
-    private final int[][] data;
-
-    /**
      * Указатель строки текущего элемента
-     */
-    private int row = 0;
-
-    /**
      * Указатель столбца текущего элемента
      */
+    private final int[][] data;
+    private int row = 0;
     private int column = 0;
 
     /**
-     * Конструктор
+     * Конструктор,инициализирующий массив
+     *
      * @param data
      */
     public MatrixIt(int[][] data) {
@@ -35,31 +31,36 @@ public class MatrixIt implements Iterator<Integer> {
     }
 
     /**
-     * Метод проверяет строки в массиве
+     * Метод проверяет строки в массиве,
+     * чтобы шаг итератора не вышел за пределы солбцов
+     *
      * @return строки в массиве
      */
+
     @Override
     public boolean hasNext() {
-        if (row + 1 == data.length) {
-            return column < data[ row ].length;
+        while (row < data.length && column < data[row].length) {
+            column = 0;
+            row++;
         }
-        return row < data.length;
+        return true;
     }
 
     /**
      * Метод выодит значения массива поочередно
+     *
      * @return значения двумерного массива с текущими элементами
+     * @throw NoSuchElementException();
      */
+
     @Override
     public Integer next() {
         if (!hasNext()) {
             throw new NoSuchElementException();
-        } else if (column < data[ row ].length) {
-            column = 0;
-            row++;
-            return data[ row ][ column++ ];
         }
-       return data[column][row];
+        return data[row][column++];
     }
 }
+
+
 
