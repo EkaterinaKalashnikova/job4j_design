@@ -1,8 +1,8 @@
 package ru.job4j.generic;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
+import java.util.Objects;
 
 public class SimpleArray<T> implements Iterable<T> {
 
@@ -35,6 +35,7 @@ public class SimpleArray<T> implements Iterable<T> {
      * @param model новое значение после изменения
      */
     public void set(int index, T model) {
+        Objects.checkIndex(index, this.index);
         this.array[index] = model;
     }
 
@@ -45,6 +46,7 @@ public class SimpleArray<T> implements Iterable<T> {
      * @param index текущая ячейка для удаления
      */
     public void remove(int index) {
+       Objects.checkIndex(index, this.index);
        System.arraycopy(array, index + 1, array, index, array.length - index - 1);
        array[--this.index] = null;
     }
@@ -55,6 +57,7 @@ public class SimpleArray<T> implements Iterable<T> {
      * @return значение в текущей ячейке
      */
     public T get(int index) {
+        Objects.checkIndex(index, this.index);
         return (T) this.array[index];
     }
 
@@ -70,11 +73,14 @@ public class SimpleArray<T> implements Iterable<T> {
 
             @Override
             public boolean hasNext() {
-                return cursor <= array.length;
+                return cursor < index;
             }
 
             @Override
             public T next() {
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
+                }
                 return (T) array[cursor++];
             }
         };

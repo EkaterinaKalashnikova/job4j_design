@@ -15,23 +15,23 @@ public class SimpleArrayTest {
         String result = array.get(0);
         assertThat(result, is("test"));
     }
-    @Test
+    @Test(expected = IndexOutOfBoundsException.class)
     public void whenAddOneElementTheArrayInteger() {
         SimpleArray<Integer> array = new SimpleArray<>(10);
         array.add(3);
-        Objects.checkIndex(1, 10);
+        assertThat(array.get(1), is(3));
     }
 
-    @Test
+    @Test(expected = IndexOutOfBoundsException.class)
     public void whenRemoveElementCheckModelIsNull() {
         SimpleArray<Integer> array = new SimpleArray<>(10);
          array.add(2);
-         array.remove(4);
-         Objects.checkIndex(4, 10);
+         array.remove(2);
+         Objects.checkIndex(2, 10);
          assertNull(array.get(2));
     }
 
-    @Test
+    @Test(expected = IndexOutOfBoundsException.class)
     public void whenChangesElementAndReturnNewModel() {
         SimpleArray<Integer> array = new SimpleArray<>(10);
         array.add(5);
