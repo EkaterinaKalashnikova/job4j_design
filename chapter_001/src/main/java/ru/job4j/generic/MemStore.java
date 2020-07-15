@@ -33,8 +33,9 @@ public final class MemStore<T extends Base> implements Store<T> {
     @Override
     public T findById(String id) {
         T rsl = null;
-        for (T base : this.mem) {
-            if (base != null && base.getId().equals(id)) {
+        for (int index = 0; index < mem.size(); index++) {
+            T base = mem.get(index);
+            if (base.getId().equals(id)) {
                 rsl = base;
                 break;
             }

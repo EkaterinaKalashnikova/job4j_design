@@ -11,17 +11,17 @@ public class RoleStore implements Store<Role> {
     }
 
     @Override
-    public boolean replace( String id ,Role model ) {
+    public boolean replace(String id, Role model ) {
         return false;
     }
 
     @Override
-    public boolean delete( String id ) {
+    public boolean delete(String id) {
         return false;
     }
 
     @Override
-    public Role findById( String id ) {
+    public Role findById(String id) {
         return null;
     }
 }

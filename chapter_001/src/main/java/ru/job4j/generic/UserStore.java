@@ -32,12 +32,7 @@ public class UserStore implements Store<User> {
     @Override
     public User findById(String id) {
         User result = null;
-       for (User base : this.store) {
-            if (base != null && base.getId().equals(id)) {
-                result = base;
-                break;
-            }
-        }
+
         return result;
     }
 }
