@@ -7,6 +7,7 @@ public final class MemStore<T extends Base> implements Store<T> {
 
     private final List<T> mem = new ArrayList<>();
 
+
     @Override
     public void add(T model) {
         this.mem.add(model);
@@ -33,14 +34,7 @@ public final class MemStore<T extends Base> implements Store<T> {
     @Override
     public T findById(String id) {
         T rsl = null;
-        for (int index = 0; index < mem.size(); index++) {
-            T base = mem.get(index);
-            if (index == mem.indexOf(id)) {
-                rsl = base;
-            } else {
-                index = -1;
-            }
-        }
+
         return rsl;
     }
 }
