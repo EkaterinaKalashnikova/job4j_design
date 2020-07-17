@@ -13,26 +13,16 @@ public class UserStore implements Store<User> {
 
     @Override
     public boolean replace(String id, User model) {
-        User base = this.findById(id);
-        if (base != null) {
-            this.store.replace(id, model);
-        }
-        return false;
+        return store.replace(id, model);
     }
 
     @Override
     public boolean delete(String id) {
-        User base = this.findById(id);
-        if (base != null) {
-            this.store.delete(id);
-        }
-        return false;
+        return store.delete(id);
     }
 
     @Override
     public User findById(String id) {
-        User result = null;
-
-        return result;
+        return store.findById(id);
     }
 }

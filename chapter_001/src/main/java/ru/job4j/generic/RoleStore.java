@@ -6,22 +6,22 @@ public class RoleStore implements Store<Role> {
 
 
     @Override
-    public void add( Role model ) {
-
+    public void add(Role model) {
+        this.store.add(model);
     }
 
     @Override
-    public boolean replace(String id, Role model ) {
-        return false;
+    public boolean replace(String id, Role model) {
+      return store.replace(id, model);
     }
 
     @Override
     public boolean delete(String id) {
-        return false;
+        return store.delete(id);
     }
 
     @Override
     public Role findById(String id) {
-        return null;
+        return store.findById(id);
     }
 }
