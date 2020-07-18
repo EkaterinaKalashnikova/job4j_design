@@ -6,6 +6,9 @@ public class UserStore implements Store<User> {
 
     private final Store<User> store = new MemStore<>();
 
+    public UserStore(User users) {
+    }
+
     @Override
     public void add(User model) {
         this.store.add(model);
