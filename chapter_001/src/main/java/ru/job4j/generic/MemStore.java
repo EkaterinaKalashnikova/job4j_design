@@ -19,7 +19,7 @@ public final class MemStore<T extends Base> implements Store<T> {
            return false;
         }
         mem.set(index, model);
-        return false;
+        return true;
     }
 
     @Override
@@ -47,8 +47,8 @@ public final class MemStore<T extends Base> implements Store<T> {
             if (mem.get(i).getId().equals(id)) {
                 index = i;
                 break;
-                }
             }
+        }
         return index;
     }
 }
