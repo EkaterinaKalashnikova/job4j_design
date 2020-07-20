@@ -25,10 +25,10 @@ public class SimpleArray<T> implements Iterable<T>  {
      * Метод добавляет новый элемент в список.
      */
     public void add(T model) {
-        if (index == container.length  + 1) {
+        if (index == container.length - 1) {
             resize((container.length * 3) / 2 + 1);
-            container[ index++ ] = model;
         }
+        container[ index++ ] = model;
     }
 
     /*
@@ -44,8 +44,7 @@ public class SimpleArray<T> implements Iterable<T>  {
      */
     private void resize(int newLength) {
         Object[] newContainer = new Object[ newLength ];
-        Arrays.copyOf(container, newLength);
-       // System.arraycopy(container, 0, newContainer, 0, index);
+        container = Arrays.copyOf(container, newLength);
         container = newContainer;
     }
 
