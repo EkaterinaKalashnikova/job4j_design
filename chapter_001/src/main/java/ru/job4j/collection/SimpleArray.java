@@ -1,18 +1,17 @@
 package ru.job4j.collection;
 
-import java.util.Arrays;
-import java.util.ConcurrentModificationException;
-import java.util.Iterator;
-import java.util.Objects;
+import java.util.*;
 
 public class SimpleArray<T> implements Iterable<T>  {
 
     /**
-     * Поле массива для хранения десяти объектов.
+     * Поле массива для хранения объектов.
      * Поле для значения текущей ячейки массива.
+     * Поле для подсчета количества элементов в коллекции.
      */
     private Object[] container;
     private  int index = 0;
+    private int modCount = 0;
 
     /**
      * Конструктор по умолчанию создает контейнер для хранения 10 элементов.
@@ -25,30 +24,14 @@ public class SimpleArray<T> implements Iterable<T>  {
      * Метод добавляет новый элемент в список.
      */
     public void add(T model) {
-        if (index == container.length - 1) {
-            resize((container.length * 3) / 2 + 1);
+        if (index == container.length) {
+            container = Arrays.copyOf(container, container.length * 2);
         }
-        container[ index++ ] = model;
+        container[ this.index++ ] = model;
+        modCount++;
     }
 
-    /*
-     * Возвращает количество элементов в списке
-     */
-    public int size() {
-        return index;
-    }
-
-    /**
-     * Вспомогательный метод для адаптации размера массива к новому размеру
-     * @param newLength новая длина нового контейнера
-     */
-    private void resize(int newLength) {
-        Object[] newContainer = new Object[ newLength ];
-        container = Arrays.copyOf(container, newLength);
-        container = newContainer;
-    }
-
-    /**
+     /**
      * Метод возвращает элемент списка по индексу.
      * @param index полученное значение текущей ячейки
      * @return элемент из нее по индексу
@@ -69,24 +52,27 @@ public class SimpleArray<T> implements Iterable<T>  {
             /**
              * Указатель для перебора элементов в контейненре.
              */
-            private int modCount = 0;
+           private int cursor;
 
             /**
              * Значение счетчика на момент создания.
              */
-            int expectedModCount = modCount;
+            private int expectedModCount = modCount;
 
             @Override
             public boolean hasNext() {
-                return this.modCount > expectedModCount;
+               if (expectedModCount != modCount) {
+                   throw new ConcurrentModificationException();
+               }
+                return cursor < index;
             }
 
             @Override
             public T next() {
-                if (this.modCount != expectedModCount) {
-                    throw new ConcurrentModificationException();
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
                 }
-                return (T) container[modCount++];
+                return (T) container[cursor++];
             }
         };
     }
