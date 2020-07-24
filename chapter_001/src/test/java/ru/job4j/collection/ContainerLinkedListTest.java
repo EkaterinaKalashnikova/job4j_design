@@ -10,10 +10,9 @@ public class ContainerLinkedListTest {
 
     @Test
     public void whenLastElementAddToList() {
-        ContainerLinkedList<Integer> list = new ContainerLinkedList <>();
+        ContainerLinkedList<Integer> list = new ContainerLinkedList<>();
         list.add(3);
         Iterator<Integer> iterator = list.iterator();
         assertThat(iterator.next(), is(3));
-
     }
 }

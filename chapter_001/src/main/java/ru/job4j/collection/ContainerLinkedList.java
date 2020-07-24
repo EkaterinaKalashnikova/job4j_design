@@ -12,13 +12,11 @@ public class ContainerLinkedList<E> implements Iterable<E> {
      * Поле для размера списка.
      * Поле первого элемента  в списке.
      * Поле последнего элемента  в списке.
-     * Поле значения текущего указателя.
      */
     private int modCount = 0;
     private int size;
     private Node head;
     private Node tail;
-    public int point;
 
     /**
      * Метод, возвращающий размер контейнера
@@ -41,7 +39,8 @@ public class ContainerLinkedList<E> implements Iterable<E> {
             this.next = next;
         }
 
-        public Node(E value, int point) {
+        public Node(E node) {
+            this.node = node;
         }
 
         public E getNode() {
@@ -67,15 +66,16 @@ public class ContainerLinkedList<E> implements Iterable<E> {
      */
     public void add(E value) {
         if (head == null) {
-            head = new Node(value, point);
+            head = new Node(value);
             size++;
             modCount++;
             return;
         }
-        while (tail.next != null) {
-            tail = tail.next;
+        Node current = head;
+        while (current.next != null) {
+            current = current.next;
         }
-        tail.next = new Node(value, null);
+        current.next = new Node(value);
         size++;
         modCount++;
     }
@@ -88,6 +88,7 @@ public class ContainerLinkedList<E> implements Iterable<E> {
     public E get(int index) {
         Objects.checkIndex(index, size);
         Node next = head;
+        int point = 0;
         while (point != index) {
             next = next.next;
             point++;
@@ -107,9 +108,11 @@ public class ContainerLinkedList<E> implements Iterable<E> {
             /**
              * Значение счетчика на момент создания.
              * Значение элемента на момент создания.
+             * Текущий указатель элемента
              */
             private int expectedModCount = modCount;
             private Node next = head;
+            private int point;
 
             @Override
             public boolean hasNext() {
