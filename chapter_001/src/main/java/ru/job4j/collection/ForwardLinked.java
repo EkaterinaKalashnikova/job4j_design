@@ -6,6 +6,7 @@ import java.util.NoSuchElementException;
 public class ForwardLinked<T> implements Iterable<T> {
     private Node<T> head;
     private Node<T> tail;
+    private T value;
 
     public void add(T value) {
         Node<T> node = new Node<T>(value, null);
@@ -21,25 +22,54 @@ public class ForwardLinked<T> implements Iterable<T> {
     }
 
     /**
-     * Метод удаления элемента из списка, когда проверяем
+     * Метод удаления первого элемента из списка, когда проверяем
      * что список состоит только из одного элемента,
      * из двух: головы и хвоста, если тот который нам нужен это голова,
      * перключаемся на второй, следующий.
-     * @return value - значение оставшегося элемента
      */
-    public T deleteFirst() {
+    public void deleteFirst() {
         if (head == null) {
             throw new NoSuchElementException();
         }
         if (head == tail) {
             head = null;
             tail = null;
-            return null;
+            return;
         }
         T value = (T) head.value;
          head = head.next;
-         return value;
     }
+
+    /**
+     * Метод удаления последнего элемента из списка, когда проверяем
+     * что список состоит только из одного элемента,
+     * из двух: головы и хвоста, если тот который нам нужен это голова,
+     * перключаемся на второй, следующий.
+     * далее продолжаем искать, как дойдем до последнего
+     * переключаем указатель с текущего элемента на последний,
+     * обнуляем его, возвращая удаленный элемент.
+     */
+    public T deleteLast() {
+        if (head == null) {
+            throw new NoSuchElementException();
+        }
+        if (head == tail) {
+            head = null;
+            tail = null;
+        }
+        assert head != null;
+        if (head.value == value) {
+            head = head.next;
+        }
+        Node<T> element = head;
+        while (element.next != null) {
+            element = element.next;
+            }
+        T value = (T) element.value;
+        element.next = null;
+        return value;
+    }
+
 
     @Override
     public Iterator<T> iterator() {
