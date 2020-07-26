@@ -19,4 +19,12 @@ public class SimpleStack<T> {
       this.linked.add(value);
       size++;
     }
+
+    public boolean isEmpty() {
+       return getSize() == 0;
+    }
+
+    public int getSize() {
+        return size;
+    }
 }
