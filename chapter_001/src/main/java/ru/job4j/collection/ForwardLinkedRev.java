@@ -19,8 +19,26 @@ public class ForwardLinkedRev<T> implements Iterable<T> {
         tail.next = node;
     }
 
+    /**
+     * Метод разворачивания связанного списка,
+     * где устанавливаем ссылку текущей, чтобы указывать на предыдущую,
+     * запоминаем элемент, чтобы с него продолжить,
+     * затем изменяем предыдущий элемент, его ссылку, и он становиться текущим,
+     * изменяем первый элемент на тот, который запомнили и так с каждым элементом
+     * до тех пор пока не достигнем последнего элемента
+     * которого вернем как новый головной элемент.
+     */
     public void revert() {
-        //TODO impl reverts of linked list.
+         Node<T> previous = head;
+         Node<T> current = head.next;
+
+         while (current != null) {
+             Node<T> tmp = current.next;
+             current.next = previous;
+             previous = current;
+             current = tmp;
+         }
+         head = previous;
     }
 
     @Override
