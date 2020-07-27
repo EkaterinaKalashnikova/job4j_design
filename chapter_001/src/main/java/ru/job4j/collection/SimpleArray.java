@@ -8,10 +8,12 @@ public class SimpleArray<T> implements Iterable<T>  {
      * Поле массива для хранения объектов.
      * Поле для значения текущей ячейки массива.
      * Поле для подсчета количества элементов в коллекции.
+     * Поле размера массива.
      */
     private Object[] container;
     private  int index = 0;
     private int modCount = 0;
+    private int size = 0;
 
     /**
      * Конструктор по умолчанию создает контейнер для хранения 10 элементов.
@@ -41,7 +43,7 @@ public class SimpleArray<T> implements Iterable<T>  {
         return (T) container[index];
     }
 
-    /**
+     /**
      * Итератор возвращает проход по элементам контейнера
      * @return возвращает итератор по элементам контейнера
      */
@@ -75,5 +77,9 @@ public class SimpleArray<T> implements Iterable<T>  {
                 return (T) container[cursor++];
             }
         };
+    }
+
+    public int size() {
+        return this.size();
     }
 }
