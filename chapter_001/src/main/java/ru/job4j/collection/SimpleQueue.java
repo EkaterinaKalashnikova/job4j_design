@@ -24,6 +24,6 @@ public class SimpleQueue<T> {
      * @param value значение.
      */
     public void push(T value) {
-        out.push(value);
+        in.push(value);
     }
 }
