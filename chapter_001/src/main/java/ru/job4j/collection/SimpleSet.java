@@ -13,19 +13,28 @@ public class SimpleSet<E> implements Iterable<E> {
     /**
      * Метод добавления элементов в контейнер
      * @param value добавляемый элемент
-     * @return false, если такой элемент есть
-     * или true, если такого нет в коллекции и добавляем
      */
-    public boolean add(E value) {
-        boolean flag = false;
-        for (E el : array) {
-            if (Objects.equals(el, value)) {
-                array.add(value);
-                return true;
-            }
+    public void add(E value) {
+        if (!contains(value)) {
+            array.add(value);
         }
-        return flag;
     }
+
+    /**
+     * Метод, проверяющий содержится ли данное значение в контейнере
+     * с другими элементами
+     * @param value добавляемый элемент
+     * @return
+     */
+    private boolean contains(E value) {
+            boolean flag = false;
+            for (E el : array) {
+                if (Objects.equals(el, value)) {
+                    return true;
+                }
+            }
+            return flag;
+        }
 
     /**
      * Метод возвращает размер контейнера
