@@ -80,6 +80,6 @@ public class SimpleArray<T> implements Iterable<T>  {
     }
 
     public int size() {
-        return this.size();
+        return index;
     }
 }
