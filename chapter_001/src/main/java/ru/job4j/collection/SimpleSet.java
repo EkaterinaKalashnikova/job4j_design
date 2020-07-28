@@ -1,6 +1,7 @@
 package ru.job4j.collection;
 
 import java.util.Iterator;
+import java.util.Objects;
 
 public class SimpleSet<E> implements Iterable<E> {
 
@@ -17,9 +18,11 @@ public class SimpleSet<E> implements Iterable<E> {
      */
     public boolean add(E value) {
         boolean flag = false;
-            if (!array.equals(value)) {
+        for (E el : array) {
+            if (Objects.equals(el, value)) {
                 array.add(value);
-            return  true;
+                return true;
+            }
         }
         return flag;
     }
