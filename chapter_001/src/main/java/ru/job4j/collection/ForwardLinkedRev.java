@@ -29,11 +29,11 @@ public class ForwardLinkedRev<T> implements Iterable<T> {
      * которого вернем как новый головной элемент.
      */
     public void revert() {
-         Node<T> previous = head;
-         Node<T> current = head.next;
          if (head == null) {
             return;
          }
+        Node<T> previous = head;
+        Node<T> current = head.next;
         while (current != null) {
              Node<T> tmp = current.next;
              current.next = previous;
