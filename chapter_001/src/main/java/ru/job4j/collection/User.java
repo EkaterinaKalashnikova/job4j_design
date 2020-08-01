@@ -1,6 +1,8 @@
 package ru.job4j.collection;
 
+import java.util.*;
 import java.util.Calendar;
+import java.util.Map;
 
 public class User {
 
@@ -39,7 +41,8 @@ public class User {
 
     /**
      * Конструктор инициализации класса по трем полям
-     * @param name - имя пользователя
+     *
+     * @param name     - имя пользователя
      * @param children - количество детей
      * @param birthday - дни рождения
      */
@@ -47,5 +50,12 @@ public class User {
         this.name = name;
         this.children = children;
         this.birthday = birthday;
+    }
+
+    public static void main(String[] args) {
+        Map<User, Object> users = new HashMap<>();
+        users.put(new User("Nikita", 2, Calendar.getInstance()), 0);
+        users.put(new User("Pavel", 1, Calendar.getInstance()), 1);
+        users.forEach((key, value) -> System.out.printf("Key: %d  Value: %s \n", key, value));
     }
 }
