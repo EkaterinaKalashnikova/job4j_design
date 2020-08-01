@@ -56,6 +56,6 @@ public class User {
         Map<User, Object> users = new HashMap<>();
         users.put(new User("Nikita", 2, Calendar.getInstance()), 0);
         users.put(new User("Pavel", 1, Calendar.getInstance()), 1);
-        users.forEach((key, value) -> System.out.printf("Key: %d  Value: %s \n", key, value));
+        users.forEach((key, value) -> System.out.printf("Key: %s  Value: %s \n", key, value));
     }
 }
