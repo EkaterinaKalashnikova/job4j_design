@@ -54,8 +54,23 @@ public class User {
 
     public static void main(String[] args) {
         Map<User, Object> users = new HashMap<>();
-        users.put(new User("Nikita", 2, Calendar.getInstance()), 0);
-        users.put(new User("Pavel", 1, Calendar.getInstance()), 1);
+        users.put(new User("Nikita", 2, Calendar.getInstance()), 1);
+        users.put(new User("Nikita", 2, Calendar.getInstance()), 1);
+       // users.put(new User("Pavel", 1, Calendar.getInstance()), 1);
         users.forEach((key, value) -> System.out.printf("Key: %s  Value: %s \n", key, value));
+    }
+
+     @Override
+    public int hashCode() {
+        return Objects.hash(getName(), getChildren(), getBirthday());
+    }
+
+    @Override
+    public String toString() {
+        return "User{"+
+                "name='" + name + '\''+
+                ", children=" + children +
+                ", birthday=" + birthday +
+                '}';
     }
 }
