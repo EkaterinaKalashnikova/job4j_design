@@ -5,8 +5,9 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import static java.util.Objects.hash;
+import static ru.job4j.collection.SimpleHashMap.*;
 
-public class SimpleHashMap<K, V> implements Iterable <User> {
+public class SimpleHashMap<K, V> implements Iterable <Entry> {
 
     /**
      * Ассоциативный массив, является хранилищем ссылок на списки(цепочки) значений.
@@ -150,7 +151,7 @@ public class SimpleHashMap<K, V> implements Iterable <User> {
              * @return an Iterator.
              */
             @Override
-            public Iterator<User> iterator() {
+            public Iterator<Entry> iterator() {
                 return new Iterator<>() {
 
                     /**

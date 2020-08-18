@@ -49,7 +49,7 @@ public class SimpleHashMapTest {
         map.insert(one, 1);
         map.insert(two, 1);
         map.insert(three, 3);
-        Iterator<User> it = map.iterator();
+        Iterator<SimpleHashMap.Entry> it = map.iterator();
         assertThat(it.hasNext(), is(true));
         it.next();
         assertThat(it.hasNext(), is(false));
