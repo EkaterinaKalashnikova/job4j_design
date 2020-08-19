@@ -82,7 +82,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{"+
+        return "User {"+
                 "name='" + name + '\''+
                 ", children=" + children +
                 ", birthday=" + birthday +

@@ -4,10 +4,7 @@ import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import static java.util.Objects.hash;
-import static ru.job4j.collection.SimpleHashMap.*;
-
-public class SimpleHashMap<K, V> implements Iterable <Entry> {
+public class SimpleHashMap<K, V> implements Iterable<K> {
 
     /**
      * Ассоциативный массив, является хранилищем ссылок на списки(цепочки) значений.
@@ -32,7 +29,7 @@ public class SimpleHashMap<K, V> implements Iterable <Entry> {
      * @param table ассоциативный массив на 16 ячеек.
      */
     public SimpleHashMap(Entry<K, V>[] table) {
-        this.table = new Entry[ (int) CAPACITY ];
+        this.table = new Entry[(int) CAPACITY];
         this.threshold = (int) (CAPACITY * LOAD_FACTOR);
         this.size = 0;
         this.modCount = 0;
@@ -59,26 +56,21 @@ public class SimpleHashMap<K, V> implements Iterable <Entry> {
      * если элемент с ключом null, то его значение перезаписываем.
      * @param key ключ
      * @param value значение
-     * @return если значение добавлено true
      */
-     public boolean insert(K key, V value) {
+     public void insert(K key, V value) {
+         if (key == null) {
+             return;
+         }
          if (size >= threshold) {
              resize();
-         }
-         if (key == null) {
-             return false;
-         }
-        int hash = key.hashCode() ^ (key.hashCode() >>> 16) & (table.length - 1);
-        if (table[hash] != null) {
-            return false;
         }
-        if (table[hash] == null) {
-            size++;
+        int hash = key.hashCode() ^ (key.hashCode() >>> 16);
+        if (table[hash] != null) {
+            return;
         }
             this.table[hash] = new Entry<>(key, value, hash);
             this.modCount++;
-            return true;
-        }
+     }
 
     /**
      * Метод расширения контейнера.
@@ -88,19 +80,18 @@ public class SimpleHashMap<K, V> implements Iterable <Entry> {
      * получаем хэш для новой таблицы(ключ и значение), и по этому хэшу помещаем новую Entry в новую таблицу.
      */
      private  void resize() {
-         if (size / CAPACITY  > LOAD_FACTOR) {
-             Entry<K, V>[] oldTable = this.table;
-             table = new Entry[ oldTable.length * 2 ];
-             Entry<K, V>[] newTab = new Entry[ oldTable.length * 2 ];
-             this.table = newTab;
-             for (int i = 0; i < oldTable.length; i++) {
-                 Entry<K, V> el = oldTable[ i ];
-                 if (el != null) {
-                     int hash = hash(table[ i ].key);
-                     newTab[el.hash] = new Entry<>(table[ i ].key, table[ i ].value, hash);
-                 }
+         Entry<K, V>[] oldTable = this.table;
+         int oldSize = this.table.length;
+         int newSize = oldSize * 2;
+         this.threshold = (int) (newSize * LOAD_FACTOR);
+         Entry<K, V>[] newTable =  new Entry[newSize];
+         this.table = newTable;
+         for (int i = 0; i  < oldTable.length; i++) {
+             Entry<K, V> el = oldTable[i];
+             if (el != null) {
+                 newTable[el.hash & (newSize - 1)] = el;
+                 oldTable[i] = null;
              }
-             table = newTab;
          }
      }
 
@@ -151,7 +142,7 @@ public class SimpleHashMap<K, V> implements Iterable <Entry> {
              * @return an Iterator.
              */
             @Override
-            public Iterator<Entry> iterator() {
+            public Iterator<K> iterator() {
                 return new Iterator<>() {
 
                     /**
@@ -178,11 +169,11 @@ public class SimpleHashMap<K, V> implements Iterable <Entry> {
                     }
 
                     @Override
-                    public Entry next() {
+                    public K next() {
                         if (!hasNext()) {
                             throw new NoSuchElementException();
                         }
-                        return table[cursor++];
+                        return (K) table[cursor++];
                     }
              };
       }
