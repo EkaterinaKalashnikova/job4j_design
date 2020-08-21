@@ -19,20 +19,18 @@ public class SimpleHashMapTest {
     @Test
     public void whenAddElementToContainer() {
         SimpleHashMap<User, Integer> map = new SimpleHashMap<>();
-        map.insert(this.one, 1);
-        map.insert(this.three, 2);
-        assertThat(map.size(), is(1));
+        map.insert(one, 1);
+        map.insert(three, 2);
+        assertThat(map.size(), is(2));
     }
 
     @Test
     public void whenSearchElementByValue() {
         SimpleHashMap<User, Integer> map = new SimpleHashMap<>();
         map.insert(one, 1);
-        map.insert(three, 3);
-        map.insert(two, 2);
+        map.insert(two, 3);
         assertThat(map.get(this.one), is(1));
-        assertThat(this.three, is(3));
-        assertThat(map.get(this.two), is(2));
+        assertThat(map.get(this.two), is(3));
     }
 
     @Test
@@ -40,23 +38,32 @@ public class SimpleHashMapTest {
         SimpleHashMap<User, Integer> map = new SimpleHashMap<>();
         map.insert(one, 1);
         map.insert(two, 2);
-        assertThat(map.delete(this.two), is(2));
+        assertThat(map.delete(this.one), is(true));
+        assertThat(map.size(), is(1));
         assertThat(map.delete(this.three), is(false));
     }
 
     @Test(expected = ConcurrentModificationException.class)
     public void iterator() {
         SimpleHashMap<User, Integer> map = new SimpleHashMap<>();
-        map.insert(one, 1);
-        map.insert(two, 1);
-        map.insert(three, 3);
-        Iterator<User> it = map.iterator();
+        map.insert(this.one, 1);
+        map.insert(this.two, 2);
+        map.insert(this.three, 1);
+        Iterator<SimpleHashMap.Entry> it = map.iterator();
+        assertThat(it.next().getKey(), is(1));
         assertThat(it.hasNext(), is(true));
-        it.next();
+        assertThat(it.next().getKey(), is(2));
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.next().getKey(), is(1));
         assertThat(it.hasNext(), is(false));
-        it.next();
-        assertThat(it.hasNext(), is(true));
-        it.next();
+    }
 
+    @Test
+    public void whenTableSizeExpands() {
+    SimpleHashMap<String, Integer> map = new SimpleHashMap<>();
+        for (int i = 1; i <= 25; i++) {
+        map.insert(String.valueOf(i), i);
+        }
+    assertThat(map.size(), is(25));
     }
 }

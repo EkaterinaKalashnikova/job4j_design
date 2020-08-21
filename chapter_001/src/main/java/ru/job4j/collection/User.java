@@ -4,7 +4,7 @@ import java.util.*;
 import java.util.Calendar;
 import java.util.Map;
 
-public class User {
+public class User extends SimpleHashMap {
 
     /**
      * Поле имени пользователя.

@@ -4,7 +4,7 @@ import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class SimpleHashMap<K, V> implements Iterable<K> {
+public class SimpleHashMap<K, V> implements Iterable<SimpleHashMap.Entry> {
 
     /**
      * Ассоциативный массив, является хранилищем ссылок на списки(цепочки) значений.
@@ -26,16 +26,13 @@ public class SimpleHashMap<K, V> implements Iterable<K> {
      * Конструктор, инициализирующий контейнер SimpleHashMap
      * c первоначальными размерами и учитывающий предельную загрузку.
      *
-     * @param table ассоциативный массив на 16 ячеек.
      */
-    public SimpleHashMap(Entry<K, V>[] table) {
-        this.table = new Entry[(int) CAPACITY];
+
+    public SimpleHashMap() {
+        this.table = new Entry[ (int) CAPACITY ];
         this.threshold = (int) (CAPACITY * LOAD_FACTOR);
         this.size = 0;
         this.modCount = 0;
-    }
-
-    public SimpleHashMap() {
     }
 
     /**
@@ -57,19 +54,22 @@ public class SimpleHashMap<K, V> implements Iterable<K> {
      * @param key ключ
      * @param value значение
      */
-     public void insert(K key, V value) {
+     public boolean insert(K key, V value) {
+         boolean flag = false;
          if (key == null) {
-             return;
+             return false;
          }
-         if (size >= threshold) {
-             resize();
+        if (size >= threshold) {
+             this.resize();
         }
-        int hash = key.hashCode() ^ (key.hashCode() >>> 16);
-        if (table[hash] != null) {
-            return;
-        }
-            this.table[hash] = new Entry<>(key, value, hash);
+        int index = (key.hashCode() >>> 16) & (table.length - 1);
+        if (table[index] != null) {
+            return true;
+          }
+            this.table[index] = new Entry<>(key, value, index);
             this.modCount++;
+            this.size++;
+         return flag;
      }
 
     /**
@@ -102,12 +102,12 @@ public class SimpleHashMap<K, V> implements Iterable<K> {
      */
       public V get(K key) {
                V value = null;
-               int hash = key.hashCode() ^ (key.hashCode() >>> 16) & (table.length - 1);
-               Entry<K, V> el = this.table[hash];
-                if (table[hash] == null || hash == table[hash].hashCode() && key.equals(table[hash])) {
+               int index = (key.hashCode() >>> 16) & (table.length - 1);
+               Entry<K, V> el = this.table[index];
+                if (table[index] == null || index == table[index].hashCode() && key.equals(table[index])) {
                     return null;
                 }
-                return table[hash].value;
+                return table[index].value;
             }
 
     /**
@@ -124,13 +124,12 @@ public class SimpleHashMap<K, V> implements Iterable<K> {
                return false;
            }
            Entry<K, V>[] el = this.table;
-           int hash = key.hashCode() ^ (key.hashCode() >>> 16) & (table.length - 1);
-            if (table[hash] == null) {
-                if (table[hash].hashCode() == key.hashCode() && key.equals(table[hash].key)) {
-                       return false;
-                   }
-                }
-                V value = table[hash].value;
+           int index = (key.hashCode() >>> 16) & (table.length - 1);
+           if (table[index] == null) {
+               return false;
+           }
+                V value = table[index].value;
+                table[index] = null;
                 modCount++;
                 size--;
                 return true;
@@ -142,7 +141,7 @@ public class SimpleHashMap<K, V> implements Iterable<K> {
              * @return an Iterator.
              */
             @Override
-            public Iterator<K> iterator() {
+            public Iterator<Entry> iterator() {
                 return new Iterator<>() {
 
                     /**
@@ -160,20 +159,23 @@ public class SimpleHashMap<K, V> implements Iterable<K> {
                         if (expectedModCount != modCount) {
                             throw new ConcurrentModificationException();
                         }
+                        boolean mark = false;
                        for (int i = cursor; i < table.length; i++) {
                            if (table[i] != null) {
                                cursor = i;
+                              mark = true;
+                              break;
                            }
                        }
-                        return false;
+                        return mark;
                     }
 
                     @Override
-                    public K next() {
+                    public Entry next() {
                         if (!hasNext()) {
                             throw new NoSuchElementException();
                         }
-                        return (K) table[cursor++];
+                        return table[cursor++];
                     }
              };
       }
