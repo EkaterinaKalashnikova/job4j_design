@@ -4,6 +4,8 @@ import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+import static java.util.Objects.hash;
+
 public class SimpleHashMap<K, V> implements Iterable<SimpleHashMap.Entry> {
 
     /**
@@ -21,13 +23,24 @@ public class SimpleHashMap<K, V> implements Iterable<SimpleHashMap.Entry> {
     private int threshold;
     private int size;
     private int modCount;
+    private short h;
 
     /**
      * Конструктор, инициализирующий контейнер SimpleHashMap
      * c первоначальными размерами и учитывающий предельную загрузку.
-     *
+     ** @param table ассоциативный массив на 16 ячеек.
      */
+    public SimpleHashMap(Entry<K, V>[] table) {
+        this.table = new Entry[(int) CAPACITY];
+        this.threshold = (int) (CAPACITY * LOAD_FACTOR);
+        this.size = 0;
+        this.modCount = 0;
+    }
 
+    /**
+     * Конструктор, инициализирующий контейнер SimpleHashMap
+     * c первоначальными размерами и учитывающий предельную загрузку.
+     */
     public SimpleHashMap() {
         this.table = new Entry[ (int) CAPACITY ];
         this.threshold = (int) (CAPACITY * LOAD_FACTOR);
@@ -59,11 +72,11 @@ public class SimpleHashMap<K, V> implements Iterable<SimpleHashMap.Entry> {
          if (key == null) {
              return false;
          }
-        if (size >= threshold) {
+        if (++size > threshold) {
              this.resize();
         }
-        int index = (key.hashCode() >>> 16) & (table.length - 1);
-        if (table[index] != null) {
+        int index = indexFor(hash(key.hashCode()), this.table.length);
+          if (table[index] != null) {
             return true;
           }
             this.table[index] = new Entry<>(key, value, index);
@@ -71,6 +84,33 @@ public class SimpleHashMap<K, V> implements Iterable<SimpleHashMap.Entry> {
             this.size++;
          return flag;
      }
+
+    /**
+     * Метод генерации хэш-кода  в обеспечение хорошего разброса битов
+     * @param h  Первый сдвиг xor на 20 позиций со вторым сдвигом на 12 позиций создает маску,
+     *           которая может перевернуть 0 или более нижних 20 битов int. Таким образом, вы можете получить
+     *           некоторую случайность, вставленную в нижние биты, которая использует потенциально лучше
+     *           распределенные старшие биты.
+     * @return Второй сдвиг на 7 позиций x или сдвиг на 4 позиции создает маску, которая может
+     * перевернуть 0 или более из нижних 28 бит, что снова вносит некоторую случайность
+     * в младшие биты и некоторые из более значимых битов, используя предыдущий xor
+     * который уже касался некоторых распределений в младших битах. Конечным результатом является
+     * более плавное распределение битов по хеш-значению.
+     */
+    private int hash(int h) {
+        h ^= (h >>> 20) ^ (h >>> 12);
+       return h ^ (h >>> 7) ^ (h >>> 4);
+    }
+
+    /**
+     * Метод нахождения нужной ячейки
+     * @param h хэш-код, полученный в результате работы hashCode()
+     * @param length длина внутреннего массива(количество ячеек)
+     * @return хэш-код - побитовое И - длина массива
+     */
+    public int indexFor(int h, int length) {
+        return h & (length - 1);
+    }
 
     /**
      * Метод расширения контейнера.
@@ -102,9 +142,9 @@ public class SimpleHashMap<K, V> implements Iterable<SimpleHashMap.Entry> {
      */
       public V get(K key) {
                V value = null;
-               int index = (key.hashCode() >>> 16) & (table.length - 1);
+           int index = indexFor(hash(key.hashCode()), this.table.length);
                Entry<K, V> el = this.table[index];
-                if (table[index] == null || index == table[index].hashCode() && key.equals(table[index])) {
+                if (table[index] == null || key.equals(table[index])) {
                     return null;
                 }
                 return table[index].value;
@@ -124,7 +164,7 @@ public class SimpleHashMap<K, V> implements Iterable<SimpleHashMap.Entry> {
                return false;
            }
            Entry<K, V>[] el = this.table;
-           int index = (key.hashCode() >>> 16) & (table.length - 1);
+           int index = indexFor(hash(key.hashCode()), this.table.length);
            if (table[index] == null) {
                return false;
            }
@@ -160,7 +200,7 @@ public class SimpleHashMap<K, V> implements Iterable<SimpleHashMap.Entry> {
                             throw new ConcurrentModificationException();
                         }
                         boolean mark = false;
-                       for (int i = cursor; i < table.length; i++) {
+                       for (int i = cursor; i < table.length - 1; i++) {
                            if (table[i] != null) {
                                cursor = i;
                               mark = true;
@@ -180,7 +220,7 @@ public class SimpleHashMap<K, V> implements Iterable<SimpleHashMap.Entry> {
              };
       }
 
-    public static class Entry<K, V> extends User {
+    public static class Entry<K, V>  {
         private final K key;
         private final V value;
         private final int hash;
