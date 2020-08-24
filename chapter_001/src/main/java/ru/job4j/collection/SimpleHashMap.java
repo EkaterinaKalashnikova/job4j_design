@@ -72,7 +72,7 @@ public class SimpleHashMap<K, V> implements Iterable<SimpleHashMap.Entry> {
          if (key == null) {
              return false;
          }
-        if (++size > threshold) {
+        if (size > threshold) {
              this.resize();
         }
         int index = indexFor(hash(key.hashCode()), this.table.length);
