@@ -1,10 +1,6 @@
 package ru.job4j.collection;
 
-import java.util.ConcurrentModificationException;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-
-import static java.util.Objects.hash;
+import java.util.*;
 
 public class SimpleHashMap<K, V> implements Iterable<SimpleHashMap.Entry> {
 
@@ -31,7 +27,7 @@ public class SimpleHashMap<K, V> implements Iterable<SimpleHashMap.Entry> {
      ** @param table ассоциативный массив на 16 ячеек.
      */
     public SimpleHashMap(Entry<K, V>[] table) {
-        this.table = new Entry[(int) CAPACITY];
+       // this.table = new Entry<K, V>[ (int) CAPACITY ];
         this.threshold = (int) (CAPACITY * LOAD_FACTOR);
         this.size = 0;
         this.modCount = 0;
@@ -143,8 +139,8 @@ public class SimpleHashMap<K, V> implements Iterable<SimpleHashMap.Entry> {
       public V get(K key) {
                V value = null;
            int index = indexFor(hash(key.hashCode()), this.table.length);
-               Entry<K, V> el = this.table[index];
-                if (table[index] == null || key.equals(table[index])) {
+               //Entry<K, V> el = this.table[index];
+                if (table[index] == null || !(key.equals(table[index].key))) {
                     return null;
                 }
                 return table[index].value;
@@ -163,17 +159,20 @@ public class SimpleHashMap<K, V> implements Iterable<SimpleHashMap.Entry> {
            if (key == null) {
                return false;
            }
-           Entry<K, V>[] el = this.table;
            int index = indexFor(hash(key.hashCode()), this.table.length);
-           if (table[index] == null) {
-               return false;
-           }
-                V value = table[index].value;
+         //  Entry<K, V> el = this.table[index];
+          // if (table[index] == null || !(key.equals(table[index].key))
+             //      && table[index].key.hashCode() == key.hashCode()) {
+           if (Objects.equals(table[index].key, key)) {
+
+              V value = table[index].value;
                 table[index] = null;
                 modCount++;
                 size--;
                 return true;
             }
+           return  false;
+       }
 
             /**
              * Returns an iterator over elements of type {@code T}.
@@ -241,5 +240,7 @@ public class SimpleHashMap<K, V> implements Iterable<SimpleHashMap.Entry> {
         }
     }
 }
+
+
 
 
