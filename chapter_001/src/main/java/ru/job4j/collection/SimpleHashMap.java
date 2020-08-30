@@ -57,12 +57,14 @@ public class SimpleHashMap<K, V> implements Iterable<SimpleHashMap.Entry> {
          if (key == null) {
              return false;
          }
-         if (size >= threshold) {
+         if (size + 1 >= threshold) {
              this.resize();
          }
          int index = indexFor(hash(key.hashCode()), this.table.length);
-         if (table[index] != null) {
-             this.size++;
+         Entry<K, V> el = this.table[index];
+         if (table[index] != null && el.hash == h && el.key.equals(key)) {
+             el.value = value;
+             this.modCount++;
              return false;
          }
          this.table[index] = new Entry<>(key, value, index);
@@ -148,9 +150,9 @@ public class SimpleHashMap<K, V> implements Iterable<SimpleHashMap.Entry> {
               return false;
            }
            int index = indexFor(hash(key.hashCode()), this.table.length);
-            if (table[index] == null || !(key.equals(table[index].key))
-                 && table[index].key.hashCode() == key.hashCode()) {
-          // if (Objects.equals(table[index].key, key)) {
+          //  if (table[index] == null || !(key.equals(table[index].key))
+          //       && table[index].key.hashCode() == key.hashCode()) {
+          if (Objects.equals(table[index].key, key)) {
                V value = table[index].value;
                table[index] = null;
                modCount++;
@@ -207,7 +209,7 @@ public class SimpleHashMap<K, V> implements Iterable<SimpleHashMap.Entry> {
 
     public static class Entry<K, V>  {
         private final K key;
-        private final V value;
+        private V value;
         private final int hash;
 
         public Entry(K key, V value, int hash) {
