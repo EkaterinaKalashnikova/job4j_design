@@ -21,8 +21,9 @@ public class SimpleHashMapTest {
     public void whenAddElementToContainer() {
         SimpleHashMap<User, Integer> map = new SimpleHashMap<>();
         map.insert(this.one, 1);
-        map.insert(this.three, 2);
-        assertThat(map.size(), is(2));
+        map.insert(this.three, 3);
+        map.insert(this.two, 2);
+        assertThat(map.size(), is(3));
     }
 
     @Test

@@ -24,18 +24,6 @@ public class SimpleHashMap<K, V> implements Iterable<SimpleHashMap.Entry> {
     /**
      * Конструктор, инициализирующий контейнер SimpleHashMap
      * c первоначальными размерами и учитывающий предельную загрузку.
-     ** @param table ассоциативный массив на 16 ячеек.
-     */
-    public SimpleHashMap(Entry<K, V>[] table) {
-       // this.table = new Entry<K, V>[ (int) CAPACITY ];
-        this.threshold = (int) (CAPACITY * LOAD_FACTOR);
-        this.size = 0;
-        this.modCount = 0;
-    }
-
-    /**
-     * Конструктор, инициализирующий контейнер SimpleHashMap
-     * c первоначальными размерами и учитывающий предельную загрузку.
      */
     public SimpleHashMap() {
         this.table = new Entry[ (int) CAPACITY ];
@@ -62,23 +50,25 @@ public class SimpleHashMap<K, V> implements Iterable<SimpleHashMap.Entry> {
      * если элемент с ключом null, то его значение перезаписываем.
      * @param key ключ
      * @param value значение
+     * @return
      */
      public boolean insert(K key, V value) {
          boolean flag = false;
          if (key == null) {
              return false;
          }
-        if (size > threshold) {
+         if (size >= threshold) {
              this.resize();
-        }
-        int index = indexFor(hash(key.hashCode()), this.table.length);
-          if (table[index] != null) {
-            return true;
-          }
-            this.table[index] = new Entry<>(key, value, index);
-            this.modCount++;
-            this.size++;
-         return flag;
+         }
+         int index = indexFor(hash(key.hashCode()), this.table.length);
+         if (table[index] != null) {
+             this.size++;
+             return false;
+         }
+         this.table[index] = new Entry<>(key, value, index);
+         this.modCount++;
+         this.size++;
+         return true;
      }
 
     /**
@@ -137,10 +127,8 @@ public class SimpleHashMap<K, V> implements Iterable<SimpleHashMap.Entry> {
      * @return полученное значение
      */
       public V get(K key) {
-               V value = null;
            int index = indexFor(hash(key.hashCode()), this.table.length);
-               //Entry<K, V> el = this.table[index];
-                if (table[index] == null || !(key.equals(table[index].key))) {
+             if (table[index] == null || !(key.equals(table[index].key))) {
                     return null;
                 }
                 return table[index].value;
@@ -157,20 +145,18 @@ public class SimpleHashMap<K, V> implements Iterable<SimpleHashMap.Entry> {
      */
        public boolean delete(K key) {
            if (key == null) {
-               return false;
+              return false;
            }
            int index = indexFor(hash(key.hashCode()), this.table.length);
-         //  Entry<K, V> el = this.table[index];
-          // if (table[index] == null || !(key.equals(table[index].key))
-             //      && table[index].key.hashCode() == key.hashCode()) {
-           if (Objects.equals(table[index].key, key)) {
-
-              V value = table[index].value;
-                table[index] = null;
-                modCount++;
-                size--;
-                return true;
-            }
+            if (table[index] == null || !(key.equals(table[index].key))
+                 && table[index].key.hashCode() == key.hashCode()) {
+          // if (Objects.equals(table[index].key, key)) {
+               V value = table[index].value;
+               table[index] = null;
+               modCount++;
+               size--;
+               return true;
+           }
            return  false;
        }
 
