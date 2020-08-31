@@ -150,8 +150,9 @@ public class SimpleHashMap<K, V> implements Iterable<SimpleHashMap.Entry> {
               return false;
            }
            int index = indexFor(hash(key.hashCode()), this.table.length);
-          //  if (table[index] == null || !(key.equals(table[index].key))
-          //       && table[index].key.hashCode() == key.hashCode()) {
+           if (table[index] == null) {
+               return false;
+           }
           if (Objects.equals(table[index].key, key)) {
                V value = table[index].value;
                table[index] = null;

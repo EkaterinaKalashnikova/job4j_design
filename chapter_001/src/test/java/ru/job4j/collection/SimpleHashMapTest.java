@@ -40,7 +40,7 @@ public class SimpleHashMapTest {
         SimpleHashMap<User, Integer> map = new SimpleHashMap<>();
         map.insert(this.one, 1);
         map.insert(this.two, 2);
-        assertThat(map.delete(this.one), is(true));
+        assertThat(map.delete(this.two), is(true));
         assertThat(map.size(), is(1));
         assertThat(map.delete(this.three), is(false));
     }
