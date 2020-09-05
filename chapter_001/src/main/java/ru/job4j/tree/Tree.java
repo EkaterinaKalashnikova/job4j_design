@@ -46,12 +46,14 @@ public class Tree<E> implements SimpleTree<E> {
         Node<E> current = null;
         while (!nodes.isEmpty()) {
             current = nodes.poll();
-            if (current.children.size() <= 2) {
-                for (Node<E> el : current.children) {
-                    nodes.offer(el);
-                }
-            } else {
+            if (current.children.size() > 2) {
                 flag = false;
+                break;
+              // for (Node<E> el : current.children) {
+               //    nodes.offer(el);
+              //  }
+          //  } else {
+              //  flag = false;
             }
         }
         return flag;
