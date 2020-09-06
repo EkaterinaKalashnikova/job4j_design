@@ -50,6 +50,7 @@ public class Tree<E> implements SimpleTree<E> {
                 flag = false;
                 break;
             }
+            nodes.addAll(current.children);
         }
         return flag;
     }
