@@ -21,7 +21,8 @@ public class Analize {
                 info.changed++;
             }
         }
-        info.deleted = (previous.size() + info.added) - (current.size() + info.changed);
+       // info.deleted = (previous.size() + info.added) - (current.size() + info.changed);
+        info.deleted = (previous.size() + info.added) - current.size();
         return info;
     }
 
@@ -82,11 +83,35 @@ public class Analize {
 
         @Override
         public String toString() {
-            return "Info{"+
-                    "added=" + added +
-                    ", changed=" + changed +
-                    ", deleted=" + deleted +
-                    '}';
+            return String.format("Info{added=%d, changed=%d, deleted=%d}", added, changed, deleted);
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (!(o instanceof Info)) {
+                return false;
+            }
+
+            Info info = (Info) o;
+
+            if (added != info.added) {
+                return false;
+            }
+            if (changed != info.changed) {
+                return false;
+            }
+            return deleted == info.deleted;
+        }
+
+        @Override
+        public int hashCode() {
+            int result = added;
+            result = 31 * result + changed;
+            result = 31 * result + deleted;
+            return result;
         }
     }
 }

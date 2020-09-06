@@ -41,7 +41,7 @@ public class TreeTest {
     public void whenNotIsBinary() {
         Tree<Integer> tree = new Tree<>(2);
         tree.add(2, 1);
-        tree.add(2, 2);
+        tree.add(2, 8);
         tree.add(2, 4);
        assertFalse(tree.isBinary());
     }

@@ -31,12 +31,12 @@ public class AnalizeTest {
         Analize.Info info = new Analize().diff(previous,
                 List.of(new User(1, "Laura"),
                         new User(2, "Robert")));
-        Analize.Info expected = new Info(0, 1, 0);
+        Analize.Info expected = new Info(1, 0, 1);
         assertThat(expected, is(info));
     }
 
     @Test
-    public void whenItemsNotChanged() {
+    public void whenItemsRemoved() {
         List<User> previous = new ArrayList<>();
         List<User> current = new ArrayList<>();
         previous.add(new User(1, "Laura"));
@@ -50,7 +50,7 @@ public class AnalizeTest {
     }
 
     @Test
-    public void whenItemsRemoved() {
+    public void whenItemsNotChanged() {
         List<User> previous = new ArrayList<>();
         List<User> current = new ArrayList<>();
         previous.add(new User(1, "Laura"));
@@ -59,6 +59,19 @@ public class AnalizeTest {
                 List.of(new User(1, "Laura"),
                         new User(2, "Robert")));
         Analize.Info expected = new Info(0, 0, 0);
+        assertThat(expected, is(info));
+    }
+
+    @Test
+    public void whenItemsChangedName() {
+        List<User> previous = new ArrayList<>();
+        List<User> current = new ArrayList<>();
+        previous.add(new User(1, "Laura"));
+        previous.add(new User(2, "Maric"));
+        Analize.Info info = new Analize().diff(previous,
+                List.of(new User(1, "Laura"),
+                        new User(2, "Robert")));
+        Analize.Info expected = new Info(0, 1, 0);
         assertThat(expected, is(info));
     }
 }
