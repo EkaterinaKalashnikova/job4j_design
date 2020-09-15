@@ -62,7 +62,6 @@ public class ContainerLinkedList<E> implements Iterable<E> {
      * при добавлении значение элемента по указателю, а последнему текущее
      * и вставленному элементу присваиваем адрес нового элемента,
      * и ссылку на null
-     *
      */
     public void add(E value) {
         if (head == null) {
