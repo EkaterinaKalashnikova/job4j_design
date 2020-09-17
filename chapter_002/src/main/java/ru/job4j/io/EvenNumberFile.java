@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class EvenNumberFile {
     public static void main(String[] args) {
-       try (FileInputStream in = new FileInputStream("C:\\projects.even.txt")) {
+       try (FileInputStream in = new FileInputStream("C:\\projects\\even.txt")) {
            StringBuilder text = new StringBuilder();
            int read;
            while ((read = in.read()) != -1) {
@@ -14,12 +14,12 @@ public class EvenNumberFile {
            }
            int num = 10;
            String[] lines = text.toString().split(System.lineSeparator());
-           for (String line : lines) {
-               int lineInt = Integer.parseInt("line");
-               if (lineInt % 2 == 0) {
+           for (int i = 0; i < lines.length; i++) {
+               int line1 = Integer.parseInt("line");
+               if (line1 % 2 == 0) {
                    boolean rsl = true;
                }
-               System.out.println(lineInt);
+               System.out.println(line1);
            }
        } catch (IOException e) {
            e.printStackTrace();
