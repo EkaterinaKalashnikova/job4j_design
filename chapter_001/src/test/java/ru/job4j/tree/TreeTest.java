@@ -23,10 +23,7 @@ public class TreeTest {
     public void when6ElFindNotExitThenOptionEmpty() {
         Tree<Integer> tree = new Tree<>(1);
         tree.add(1, 2);
-        assertThat(
-                tree.findBy(7).isPresent(),
-                is(false)
-        );
+        assertThat(tree.findBy(7).isPresent(), is(false));
     }
 
     @Test
