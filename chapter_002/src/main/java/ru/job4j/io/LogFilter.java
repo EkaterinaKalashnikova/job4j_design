@@ -13,7 +13,6 @@ public class LogFilter {
         try (BufferedReader in = new BufferedReader(new FileReader(file))) {
                line = in.lines()
                .filter(s -> s.contains("404"))
-               .limit(1)
                .collect(Collectors.toList());
            line.forEach(System.out::println);
 
@@ -26,10 +25,10 @@ public class LogFilter {
     public static void save(List<String> log, String file) {
         try (PrintWriter out = new PrintWriter(
                 new BufferedOutputStream(
-                        new FileOutputStream("log.txt")
+                        new FileOutputStream(file)
                 ))) {
             log.forEach(n -> {
-                out.write(format("%s%x", n));
+                out.write(n + System.lineSeparator());
             });
            } catch (IOException e) {
             e.printStackTrace();
