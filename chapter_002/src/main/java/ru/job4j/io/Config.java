@@ -17,16 +17,18 @@ public class Config {
     }
 
     public static void main(String[] args) {
-        System.out.println(new Config("chapter_006/data/text_with_comment.properties"));
+        System.out.println(new Config("data\\text_with_comment.properties"));
     }
 
     public void load() {
         int index = 0;
         try (BufferedReader rd = new BufferedReader(new FileReader(path))) {
               rd.lines()
-                .filter(n -> n.startsWith("password") && n.startsWith("name"))
-                .forEach(m -> keys = m.split("="));
-                 values.put(keys[index], keys[index + 1]);
+                .filter(n -> !n.isEmpty() && !n.startsWith("#"))
+                .map(line -> line.split("="))
+                .filter(keys -> keys.length == 2)
+                .forEach(keys -> values.put(keys[0], keys[1]));
+
         } catch (Exception e) {
             e.printStackTrace();
         }

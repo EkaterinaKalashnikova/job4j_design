@@ -12,11 +12,10 @@ public class EvenNumberFile {
                 text.append((char) read);
             }
             String[] num = text.toString().split(System.lineSeparator());
-            for (int i = 0; i <= num.length; i++) {
-                if (Integer.parseInt(num[i]) % 2 == 0) {
-                    boolean rsl = true;
+            for (int i = 0; i < num.length; i++) {
+                if (Integer.parseInt(num[ i ]) % 2 == 0) {
+                    System.out.println(num[i]);
                 }
-                System.out.println(num[i]);
             }
         } catch (IOException e) {
             e.printStackTrace();
