@@ -17,7 +17,8 @@ public class Config {
     }
 
     public static void main(String[] args) {
-        System.out.println(new Config("data\\text_with_comment.properties"));
+        System.out.println(new Config("C:\\projects\\job4j_design\\chapter_002\\data"));
+        System.out.println(new Config("C:\\projects\\job4j_design\\chapter_002\\data"));
     }
 
     public void load() {
