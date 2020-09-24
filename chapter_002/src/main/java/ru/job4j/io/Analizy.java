@@ -1,6 +1,7 @@
 package ru.job4j.io;
 
 import java.io.*;
+import java.util.Arrays;
 
 public class Analizy {
     public static void main(String[] args) {
@@ -15,20 +16,19 @@ public class Analizy {
     public void unavailable(String source, String target) {
         try (BufferedReader reader = new BufferedReader(new FileReader(source));
              BufferedWriter writer = new BufferedWriter(new FileWriter(target))) {
-            String start = "";
+            String begin = "";
             String line;
-            String end = null;
-            boolean flag = false;
+            String end = "";
+            boolean isActiv = true;
             while ((line = reader.readLine()) != null) {
-                //  System.out.println(line);
-                if (line.startsWith("400") | line.startsWith("500")) {
-                    writer.write("%s; %x", line.lastIndexOf(start), Integer.parseInt("\n"));
-                    flag = true;
-                } else if (line.startsWith("300") | line.startsWith("200")) {
-                    assert false;
-                    writer.write("%s; %x", Integer.parseInt(start), line.lastIndexOf(end));
-                    flag = false;
+               if (line.startsWith("400") | line.startsWith("500") && isActiv) {
+                    writer.write(Arrays.toString(begin.split((""))));
+                    isActiv = false;
+                } else if (line.startsWith("300") | line.startsWith("200") && isActiv) {
+                  writer.write(String.format("%s; %s", new Object[]{begin, end.split("")[ 0 ]}));
+                   isActiv = true;
                 }
+
             }
         } catch (IOException e) {
             e.printStackTrace();

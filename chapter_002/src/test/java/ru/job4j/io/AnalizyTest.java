@@ -3,7 +3,9 @@ package ru.job4j.io;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import java.io.File;
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 public class AnalizyTest {
@@ -18,12 +20,12 @@ public class AnalizyTest {
     @Test
     public void whenUnavailableServer() {
         Analizy analizy = new Analizy();
-        //analizy.unavailable();
+        analizy.unavailable("source", "target");
         List<String> expected = List.of("10:57:01 до 10:59:01", "11:01:02 до 11:02:02");
-      //  List<String> result = new File();
-     //   assertThat(expected, result);
+        List<String> result = Collections.unmodifiableList((List<String>) new Object());
+       assertThat(expected, result);
     }
 
-    private void assertThat(List<String> expected, List<String> result) {
+      private void assertThat(List<String> expected, List<String> result) {
     }
 }
