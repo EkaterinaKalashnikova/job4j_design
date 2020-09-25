@@ -21,14 +21,15 @@ public class Analizy {
             String end = "";
             boolean isActiv = true;
             while ((line = reader.readLine()) != null) {
-               if (line.startsWith("400") | line.startsWith("500") && isActiv) {
-                    writer.write(Arrays.toString(begin.split((""))));
+               if (line.startsWith("400") || line.startsWith("500") && isActiv) {
+                    begin = line.split(" ")[1];
                     isActiv = false;
-                } else if (line.startsWith("300") | line.startsWith("200") && isActiv) {
-                  writer.write(String.format("%s; %s", new Object[]{begin, end.split("")[ 0 ]}));
+                } else if (line.startsWith("300") || line.startsWith("200") && isActiv) {
+                  //writer.write(String.format("%s; %s", new Object[]{begin, end.split("")[ 0 ]}));
+                   end = line.split(" ")[1];
+                   writer.write(begin + ";" + end + System.lineSeparator());
                    isActiv = true;
                 }
-
             }
         } catch (IOException e) {
             e.printStackTrace();
