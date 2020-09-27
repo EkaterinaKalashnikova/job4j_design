@@ -9,7 +9,7 @@ import static org.hamcrest.core.Is.is;
 public class ConfigTest {
     @Test
     public void whenPairWithoutComment() {
-        String path = "C:\\projects\\job4j_design\\chapter_002\\data";
+        String path = "C:\\projects\\job4j_design\\chapter_002\\data\\pair_without_comment";
         Config config = new Config(path);
         config.load();
         assertThat(
@@ -20,7 +20,7 @@ public class ConfigTest {
 
     @Test
     public void whenTextWithComment() {
-        String path = "C:\\projects\\job4j_design\\chapter_002\\data";
+        String path = "C:\\projects\\job4j_design\\chapter_002\\data\\text_with_comment";
         Config config = new Config(path);
         config.load();
         assertThat(
