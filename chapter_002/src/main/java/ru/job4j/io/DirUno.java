@@ -5,9 +5,9 @@ import java.util.Objects;
 
 public class DirUno {
     public static void main(String[] args) {
-       // File file = new File("c:\\projects\\job4j_design");
+        File file = new File("c:\\projects\\job4j_design");
        // File file = new File(".src\\main\\java\\ru.job4j.io\\Config");
-        File file = new File(".text_with_comment.properties");
+       // File file = new File(".text_with_comment.properties");
         System.out.println("File name: " + file.getName());
         System.out.println("Parent folder: " + file.getParent());
         System.out.println("Путь: " + file.getPath());
@@ -24,7 +24,9 @@ public class DirUno {
         }
         System.out.println(String.format("size : %s", file.getTotalSpace()));
         for (File subfile : Objects.requireNonNull(file.listFiles())) {
-            System.out.println(String.format("size : %s ", subfile.getName()));
+            int digitGroups = (int) (Math.log10(file.length()) / Math.log10(1024));
+            System.out.println(String.format("name: %s size : %s ", subfile.getName(), subfile.length() / Math.pow(1024, digitGroups)));
         }
+
     }
 }
