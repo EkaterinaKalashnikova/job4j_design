@@ -23,12 +23,11 @@ public class Analizy {
             while ((line = reader.readLine()) != null) {
                if (line.startsWith("400") || line.startsWith("500") && isActiv) {
                     begin = line.split(" ")[1];
-                    isActiv = false;
-                } else if (line.startsWith("300") || line.startsWith("200") && isActiv) {
-                  //writer.write(String.format("%s; %s", new Object[]{begin, end.split("")[ 0 ]}));
+                    isActiv = true;
+                } else if (line.startsWith("200") || line.startsWith("300") && !isActiv) {
                    end = line.split(" ")[1];
-                   writer.write(begin + ";" + end + System.lineSeparator());
-                   isActiv = true;
+                   writer.write(begin + " до " + end + System.lineSeparator());
+                   isActiv = false;
                 }
             }
         } catch (IOException e) {

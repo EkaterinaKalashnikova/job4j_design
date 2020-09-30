@@ -7,6 +7,7 @@ import org.junit.rules.TemporaryFolder;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Files;
 import java.util.Collections;
 import java.util.List;
 
@@ -28,14 +29,21 @@ public class AnalizyTest {
 
     @Test
     public void whenUnavailableServer()  throws IOException {
-        File source = folder.newFile("source");
-        File target = folder.newFile("target");
-        //assertTrue(newFolder.exists());
+        File source = folder.newFile("source.csv");
+        File target = folder.newFile("target.csv");
+        Files.write(source.toPath(), List.of(
+                "200 10:56:01",
+                "500 10:57:01",
+                "400 10:58:01",
+                "200 10:59:01",
+                "500 11:01:02",
+                "200 11:02:02"
+        ));
 
         Analizy analizy = new Analizy();
         analizy.unavailable(source.getAbsolutePath(), target.getAbsolutePath());
         List<String> expected = List.of("10:57:01 до 10:59:01", "11:01:02 до 11:02:02");
-        List<String> result = Collections.singletonList(File.pathSeparator);
+        List<String> result = Files.readAllLines(target.toPath());
        assertThat(result, is(expected));
     }
 }

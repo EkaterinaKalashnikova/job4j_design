@@ -6,6 +6,7 @@ import java.util.Objects;
 public class DirUno {
     public static void main(String[] args) {
         File file = new File("c:\\projects\\job4j_design");
+        //File file = new File("unavailable.csv");
        // File file = new File(".src\\main\\java\\ru.job4j.io\\Config");
        // File file = new File(".text_with_comment.properties");
         System.out.println("File name: " + file.getName());

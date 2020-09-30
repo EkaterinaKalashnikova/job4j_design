@@ -5,7 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class SaerchAll {
+public class SearchFiles {
     public static void main(String[] args) throws IOException {
         Path start = Paths.get(".");
         Files.walkFileTree(start, new PrintFiles());

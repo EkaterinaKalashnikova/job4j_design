@@ -14,8 +14,12 @@ public class Search {
 
     public static List<Path> search(Path root, String ext) {
       //  SearchFiles seacher = new SearchFiles(p -> p.toFile().getName.endsWith(ext));
-     //   Files.walkFileTree(root, searcher);
-      //  return searcher.getPaths();
+       // Files.walkFileTree(root, searcher);
+       // return searcher.getPaths();
         return null;
+    }
+
+    private  void  writeLog() {
+      //  Files.write();
     }
 }
