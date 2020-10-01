@@ -18,16 +18,7 @@ public class AnalizyTest {
     @Rule
     public final TemporaryFolder folder = new TemporaryFolder();
 
-    List<String> list = List.of(
-         "200 10:56:01",
-         "500 10:57:01",
-         "400 10:58:01",
-         "200 10:59:01",
-         "500 11:01:02",
-         "200 11:02:02"
- );
-
-    @Test
+     @Test
     public void whenUnavailableServer()  throws IOException {
         File source = folder.newFile("source.csv");
         File target = folder.newFile("target.csv");

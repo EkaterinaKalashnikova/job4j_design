@@ -21,13 +21,13 @@ public class Analizy {
             String end = "";
             boolean isActiv = true;
             while ((line = reader.readLine()) != null) {
-               if (line.startsWith("400") || line.startsWith("500") && isActiv) {
+               if ((line.startsWith("400") || line.startsWith("500")) && isActiv) {
                     begin = line.split(" ")[1];
-                    isActiv = true;
-                } else if (line.startsWith("200") || line.startsWith("300") && !isActiv) {
+                    isActiv = false;
+                } else if ((line.startsWith("200") || line.startsWith("300")) && !isActiv) {
                    end = line.split(" ")[1];
                    writer.write(begin + " до " + end + System.lineSeparator());
-                   isActiv = false;
+                   isActiv = true;
                 }
             }
         } catch (IOException e) {
