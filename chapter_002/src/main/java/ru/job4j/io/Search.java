@@ -1,7 +1,8 @@
 package ru.job4j.io;
 
+import java.io.File;
 import java.io.IOException;
-import java.nio.file.*;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
@@ -14,6 +15,12 @@ public class Search {
     }
 
     public static List<Path> search(Path root, String ext) throws IOException {
+        if (root == null) {
+           throw new IllegalArgumentException("ROOT is null");
+        }
+        if (ext == null) {
+            throw new IllegalArgumentException("ext not found");
+        }
        SearchFiles searcher = new SearchFiles(p -> p.toFile().getName().endsWith(ext));
         Files.walkFileTree(root, searcher);
         return searcher.getPaths();

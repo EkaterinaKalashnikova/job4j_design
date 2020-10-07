@@ -31,6 +31,6 @@ public class SearchFiles extends SimpleFileVisitor<Path> {
     }
 
     public List<Path> getPaths() {
-     return this.getPaths();
+     return this.files;
     }
 }
