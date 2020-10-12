@@ -1,18 +1,27 @@
 package ru.job4j.io;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ArgsName {
     private final Map<String, String> values = new HashMap<>();
 
-    public String get(String key) {
+    public String get(String key)  {
+        if (!values.containsKey(key)) {
+            throw new  IllegalArgumentException(String.format("Not key %s", values.isEmpty()));
+        }
         return values.get(key);
     }
 
     private void parse(String[] args) {
-        /* TODO parse args to values. */
-    }
+           for (String s : args) {
+                String[] parts = s.split("=");
+                String key = parts[ 0 ].substring(1);
+                values.put(key, parts[ 1 ]);
+           }
+     }
 
     public static ArgsName of(String[] args) {
         ArgsName names = new ArgsName();
