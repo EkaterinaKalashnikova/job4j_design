@@ -61,11 +61,15 @@ public class Zip {
      *
      * @param args
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         ArgZip argZip = new ArgZip(args);
-        List<Path> filesToArchive = new ArrayList<>();
+        argZip.valid();
+       // List<Path> filesToArchive = new ArrayList<>();
+        List<Path> files = search(argZip);
         Zip zip = new Zip();
-        filesToArchive.forEach(f -> filesToArchive.stream().map(Path::getFileName).collect(Collectors.toList()));
+        new Zip().packFiles(files.stream().map(Path::toFile).collect(Collectors.toList()),
+                new File(String.valueOf(argZip), "job4j_design.zip"));
+        //files.forEach(f -> filesToArchive.stream().map(Path::getFileName).collect(Collectors.toList()));
         new Zip().packSingleFile(
                 new File("./chapter_005/pom.xml"),
                 new File("./chapter_005/pom.zip")
