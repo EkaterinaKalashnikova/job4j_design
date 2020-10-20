@@ -24,9 +24,9 @@ public class Zip {
      }
 
     /**
-     *
-     * @param sources
-     * @param target
+     * Метод упаковки нескольких файлов и запись каталога для каждого пустого каталога
+     * @param sources Список файлов
+     * @param target конечный результат записи
      */
     public void packFiles(List<File> sources, File target) {
         try (ZipOutputStream zip = new ZipOutputStream(new BufferedOutputStream(new FileOutputStream(target)))) {
@@ -42,9 +42,9 @@ public class Zip {
     }
 
     /**
-     *
-     * @param source
-     * @param target
+     * Метод упаковки файла и запись каталога для каждого пустого каталога
+     * @param source Переданный файл
+     * @param target конечный результат записи
      */
     public void packSingleFile(File source, File target) {
         try (ZipOutputStream zip = new ZipOutputStream(new BufferedOutputStream(new FileOutputStream(target)))) {
@@ -58,18 +58,16 @@ public class Zip {
     }
 
     /**
-     *
-     * @param args
+     * Метод упаковки всей директории и создание архивной папки
+     * @param args массив переданных аргументов типа ArgZip
      */
     public static void main(String[] args) throws IOException {
         ArgZip argZip = new ArgZip(args);
         argZip.valid();
-       // List<Path> filesToArchive = new ArrayList<>();
         List<Path> files = search(argZip);
         Zip zip = new Zip();
         new Zip().packFiles(files.stream().map(Path::toFile).collect(Collectors.toList()),
                 new File(String.valueOf(argZip), "job4j_design.zip"));
-        //files.forEach(f -> filesToArchive.stream().map(Path::getFileName).collect(Collectors.toList()));
         new Zip().packSingleFile(
                 new File("./chapter_005/pom.xml"),
                 new File("./chapter_005/pom.zip")
