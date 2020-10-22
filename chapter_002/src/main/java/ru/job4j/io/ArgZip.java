@@ -1,13 +1,15 @@
 package ru.job4j.io;
 
 import java.io.File;
+import java.util.HashMap;
 
 public class ArgZip {
     private final String[] args;
     private final static int ARG = 3;
-    private final static String DIRECTORY = "c:\\projects\\job4j_design\\";
-    private final static String EXCLUDE = ".xml";
-    private final static String OUTPUT = "job4j_design.zip";
+    private HashMap<String, String> pairs = new HashMap<>(ARG);
+   // private final static String DIRECTORY = "c:\\projects\\job4j_design\\";
+   // private final static String EXCLUDE = ".xml";
+  //  private final static String OUTPUT = "job4j_design.zip";
 
     public ArgZip(String[] args) {
         this.args = args;
@@ -17,7 +19,12 @@ public class ArgZip {
         if (args.length != ARG) {
            throw new IllegalArgumentException("Invalid args: java -jar pack.jar -d=c:\\projects\\job4j_design\\ -e=class -o=projects.zip");
         }
-        File file = new File(args[ Integer.parseInt(DIRECTORY) ]);
+        for (int i = 0; i < args.length; i++) {
+            String[] parts = args[i].split(" ");
+            pairs.put(parts[0], parts[1]);
+        }
+
+        File file = new File(pairs.get("c:\\projects\\job4j_design\\"));
         if (!file.isDirectory()) {
             throw  new IllegalArgumentException("Invalid catalog");
         }
@@ -27,14 +34,14 @@ public class ArgZip {
     }
 
     public String directory() {
-        return args[ Integer.parseInt(DIRECTORY) ];
+        return pairs.get(" -d ");
     }
 
     public String exclude() {
-        return args[ Integer.parseInt(EXCLUDE) ];
+        return pairs.get("-e");
     }
 
     public String output() {
-        return args[ Integer.parseInt(OUTPUT) ];
+        return pairs.get("-o");
     }
 }

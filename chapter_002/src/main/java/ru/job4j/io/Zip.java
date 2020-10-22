@@ -67,7 +67,7 @@ public class Zip {
         List<Path> files = search(argZip);
         Zip zip = new Zip();
         new Zip().packFiles(files.stream().map(Path::toFile).collect(Collectors.toList()),
-                new File(String.valueOf(argZip), "job4j_design.zip"));
+                new File(argZip.output()));
         new Zip().packSingleFile(
                 new File("./chapter_005/pom.xml"),
                 new File("./chapter_005/pom.zip")
