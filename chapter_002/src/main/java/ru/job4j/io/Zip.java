@@ -1,14 +1,11 @@
 package ru.job4j.io;
 
-import javax.sound.midi.Patch;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -65,12 +62,9 @@ public class Zip {
         ArgZip argZip = new ArgZip(args);
         argZip.valid();
         List<Path> files = search(argZip);
+        List<File> result = files.stream().map(Path::toFile).collect(Collectors.toList());
         Zip zip = new Zip();
-        new Zip().packFiles(files.stream().map(Path::toFile).collect(Collectors.toList()),
-                new File(argZip.output()));
-        new Zip().packSingleFile(
-                new File("./chapter_005/pom.xml"),
-                new File("./chapter_005/pom.zip")
-        );
+        final File zipFile = new File(argZip.output());
+        zip.packFiles(result, zipFile);
     }
 }
