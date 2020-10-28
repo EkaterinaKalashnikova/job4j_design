@@ -14,10 +14,10 @@ public class ArgZip {
 
     public void valid() {
         if (args.length != ARG) {
-           throw new IllegalArgumentException("Invalid args: java -jar pack.jar -d=c:\\projects\\job4j\\ -e=class -o=projects.zip");
+           throw new IllegalArgumentException("Invalid args: -d=c:\\projects\\job4j\\ -e=class -o=projects.zip");
         }
         for (int i = 0; i < args.length; i++) {
-            String[] parts = args[i].split(" ");
+            String[] parts = args[i].split("=");
             pairs.put(parts[0], parts[1]);
         }
 
