@@ -31,7 +31,7 @@ public class ArgZip {
     }
 
     public String directory() {
-        return pairs.get(" -d ");
+        return pairs.get("-d");
     }
 
     public String exclude() {
