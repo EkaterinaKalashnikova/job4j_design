@@ -39,7 +39,7 @@ public class ConsoleChat {
         //возвращает логический тип данных, который соответствует новой строке String, которую содержит объект Scanner
         String userAnswers = " ";
         while (!OUT.equalsIgnoreCase(userAnswers)) {
-            System.out.println("Ваш вопрос здесь: ");
+            System.out.print("Ваш вопрос здесь: ");
             //Перемещает сканер за текущую строку и возвращает пропущенный ввод.
              userAnswers = scanner.nextLine();
                 if (STOP.equalsIgnoreCase(userAnswers)) {
@@ -50,8 +50,12 @@ public class ConsoleChat {
                 }
                 if (def) {
                     //генерируем случайное число для поиска ответа
+                    //получаем рандомный индекс
+                    int randomIndex = (int) (Math.random() * offers.size());
+                    // получаем ответ по этому индексу
+                    String botResponse = offers.get(randomIndex);
                     //и записываем его в ответную строку
-                    String botResponse = String.valueOf(Math.random() * offers.size());
+                    //String botResponse = String.valueOf(Math.random() * offers.size());
                     //добавляем в список ответов
                     response.add(botResponse);
                     System.out.println("Получите ответ: " +  botResponse);
