@@ -2,12 +2,15 @@ package ru.job4j.io;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.OpenOption;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import static java.nio.charset.StandardCharsets.*;
 
 public class ConsoleChat {
     private static final String OUT = "закончить";
@@ -31,7 +34,8 @@ public class ConsoleChat {
         //список ответов от бота
         List<String> response = new ArrayList<>();
         //и кодировку
-        Charset charset = Charset.forName("WINDOWS-1251");
+       // Charset charset = Charset.forName("WINDOWS-1251");
+        Charset charset = UTF_8;
         //создаем список вопросов и считываем все поступающие сообщения от пользователя
         List<String> offers = Files.readAllLines(Path.of(path), charset);
         //читать ввод с консоли
