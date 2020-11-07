@@ -15,32 +15,37 @@ public class EchoServerBot {
     private static String any = "any";
     private static Pattern pattern = Pattern.compile("\\?msg=" + "HTTP/1.1", Pattern.CASE_INSENSITIVE);
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args)  {
         try (ServerSocket server = new ServerSocket(9000)) {
-
             while (!server.isClosed()) {
                 Socket socket = server.accept();
                 try (OutputStream out = socket.getOutputStream();
                      BufferedReader in = new BufferedReader(
                              new InputStreamReader(socket.getInputStream()))) {
                     String str;
-                    while (!(str = in.readLine()).isEmpty()
+                    if (!(str = in.readLine()).isEmpty()
                             && pattern.matcher(str).matches()) {
-                        String request = String.valueOf(str.trim().endsWith("="));
-                        String response  = " ";
-                        if (hello.equalsIgnoreCase(response)) {
+                        String request = str.substring(str.lastIndexOf("="), str.lastIndexOf(" "));
+                        String response = String.valueOf(hello.equalsIgnoreCase(request));
                             System.out.println("HELLO");
+                        if (any.equalsIgnoreCase(request)) {
+                            System.out.println(" ");
                         }
                         if (exit.equalsIgnoreCase(response)) {
                             System.out.println("STOP");
                         }
+                        out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
+                        out.write("Hello, dear friend.".getBytes());
+                        if (exit.equalsIgnoreCase(response)) {
+                            System.out.println("STOP");
+                        }
+                        server.close();
+                        break;
                     }
-                    out.write("HTTP/1.1 200 OK\r\n".getBytes());
-                    out.write("Hello, dear friend.".getBytes());
-                    server.close();
-                    break;
                 }
             }
+        } catch (IOException e) {
+            throw new RuntimeException();
         }
     }
 }
