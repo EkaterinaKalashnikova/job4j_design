@@ -6,7 +6,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Random;
 import java.util.regex.Pattern;
 
 public class EchoServerBot {
@@ -27,7 +26,7 @@ public class EchoServerBot {
                             && pattern.matcher(str).matches()) {
                         String request = str.substring(str.lastIndexOf("="), str.lastIndexOf(" "));
                         String response = String.valueOf(hello.equalsIgnoreCase(request));
-                            System.out.println("HELLO");
+                        System.out.println("HELLO");
                         if (any.equalsIgnoreCase(request)) {
                             System.out.println(" ");
                         }
