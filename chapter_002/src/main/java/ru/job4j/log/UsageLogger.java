@@ -3,7 +3,7 @@ package ru.job4j.log;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class UsageLog4j_1 {
+public class UsageLogger {
     private static final Logger LOG = LoggerFactory.getLogger(UsageLog4j.class.getName());
 
     public static void main(String[] args) {

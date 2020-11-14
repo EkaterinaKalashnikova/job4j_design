@@ -12,7 +12,7 @@ public class EchoServerBot {
     private static String hello = "Hello";
     private static String exit = "Exit";
     private static String any = "any";
-    private static Pattern pattern = Pattern.compile("\\?msg=" + "HTTP/1.1", Pattern.CASE_INSENSITIVE);
+   // private static Pattern pattern = Pattern.compile("\\?msg=" + "HTTP/1.1", Pattern.CASE_INSENSITIVE);
 
     public static void main(String[] args)  {
         try (ServerSocket server = new ServerSocket(9000)) {
@@ -34,10 +34,12 @@ public class EchoServerBot {
                         }
                         out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
                         out.write("Hello, dear friend.".getBytes());
+                       // out.write("Hello, dear friend.".getBytes());
+                        out.write(request.getBytes());
                         if (exit.equalsIgnoreCase(response)) {
                             System.out.println("STOP");
+                            server.close();
                         }
-                        server.close();
                     }
                 }
             }

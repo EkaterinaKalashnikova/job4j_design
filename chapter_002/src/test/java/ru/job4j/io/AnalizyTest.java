@@ -12,7 +12,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class AnalizyTest {
     @Rule
@@ -33,7 +33,7 @@ public class AnalizyTest {
 
         Analizy analizy = new Analizy();
         analizy.unavailable(source.getAbsolutePath(), target.getAbsolutePath());
-        List<String> expected = List.of("10:57:01 до 10:59:01", "11:01:02 до 11:02:02");
+        List<String> expected = List.of("10:57:01 ; 10:59:01", "11:01:02 ; 11:02:02");
         List<String> result = Files.readAllLines(target.toPath());
        assertThat(result, is(expected));
     }

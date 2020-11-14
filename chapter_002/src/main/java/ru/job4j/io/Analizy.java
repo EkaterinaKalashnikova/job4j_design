@@ -26,7 +26,7 @@ public class Analizy {
                     isActiv = false;
                 } else if ((line.startsWith("200") || line.startsWith("300")) && !isActiv) {
                    end = line.split(" ")[1];
-                   writer.write(begin + " до " + end + System.lineSeparator());
+                   writer.write(begin + " ; " + end + System.lineSeparator());
                    isActiv = true;
                 }
             }
