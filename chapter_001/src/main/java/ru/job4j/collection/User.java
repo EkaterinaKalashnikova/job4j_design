@@ -72,9 +72,9 @@ public class User {
             return false;
         }
         User user = (User) o;
-        return getChildren() == user.getChildren() &&
-                Objects.equals(getName(), user.getName()) &&
-                Objects.equals(getBirthday(), user.getBirthday());
+        return getChildren() == user.getChildren() && Objects.equals(getName(),
+                user.getName()) && Objects.equals(getBirthday(),
+                user.getBirthday());
     }
 
   @Override
@@ -84,10 +84,6 @@ public class User {
 
     @Override
     public String toString() {
-        return "User {"+
-                "name='" + name + '\''+
-                ", children=" + children +
-                ", birthday=" + birthday +
-                '}';
+        return "User {" + "name='" + name + '\'' + ", children=" + children + ", birthday=" + birthday + '}';
     }
 }

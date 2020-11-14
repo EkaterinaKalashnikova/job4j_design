@@ -4,6 +4,9 @@ public class RoleStore implements Store<Role> {
 
     private final Store<Role> store = new MemStore<>();
 
+    public RoleStore(SimpleArray<Role> roles) {
+    }
+
 
     @Override
     public void add(Role model) {

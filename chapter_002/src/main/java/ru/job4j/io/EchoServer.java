@@ -17,8 +17,8 @@ public class EchoServer {
                 try (OutputStream out = socket.getOutputStream();
                      BufferedReader in = new BufferedReader(
                              new InputStreamReader(socket.getInputStream()))) {
-                    String str;
-                    while (!(str = in.readLine()).isEmpty()) {
+                    String str = in.readLine();
+                    while (!(str.isEmpty())) {
                         if (str.contains("Bye")) {
                             System.out.println(str);
                             isWorking = false;

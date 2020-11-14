@@ -47,4 +47,15 @@ public class MemStoreTest {
         store.add(new User("6"));
         assertThat(store.delete("6"), is(true));
     }
+
+    /**
+     * Проверяем что замена объекта вернет true
+     */
+    @Test
+    public void whenUpdateRoleThenNewRoleId() {
+        SimpleArray<Role> roles = new SimpleArray<>(4);
+        RoleStore store = new RoleStore(roles);
+        store.add(new Role("123"));
+        assertThat(store.replace("123", new Role("456")), is(true));
+    }
 }

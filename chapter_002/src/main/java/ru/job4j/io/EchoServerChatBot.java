@@ -14,7 +14,7 @@ public class EchoServerChatBot {
         String res = "HTTP/1.1 200 OK\n"
                 + "Server: HTTP server/0.1\n"
                 + "Date: "
-                + format.format(new java.util.Date ())
+                + format.format(new java.util.Date())
                 + "\n";
         out.write(res);
     }
@@ -36,7 +36,7 @@ public class EchoServerChatBot {
                 + "</BODY></HTML>";
         String res = "HTTP/1.1 400 Bad Request\n"
                 + "Server: HTTP server/0.1\n"
-                + "Date: " + format.format(new java.util.Date ())
+                + "Date: " + format.format(new java.util.Date())
                 + "\n"
                 + "Content-type: text/html; charset = UTF-8\n"
                 + "Content-Length: " + msg.length() + "\n" + msg;
@@ -47,7 +47,7 @@ public class EchoServerChatBot {
     public static void main(String[] args) {
         try (ServerSocket server = new ServerSocket(80)) {
             while (true) {
-                Socket socket = server.accept ();
+                Socket socket = server.accept();
                 Map<String, String> road = new HashMap<>();
                 road.put("Hello", "Hello I'm bot");
                 road.put("Buy", "Buy!!!");
@@ -56,8 +56,8 @@ public class EchoServerChatBot {
                                      new OutputStreamWriter(socket.getOutputStream()));
                      BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()))
                 ) {
-                    String str;
-                    if (!(str = in.readLine()).isEmpty()) {
+                    String str = in.readLine();
+                    if (!(str.isEmpty()) && str != null) {
                         try {
                             str = str.split(" ")[ 1 ].split("=")[ 1 ];
                             String req = road.get(str);
@@ -76,7 +76,7 @@ public class EchoServerChatBot {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace ();
+            e.printStackTrace();
         }
     }
 }

@@ -21,9 +21,8 @@ public class EchoServerBot {
                 try (OutputStream out = socket.getOutputStream();
                      BufferedReader in = new BufferedReader(
                              new InputStreamReader(socket.getInputStream()))) {
-                    String str;
-                    if (!(str = in.readLine()).isEmpty()
-                            && pattern.matcher(str).matches()) {
+                    String str = in.readLine();
+                    if (!(str.isEmpty()) && str != null && str.contains("msg=")) {
                         String request = str.substring(str.lastIndexOf("="), str.lastIndexOf(" "));
                         String response = String.valueOf(hello.equalsIgnoreCase(request));
                         System.out.println("HELLO");
@@ -39,7 +38,6 @@ public class EchoServerBot {
                             System.out.println("STOP");
                         }
                         server.close();
-                        break;
                     }
                 }
             }
