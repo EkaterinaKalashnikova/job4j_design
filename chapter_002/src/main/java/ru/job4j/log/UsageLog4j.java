@@ -3,6 +3,7 @@ package ru.job4j.log;
 //import java.util.logging.LogManager;
 //import java.util.logging.Logger;
 
+import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -17,10 +18,5 @@ public class UsageLog4j {
         LOG.warn("warn message");
         LOG.error("error message");
         BasicConfigurator.configure();
-    }
-
-    private static class BasicConfigurator {
-        public static void configure() {
-        }
     }
 }
