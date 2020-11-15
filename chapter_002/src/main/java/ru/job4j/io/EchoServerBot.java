@@ -6,15 +6,15 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.regex.Pattern;
+import java.sql.SQLOutput;
 
 public class EchoServerBot {
-    private static String hello = "Hello";
-    private static String exit = "Exit";
-    private static String any = "any";
-   // private static Pattern pattern = Pattern.compile("\\?msg=" + "HTTP/1.1", Pattern.CASE_INSENSITIVE);
+    private static final String HELLO = "hello";
+    private static final String EXIT = "exit";
+    private static final String ACTION = "msg=";
+    // private static Pattern pattern = Pattern.compile("\\?msg=" + "HTTP/1.1", Pattern.CASE_INSENSITIVE);
 
-    public static void main(String[] args)  {
+    public static void main(String[] args) {
         try (ServerSocket server = new ServerSocket(9000)) {
             while (!server.isClosed()) {
                 Socket socket = server.accept();
@@ -22,24 +22,31 @@ public class EchoServerBot {
                      BufferedReader in = new BufferedReader(
                              new InputStreamReader(socket.getInputStream()))) {
                     String str = in.readLine();
-                    if (!(str.isEmpty()) && str != null && str.contains("msg=")) {
-                        String request = str.substring(str.lastIndexOf("="), str.lastIndexOf(" "));
-                        String response = String.valueOf(hello.equalsIgnoreCase(request));
-                        System.out.println("HELLO");
-                        if (any.equalsIgnoreCase(request)) {
-                            System.out.println(" ");
+                    String answer = "";
+                    //str = str.replaceAll ("GET (?:.*msg=(.*))?.* .*", "$1");
+                    //GET /?msg=asdf
+                    if (str != null && !str.isEmpty() && str.contains("msg=")) {
+                        String request = str.substring(str.lastIndexOf(ACTION) + ACTION.length(), str.lastIndexOf(" "));
+
+                        if (HELLO.equalsIgnoreCase(request)) {
+                            answer = "HELLO USER!";
+                            System.out.println(answer);
+                        } else if (EXIT.equalsIgnoreCase(answer)) {
+                            answer = "SERVER IS CLOSING";
+                        } else {
+                            answer = request;
                         }
-                        if (exit.equalsIgnoreCase(response)) {
-                            System.out.println("STOP");
-                        }
+
                         out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
-                        out.write("Hello, dear friend.".getBytes());
-                       // out.write("Hello, dear friend.".getBytes());
-                        out.write(request.getBytes());
-                        if (exit.equalsIgnoreCase(response)) {
-                            System.out.println("STOP");
+                        out.write(("Hello, dear friend." + answer).getBytes());
+                        out.flush();
+
+                        if (EXIT.equalsIgnoreCase(request)) {
                             server.close();
                         }
+                    } else {
+                        out.write("HTTP/1.1 400 Bad Request".getBytes());
+                        out.flush();
                     }
                 }
             }
