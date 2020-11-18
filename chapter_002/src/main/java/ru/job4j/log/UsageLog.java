@@ -16,7 +16,8 @@ public class UsageLog {
         long head = 57;
         boolean mind = true;
         char unique = 's';
-        LOG.debug("User info name : {}, age : {}, size : {}, line : {}, step : {}, jump : {}, head : {}, mind : {}, unique : {}",
+       LOG.debug("User info name : {}, age : {}, size : {}, line : {}, step : {}, jump : {}, head : {}, mind : {}, unique : {}",
                 name, age, size, line, step, jump, head, mind, unique);
+       // LOG.debug("User info name : {}, age : {}", name, age);
     }
 }
