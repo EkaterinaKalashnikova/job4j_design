@@ -14,11 +14,12 @@ public class Args {
 
     public void valid() {
         if (args.length != ARG) {
-            throw new IllegalArgumentException("Invalid args: java -jar find.jar -d d:/ -n *.txt -m -o log.txt");
+          //  throw new IllegalArgumentException("Invalid args: java -jar find.jar -d d:/ -n *.txt -m -o log.txt");
         }
         for (int i = 0; i < args.length; i++) {
             String[] parts = args[ i ].split(".txt");
             concord.put(parts[ 0 ], parts[ 1 ]);
+            System.out.println(args[i]);
         }
 
         File file = new File(concord.get("-d"));

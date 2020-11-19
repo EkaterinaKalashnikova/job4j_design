@@ -32,7 +32,7 @@ public class ProgramSearchFile {
     }
 
     public  void  writeFile(Args args, List<Path> fileList) throws IOException {
-        Files.write(Path.of(args.exclude()), fileList.stream().map(Path::toString).collect(Collectors.toList()));
+        Files.write(Path.of(args.directory()), fileList.stream().map(Path::toString).collect(Collectors.toList()));
     }
 
     public static void main(String[] args) throws IOException {
