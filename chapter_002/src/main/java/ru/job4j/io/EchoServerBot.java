@@ -20,16 +20,16 @@ public class EchoServerBot {
 
     public static void main(String[] args) {
         try (ServerSocket server = new ServerSocket(9000)) {
-           // throw new Exception("Not supported code");
+            // throw new Exception("Not supported code");
             while (!server.isClosed()) {
                 Socket socket = server.accept();
                 try (OutputStream out = socket.getOutputStream();
                      BufferedReader in = new BufferedReader(
                              new InputStreamReader(socket.getInputStream()))) {
-                    String str = in.readLine();
+                    String str = in.readLine ();
                     String answer = "";
                     //str = str.replaceAll ("GET (?:.*msg=(.*))?.* .*", "$1");
-                    //GET /?msg=asdf
+                    //GET /?msg = asdf
                     if (str != null && !str.isEmpty() && str.contains("msg=")) {
                         String request = str.substring(str.lastIndexOf(ACTION) + ACTION.length(), str.lastIndexOf(" "));
 
@@ -47,7 +47,7 @@ public class EchoServerBot {
                         out.flush();
 
                         if (EXIT.equalsIgnoreCase(request)) {
-                            server.close ();
+                            server.close();
                         }
                     } else {
                         out.write("HTTP/1.1 400 Bad Request".getBytes());
@@ -55,9 +55,6 @@ public class EchoServerBot {
                     }
                 }
             }
-        } catch (IOException e) {
-            throw new RuntimeException ();
-
         } catch (Exception e) {
             LOG.error("Exception in log example", e);
         }
