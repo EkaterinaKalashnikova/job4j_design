@@ -47,9 +47,6 @@ public class ProgramSearchFile {
         psf.writeFile(args1, fileList);
     }
 
-
-
-
     /** public  static  void searchFiles(File rootFile, List<File> filesList) {
          if (rootFile.isDirectory()) {
              System.out.println("D:\\" + rootFile.getAbsolutePath());

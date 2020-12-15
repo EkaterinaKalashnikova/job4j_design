@@ -26,7 +26,7 @@ public class EchoServerBot {
                 try (OutputStream out = socket.getOutputStream();
                      BufferedReader in = new BufferedReader(
                              new InputStreamReader(socket.getInputStream()))) {
-                    String str = in.readLine ();
+                    String str = in.readLine();
                     String answer = "";
                     //str = str.replaceAll ("GET (?:.*msg=(.*))?.* .*", "$1");
                     //GET /?msg = asdf

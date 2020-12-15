@@ -1,12 +1,15 @@
 package ru.job4j.files;
 
 import java.io.File;
-import java.util.HashMap;
 
 public class Args {
-    private final static int ARG = 3;
+    private final static int ARG = 7;
+    private final static int DIRECTORY_KEY = 1;
+    private final static int TEMPLATE_KEY= 2; //шаблоны по ключу
+    private final static int SEARCH_KEY = 4; //поиск значения по ключу
+    private final static int ARG_PATH_KEY = 5; //пути аргументов
     private final String[] args;
-    private HashMap<String, String> concord = new HashMap<>();
+    //private HashMap<String, String> concord = new HashMap<>();
 
     public Args(String[] args) {
         this.args = args;
@@ -14,33 +17,38 @@ public class Args {
 
     public void valid() {
         if (args.length != ARG) {
-          //  throw new IllegalArgumentException("Invalid args: java -jar find.jar -d d:/ -n *.txt -m -o log.txt");
+            throw new IllegalArgumentException("Invalid args: java -jar find.jar -d d:/ -n *.txt -m -o log.txt");
         }
-        for (int i = 0; i < args.length; i++) {
-            String[] parts = args[ i ].split(".txt");
-            concord.put(parts[ 0 ], parts[ 1 ]);
-            System.out.println(args[i]);
+        File directory = null;
+        //проверяем заданный набор символов из одного промежутка
+        if (!args[ DIRECTORY_KEY ].startsWith("-")
+                || args[ TEMPLATE_KEY ].startsWith("-")
+                || args[ SEARCH_KEY ].startsWith("-")
+                || args[ ARG_PATH_KEY ].startsWith("-")) {
+            throw new IllegalArgumentException("Invalid args with -");
+        }
+        //
+        if (!args[ DIRECTORY_KEY ].equalsIgnoreCase("-d")
+                || args[ TEMPLATE_KEY ].equalsIgnoreCase("-n")
+                || args[ ARG_PATH_KEY ].equalsIgnoreCase("-o")) {
+            throw new IllegalArgumentException("Invalid args");
         }
 
-        File file = new File(concord.get("-d"));
-        if (!file.exists()) {
-            throw new IllegalArgumentException("Invalid file");
-        }
-        if (!file.isDirectory()) {
+        directory = new File(args[ DIRECTORY_KEY ]);
+        if (!directory.exists()) {
             throw new IllegalArgumentException("Invalid catalog");
         }
     }
 
     public String directory() {
-        return concord.get("-d");
+        return args[DIRECTORY_KEY];
     }
 
-    public String exclude() {
-        return concord.get("-n");
+    public String pattern() {
+        return args[TEMPLATE_KEY];
     }
 
     public String output() {
-        return concord.get("-o");
+        return args[ARG_PATH_KEY];
     }
-
 }
