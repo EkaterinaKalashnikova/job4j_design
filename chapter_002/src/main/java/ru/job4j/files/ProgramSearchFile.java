@@ -26,7 +26,7 @@ public class ProgramSearchFile {
     }
 
     public List<Path> searchFiles() throws IOException {
-        SearchFiles searcher = new SearchFiles(p -> p.toFile().getName().endsWith(".txt"));
+        SearchFiles searcher = new SearchFiles(p -> p.toFile().getName().endsWith(".java"));
         Files.walkFileTree(rootFile, searcher);
         return searcher.getPaths();
     }
