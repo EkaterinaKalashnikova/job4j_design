@@ -61,4 +61,27 @@ public class Contact implements Serializable {
                 ", phone='" + phone + '\''+
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+        return true;
+        }
+        if (!(o instanceof Contact)) {
+            return false;
+        }
+
+        Contact contact = (Contact) o;
+        if (getZipCode() != contact.getZipCode()) {
+            return false;
+        }
+        return getPhone() != null ? getPhone().equals(contact.getPhone()) : contact.getPhone() == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getZipCode();
+        result = 31 * result + (getPhone() != null ? getPhone().hashCode() : 0);
+        return result;
+    }
 }
