@@ -3,40 +3,40 @@ package ru.job4j.serialization.json;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-public class Horse {
+public class Horses {
     private final String breed;
 
-    public Contact( String breed) {
-        this.breed = phone;
+    public Horses( String breed) {
+        this.breed = breed;
     }
 
     @Override
     public String toString() {
-        return "Contact{"
-                + "phone='" + phone + '''
+        return "Horse{"
+                + "breed='" + breed + '\''
                 + '}';
     }
 
     public static void main(String[] args) {
-        final Person person = new Person(false, 30, new Contact("11-111"), "Worker", "Married");
+        final Horse horse = new Horse(false, 4, new Horses("english"), "Black", "Red");
 
         /* Преобразуем объект person в json-строку. */
-        final Gson gson = new GsonBuilder ().create();
-        System.out.println(gson.toJson(person));
+        final Gson gson = new GsonBuilder().create();
+        System.out.println(gson.toJson(horse));
 
-        /* Модифицируем json-строку */
-        final String personJson =
+        /* Модифицируем json-строку*/
+        final String horseJson =
                 "{"
-                        + ""sex":false,"
-                + ""age":35,"
-                + ""contact":"
-                + "{"
-                + ""phone":"+7(924)111-111-11-11""
-                + "},"
-                + ""statuses":"
-                + "["Student","Free"]"
-                + "}";
-        final Person personMod = gson.fromJson(personJson, Person.class);
-        System.out.println(personMod);
+                        + "\"sex\" :false,"
+                        + "\"age\" :4,"
+                        + "\"horses\":"
+                        + "{"
+                        + "\"breed\":" + "english"
+                        + "},"
+                        + "\"suites\":"
+                        + "[\"Black\", \"Red\"]"
+                        + "}";
+        final Horse horse1Mod = gson.fromJson(horseJson, Horse.class);
+        System.out.println(horse1Mod);
     }
 }

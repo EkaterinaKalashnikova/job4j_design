@@ -2,26 +2,26 @@ package ru.job4j.serialization.json;
 
 import java.util.Arrays;
 
-public class Don {
+public class Horse {
     private final boolean sex;
     private final int age;
-    private final Horse horse;
-    private final String[] suit;
+    private final Horses horses;
+    private final String[] suites;
 
-    public Don(boolean sex, int age, Horse horse, String... suit) {
+    public Horse( boolean sex, int age, Horses horses, String... suites) {
         this.sex = sex;
         this.age = age;
-        this.horse = horse;
-        this.suit = suit;
+        this.horses = horses;
+        this.suites = suites;
     }
 
     @Override
     public String toString() {
-        return "Don{"
+        return "Horse{"
                 + "sex=" + sex
                 + ", age=" + age
-                + ", horse=" + horse
-                + ", suit=" + Arrays.toString(suit)
+                + ", horses=" + horses
+                + ", suites=" + Arrays.toString(suites)
                 + '}';
     }
 }
