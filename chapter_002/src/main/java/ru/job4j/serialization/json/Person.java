@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class Person {
     private final boolean sex;
     private final int age;
-    private final Contact contact;
+    private final Contact contact; //
     private final String[] statuses;
 
     public Person(boolean sex, int age, Contact contact, String... statuses) {
@@ -23,5 +23,13 @@ public class Person {
                 + ", kontact=" + contact
                 + ", statuses=" + Arrays.toString(statuses)
                 + '}';
+    }
+
+    public int getAge() {
+        return this.age;
+    }
+
+    public boolean isSex() {
+        return false;
     }
 }
