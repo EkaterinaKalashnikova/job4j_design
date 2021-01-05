@@ -2,50 +2,69 @@ package ru.job4j.files;
 
 import ru.job4j.io.SearchFiles;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-public class ProgramSearchFile {
+public class ProgramSearchFile  {
 
     private static Path file;
-    private static Path fileNameSearch;
     private static Path rootFile;
 
-    public ProgramSearchFile(Path fileNameSearch, Path rootFile) {
-        this.fileNameSearch = fileNameSearch;
-        this.rootFile = rootFile;
-    }
-
-    public static void setFile(Path file) {
+    public void setFile(Path file) {
         ProgramSearchFile.file = file;
     }
 
-    public List<Path> searchFiles() throws IOException {
-        SearchFiles searcher = new SearchFiles(p -> p.toFile().getName().endsWith(".java"));
+    public void setRootFile(Path rootFile) {
+        ProgramSearchFile.rootFile = rootFile;
+    }
+
+    public static List<Path> searchFiles(Path rootFile, String ext) throws IOException {
+        SearchFiles searcher = new SearchFiles(p -> p.toFile().getName().endsWith(ext));
+       // SearchFiles searcher = new SearchFiles(precept);
         Files.walkFileTree(rootFile, searcher);
         return searcher.getPaths();
     }
 
     public  void  writeFile(Args args, List<Path> fileList) throws IOException {
-        Files.write(Path.of(args.directory()), fileList.stream().map(Path::toString).collect(Collectors.toList()));
+        Files.write(
+                Path.of(args.output()), fileList.stream().map(
+                        Path::toString).collect(Collectors.toList()));
+    }
+
+    public static List<Path> listPath(Args args) {
+        String type = args.typeSearch();
+        if (type.equals("-f")) {
+           //
+            Pattern.quote(args.getClass().getName());
+        } else if (type.equals("-m")) {
+            Pattern p = Pattern.compile(type);
+        } else if (type.equals("-r")) {
+            Predicate<Path> predicate1 = path -> path.toFile().getName().matches(".");
+            predicate1 = (Predicate<Path>) listPath(args);
+        }
+        return listPath(args);
     }
 
     public static void main(String[] args) throws IOException {
         Args args1 = new Args(args);
         args1.valid();
-        ProgramSearchFile psf = new ProgramSearchFile(Path.of("D:\\"), rootFile);
-        List<Path> fileList = psf.searchFiles();
+        ProgramSearchFile psf = new ProgramSearchFile();
+        //Predicate<Path> precept = SearchFile.predicate(args1);
+        List<Path> fileList = listPath(args1);
+
         for (Path ignored : fileList) {
             System.out.println(file.getFileName());
-        }
-        Predicate<Path> accord = Path::isAbsolute;
-        psf.writeFile(args1, fileList);
+       }
+      psf.writeFile(args1, fileList);
+       //Predicate<Path> precept = Path::isAbsolute;
+        //psf.writeFile(args1, fileList);
     }
+
 
     /** public  static  void searchFiles(File rootFile, List<File> filesList) {
          if (rootFile.isDirectory()) {

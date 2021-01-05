@@ -1,5 +1,7 @@
 package ru.job4j.io;
 
+import ru.job4j.files.Args;
+
 import java.io.IOException;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Path;
@@ -12,7 +14,7 @@ import java.util.function.Predicate;
 public class SearchFiles extends SimpleFileVisitor<Path> {
 
     private  final Predicate<Path> predicate;
-    private  final List<Path> files =  new ArrayList<>();;
+    private  final List<Path> files =  new ArrayList<>();
 
    public SearchFiles(Predicate<Path> predicate) {
         this.predicate = predicate;

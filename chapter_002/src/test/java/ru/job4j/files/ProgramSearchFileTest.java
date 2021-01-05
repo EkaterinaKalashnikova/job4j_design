@@ -9,10 +9,7 @@ public class ProgramSearchFileTest {
         super();
     }
 
-   // public static Test suite() {
-    //    TestSuite suite = new TestSuite (ProgramSearchFileTest.class);
-    //    return (Test) suite;
-   // }
+
 
 
     @Test

@@ -1,12 +1,13 @@
 package ru.job4j.files;
 
 import java.io.File;
+import java.nio.file.Path;
 
-public class Args {
+public class Args  {
     private final static int ARG = 7;
     private final static int DIRECTORY_KEY = 0;
     private final static int TEMPLATE_KEY = 2; //шаблоны по ключу
-    private final static int SEARCH_KEY = 4; //поиск значения по ключу
+    private final static int TYPE_KEY = 4; //поиск значения по ключу
     private final static int ARG_PATH_KEY = 5; //пути аргументов
     private final String[] args;
 
@@ -21,7 +22,7 @@ public class Args {
         //проверяем заданный набор символов из одного промежутка
         if (!args[ DIRECTORY_KEY ].startsWith("-")
                 || !args[ TEMPLATE_KEY ].startsWith("-")
-                || !args[ SEARCH_KEY ].startsWith("-")
+                || !args[ TYPE_KEY ].startsWith("-")
                 || !args[ ARG_PATH_KEY ].startsWith("-")) {
             throw new IllegalArgumentException("Invalid args with -");
         }
@@ -32,25 +33,34 @@ public class Args {
             throw new IllegalArgumentException("Invalid args");
         }
 
-       File directory = new File(args[ DIRECTORY_KEY ]);
+        //
+       File directory = new File(args[1]);
         if (!directory.exists()) {
             throw new IllegalArgumentException("Invalid catalog");
         }
     }
 
     public String directory() {
-        return args[DIRECTORY_KEY];
+        return this.args[1];
     }
 
-    public String searchValue() {
-        return args[SEARCH_KEY];
+    public String typeSearch() {
+        return this.args[TYPE_KEY];
     }
 
     public String pattern() {
-        return args[TEMPLATE_KEY];
+        return this.args[TEMPLATE_KEY];
     }
 
     public String output() {
-        return args[ARG_PATH_KEY];
+        return this.args[ARG_PATH_KEY];
+    }
+
+    public String logName() {
+        return this.args[6];
+    }
+
+    public String mask() {
+        return this.args[3];
     }
 }
