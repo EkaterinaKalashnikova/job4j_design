@@ -1,7 +1,6 @@
 package ru.job4j.files;
 
 import java.io.File;
-import java.nio.file.Path;
 
 public class Args  {
     private final static int ARG = 7;

@@ -2,15 +2,18 @@ package ru.job4j.files;
 
 import ru.job4j.io.SearchFiles;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.function.Predicate;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-public class ProgramSearchFile  {
+public class ProgramSearchFile {
 
     private static Path file;
     private static Path rootFile;
@@ -23,61 +26,56 @@ public class ProgramSearchFile  {
         ProgramSearchFile.rootFile = rootFile;
     }
 
+    public void writeFile(Args args, List<Path> fileList) throws IOException {
+        Files.write(Path.of(args.logName()), fileList.stream()
+                .map(Path::toString).collect(Collectors.toList()));
+    }
+
     public static List<Path> searchFiles(Path rootFile, String ext) throws IOException {
         SearchFiles searcher = new SearchFiles(p -> p.toFile().getName().endsWith(ext));
-       // SearchFiles searcher = new SearchFiles(precept);
         Files.walkFileTree(rootFile, searcher);
         return searcher.getPaths();
     }
 
-    public  void  writeFile(Args args, List<Path> fileList) throws IOException {
-        Files.write(
-                Path.of(args.output()), fileList.stream().map(
-                        Path::toString).collect(Collectors.toList()));
-    }
-
-    public static List<Path> listPath(Args args) {
+    public static List<Path> listPath(Args args) throws IOException {
         String type = args.typeSearch();
+        String ext = "";
+        String target = "*", replacement = "(.*)";
+        String mask1 = args.mask().replace(target, replacement);
+        List<Path> list1 = new ArrayList<>();
+        List<Path> list2 = new ArrayList<>();
+
         if (type.equals("-f")) {
-           //
-            Pattern.quote(args.getClass().getName());
+            list1 = ProgramSearchFile.searchFiles(
+                    Path.of(args.directory() + args.mask()), ext);
         } else if (type.equals("-m")) {
-            Pattern p = Pattern.compile(type);
+            list2 = ProgramSearchFile.searchFiles(Path.of(args.directory()), ext);
+            for (Path file : list2) {
+                if (file.toFile().getName().matches(mask1)) {
+                    list1.add(file);
+                }
+            }
         } else if (type.equals("-r")) {
-            Predicate<Path> predicate1 = path -> path.toFile().getName().matches(".");
-            predicate1 = (Predicate<Path>) listPath(args);
+            list2 = ProgramSearchFile.searchFiles(Path.of(args.directory()), ext);
+            Pattern pattern = Pattern.compile(mask1);
+            Matcher matcher = pattern.matcher(args.pattern());
+            for (Path file : list2) {
+               if (file.toFile().getName().matches(mask1)) {
+                  list1.add(file);
+               }
+            }
         }
-        return listPath(args);
+        return list1;
     }
 
     public static void main(String[] args) throws IOException {
         Args args1 = new Args(args);
         args1.valid();
         ProgramSearchFile psf = new ProgramSearchFile();
-        //Predicate<Path> precept = SearchFile.predicate(args1);
         List<Path> fileList = listPath(args1);
-
         for (Path ignored : fileList) {
-            System.out.println(file.getFileName());
-       }
-      psf.writeFile(args1, fileList);
-       //Predicate<Path> precept = Path::isAbsolute;
-        //psf.writeFile(args1, fileList);
+            System.out.println(ignored.getFileName());
+        }
+        psf.writeFile(args1, fileList);
     }
-
-
-    /** public  static  void searchFiles(File rootFile, List<File> filesList) {
-         if (rootFile.isDirectory()) {
-             System.out.println("D:\\" + rootFile.getAbsolutePath());
-             File[] directoryFiles = rootFile.listFiles();
-             if (directoryFiles != null) {
-                 Arrays.stream(directoryFiles).filter(file -> file.isDirectory ())
-                         .forEach(file -> searchFiles(file, filesList));
-             } else {
-                 if (file.getName().toLowerCase().endsWith(".txt")) {
-                     filesList.add(file);
-                 }
-             }
-         }
-     }*/
 }
