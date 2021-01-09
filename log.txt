@@ -1,6 +1,2 @@
-d:\resume\1.txt
-d:\resume\РЕЗЮМЕ 001.BMP
-d:\resume\РЕЗЮМЕ-2 001.BMP
-d:\resume\РЕЗЮМЕ-3 001.BMP
-d:\resume\РЕЗЮМЕ-4 001.BMP
-d:\resume\РЕЗЮМЕ-5 001.BMP
+d:\resume\Java - Import CSV File Into An Array.mp4
+d:\resume\Java - Reading and Writing using ArrayLists.mp4

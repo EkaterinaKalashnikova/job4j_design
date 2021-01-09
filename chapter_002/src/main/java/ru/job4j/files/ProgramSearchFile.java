@@ -9,9 +9,12 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+
+import static ru.job4j.files.SearchTerms.listPath;
 
 public class ProgramSearchFile {
 
@@ -31,47 +34,21 @@ public class ProgramSearchFile {
                 .map(Path::toString).collect(Collectors.toList()));
     }
 
+    //public static List<Path> searchFiles(Args args, Predicate<Path> predicate) throws IOException {
     public static List<Path> searchFiles(Path rootFile, String ext) throws IOException {
         SearchFiles searcher = new SearchFiles(p -> p.toFile().getName().endsWith(ext));
+       // SearchFiles searcher = new SearchFiles(predicate);
         Files.walkFileTree(rootFile, searcher);
         return searcher.getPaths();
-    }
-
-    public static List<Path> listPath(Args args) throws IOException {
-        String type = args.typeSearch();
-        String ext = "";
-        String target = "*", replacement = "(.*)";
-        String mask1 = args.mask().replace(target, replacement);
-        List<Path> list1 = new ArrayList<>();
-        List<Path> list2 = new ArrayList<>();
-
-        if (type.equals("-f")) {
-            list1 = ProgramSearchFile.searchFiles(
-                    Path.of(args.directory() + args.mask()), ext);
-        } else if (type.equals("-m")) {
-            list2 = ProgramSearchFile.searchFiles(Path.of(args.directory()), ext);
-            for (Path file : list2) {
-                if (file.toFile().getName().matches(mask1)) {
-                    list1.add(file);
-                }
-            }
-        } else if (type.equals("-r")) {
-            list2 = ProgramSearchFile.searchFiles(Path.of(args.directory()), ext);
-            Pattern pattern = Pattern.compile(mask1);
-            Matcher matcher = pattern.matcher(args.pattern());
-            for (Path file : list2) {
-               if (file.toFile().getName().matches(mask1)) {
-                  list1.add(file);
-               }
-            }
-        }
-        return list1;
     }
 
     public static void main(String[] args) throws IOException {
         Args args1 = new Args(args);
         args1.valid();
         ProgramSearchFile psf = new ProgramSearchFile();
+      //  Predicate<Path> predicate = SearchTerms.listPath(args);
+       // List<Path> fileList = ProgramSearchFile.searchFiles(args1, predicate);
+      //  List<Path> fileList = ProgramSearchFile.searchFiles();
         List<Path> fileList = listPath(args1);
         for (Path ignored : fileList) {
             System.out.println(ignored.getFileName());
