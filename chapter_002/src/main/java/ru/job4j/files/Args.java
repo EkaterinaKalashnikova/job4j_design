@@ -59,7 +59,7 @@ public class Args  {
         return this.args[6];
     }
 
-    public String mask() {
+    public String valKey() {
         return this.args[3];
     }
 }

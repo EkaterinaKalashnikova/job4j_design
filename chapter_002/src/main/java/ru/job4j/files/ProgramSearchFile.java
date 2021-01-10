@@ -1,7 +1,5 @@
 package ru.job4j.files;
 
-import ru.job4j.io.SearchFiles;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -14,45 +12,31 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import static ru.job4j.files.SearchTerms.listPath;
-
 public class ProgramSearchFile {
 
-    private static Path file;
-    private static Path rootFile;
-
-    public void setFile(Path file) {
-        ProgramSearchFile.file = file;
-    }
-
-    public void setRootFile(Path rootFile) {
-        ProgramSearchFile.rootFile = rootFile;
-    }
-
-    public void writeFile(Args args, List<Path> fileList) throws IOException {
+    public static void writeFile(Args args, List<Path> fileList) throws IOException {
         Files.write(Path.of(args.logName()), fileList.stream()
                 .map(Path::toString).collect(Collectors.toList()));
     }
 
-    //public static List<Path> searchFiles(Args args, Predicate<Path> predicate) throws IOException {
-    public static List<Path> searchFiles(Path rootFile, String ext) throws IOException {
-        SearchFiles searcher = new SearchFiles(p -> p.toFile().getName().endsWith(ext));
-       // SearchFiles searcher = new SearchFiles(predicate);
+    public static List<Path> searchFiles(Path rootFile,  Predicate<Path> predicate) throws IOException {
+        SearchTerms searcher = new SearchTerms(predicate);
         Files.walkFileTree(rootFile, searcher);
         return searcher.getPaths();
     }
 
     public static void main(String[] args) throws IOException {
+        // получили аргументы из командной строки
         Args args1 = new Args(args);
+        // проверили их
         args1.valid();
-        ProgramSearchFile psf = new ProgramSearchFile();
-      //  Predicate<Path> predicate = SearchTerms.listPath(args);
-       // List<Path> fileList = ProgramSearchFile.searchFiles(args1, predicate);
-      //  List<Path> fileList = ProgramSearchFile.searchFiles();
-        List<Path> fileList = listPath(args1);
-        for (Path ignored : fileList) {
-            System.out.println(ignored.getFileName());
-        }
-        psf.writeFile(args1, fileList);
+        // сформировали условие по которому будет искать
+        Predicate<Path> condition = PredicateFactory.createPredicate(args1);
+        // Нашли файлы по этому условию
+        List<Path> paths = searchFiles(
+                Path.of(args1.directory()), condition
+        );
+        // Сохранили результат
+        writeFile(args1, paths);
     }
 }
