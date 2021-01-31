@@ -25,10 +25,10 @@ public class Config {
         int index = 0;
         try (BufferedReader rd = new BufferedReader(new FileReader(path))) {
               rd.lines()
-                .filter(n -> !n.isEmpty() && !n.startsWith("#"))
-                .map(line -> line.split("="))
-                .filter(keys -> keys.length == 2)
-                .forEach(keys -> values.put(keys[0], keys[1]));
+                    .filter(n -> !n.isEmpty() && !n.startsWith("#"))
+                    .map(line -> line.split("="))
+                    .filter(keys -> keys.length == 2)
+                    .forEach(keys -> values.put(keys[0], keys[1]));
 
         } catch (Exception e) {
             e.printStackTrace();
