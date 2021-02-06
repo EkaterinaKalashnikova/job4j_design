@@ -11,7 +11,7 @@ public class ShellFolderTest {
         ShellFolder shellFolder = new ShellFolder();
         shellFolder.cd("/user/..");
         assertThat(
-                shellFolder.pwd("/"), is("/")
+                shellFolder.pwd(), is("/")
         );
     }
 
@@ -20,7 +20,7 @@ public class ShellFolderTest {
         ShellFolder shellFolder = new ShellFolder();
         shellFolder.cd("/");
         assertThat(
-                shellFolder.pwd("/"), is("/")
+                shellFolder.pwd(), is("/")
         );
     }
 
@@ -30,7 +30,7 @@ public class ShellFolderTest {
         shellFolder.cd("user");
         shellFolder.cd("local");
         assertThat(
-                shellFolder.pwd("/"), is("/user/local")
+                shellFolder.pwd(), is("/user/local")
         );
     }
 
@@ -40,7 +40,7 @@ public class ShellFolderTest {
         shellFolder.cd("user");
         shellFolder.cd("..");
         assertThat(
-                shellFolder.pwd("/"), is("/")
+                shellFolder.pwd(), is("/")
         );
     }
 }
