@@ -1,4 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<root>
-    <font name="age">TimesNewRoman</font>
-</root>
+<?xml version="1.0" encoding="UTF-8"?>
+<dog age="5" sex="false">
+    <terrier name="Josefina"/>
+    <breeds>
+        <breed>West</breed>
+        <breed1>Russel</breed1>
+        <breed2>York</breed2>
+    </breeds>
+</dog>
