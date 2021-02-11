@@ -9,9 +9,9 @@ import java.io.StringWriter;
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        PersonYet personYet = new PersonYet(false, 30, new Contact("11-111"), "Worker", "Married");
+        PersonYet personYet = new PersonYet(false, 30, new ContactYet("11-111"), "Worker", "Married");
         // Получаем контекст для доступа к АПИ
-        JAXBContext context = JAXBContext.newInstance(Person.class);
+        JAXBContext context = JAXBContext.newInstance(PersonYet.class);
         // Создаем сериализатор
         Marshaller marshaller = context.createMarshaller();
         // Указываем, что нам нужно форматирование

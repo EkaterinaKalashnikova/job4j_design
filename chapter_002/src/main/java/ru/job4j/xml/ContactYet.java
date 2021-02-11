@@ -4,7 +4,7 @@ import com.sun.xml.txw2.annotation.XmlElement;
 
 import javax.xml.bind.annotation.XmlAttribute;
 
-@XmlElement(value = "contact")
+@XmlElement(value = "contactYet")
 
 public class ContactYet {
     private String phone;

@@ -17,7 +17,7 @@ public class PersonYet {
     @XmlAttribute
     private int age;
 
-    private Contact contact;
+    private ContactYet contactYet;
 
    // @XmlElementWrapper(name = "statuses")
    // @XmlElement(name = "status")
@@ -25,36 +25,36 @@ public class PersonYet {
 
     public PersonYet() { }
 
-    public PersonYet(boolean sex, int age, Contact contact, String... statuses) {
+    public PersonYet(boolean sex, int age, ContactYet contactYet, String... statuses) {
         this.sex = sex;
         this.age = age;
-        this.contact = contact;
+        this.contactYet = contactYet;
         this.statuses = statuses;
     }
 
     @Override
     public String toString() {
-        return "Person{"
+        return "PersonYet{"
                 + "sex=" + sex
                 + ", age=" + age
-                + ", contact=" + contact
+                + ", contactYet=" + contactYet
                 + ", statuses=" + Arrays.toString(statuses)
                 + '}';
     }
 
     public static void main(String[] args) throws JAXBException {
 
-        final Person person = new Person(false, 30, new Contact("11-111"), "Worker", "Married");
+        final PersonYet personYet = new PersonYet(false, 30, new ContactYet("11-111"), "Worker", "Married");
 
         JAXBContext context = JAXBContext.newInstance(Person.class);
         Marshaller marshaller = context.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
         //marshaller.marshal(book, new File("./book.xml"));
         try (StringWriter writer = new StringWriter()) {
-            marshaller.marshal(person, writer);
+            marshaller.marshal(personYet, writer);
             String result = writer.getBuffer().toString();
             System.out.println(result);
-        } catch (Exception e) {
+        } catch (Exception ignored) {
 
         }
     }
