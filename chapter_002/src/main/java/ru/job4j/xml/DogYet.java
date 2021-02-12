@@ -1,5 +1,7 @@
 package ru.job4j.xml;
 
+import com.sun.xml.txw2.annotation.XmlElement;
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -8,7 +10,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
@@ -25,6 +26,7 @@ public class DogYet {
 
     @XmlAttribute
     private  int age;
+
     private  TerrierYet terrierYet;
 
     // @XmlElementWrapper(name = "breeds")
