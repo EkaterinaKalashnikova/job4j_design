@@ -14,10 +14,7 @@ public class ShellFolder {
 
         String mask = ".*/..";
         if ("/".equals(path)) {
-            while (currentDir.size() > 0) {
-               // currentDir.remove(currentDir.size() - 1);
                 currentDir.clear();
-            }
                 currentDir.add(root);
             pwd();
         } else if ("..".equals(path)) {
@@ -53,7 +50,6 @@ public class ShellFolder {
 
     public void  stepBack() {
         if (currentDir.size() > 1) {
-           // currentDir.remove(currentDir.size() - 1);
             currentDir.removeLast();
         }
     }
