@@ -30,5 +30,32 @@ insert into attachs(scroll)values('схема');
 insert into attachs(scroll)values('снимок');
 insert into attachs(scroll)values('график проведенных работ');
 
+insert into users_roles(users_id) values('1');
+insert into users_roles(users_id) values('2');
+insert into users_roles(users_id) values('3');
+
+insert into roles_rules(roles_id, rules_id) values('1', '3');
+insert into roles_rules(roles_id, rules_id) values('2', '1');
+insert into roles_rules(roles_id, rules_id) values('3', '2');
+
+insert into item_users(item_id) values('1');
+insert into item_users(item_id) values('2');
+insert into item_users(item_id) values('3');
+
+insert into item_commentses(commentses_id) values('1');
+insert into item_commentses(commentses_id) values('2');
+insert into item_commentses(commentses_id) values('3');
+
+insert into item_attachs(attachs_id) values('1');
+insert into item_attachs(attachs_id) values('2');
+insert into item_attachs(attachs_id) values('3');
+
+insert into item_category(item_id) values('1');
+insert into item_category(item_id) values('2');
+insert into item_category(item_id) values('3');
+
+insert into item_state(item_id) values('1');
+insert into item_state(item_id) values('2');
+insert into item_state(item_id) values('3');
 
 
