@@ -58,29 +58,33 @@ insert into product(name, type_id, expired_date, price) values('рич', '11', '
 insert into product(name, type_id, expired_date, price) values('добрый', '11', '01.01.2022', '85');
 
 1. Написать запрос получение всех продуктов с типом "СЫР":
-   select id from type where name = 'Сыр';
+   select name from product where type_id  = (select id from type where name = 'Сыр');
 
 2. Написать запрос получения всех продуктов, у кого в имени есть слово "мороженное"
    select name from product where name like '%Мороженое%';
 
 3. Написать запрос, который выводит все продукты, срок годности которых заканчивается в следующем месяце.
    select name from product where EXTRACT(MONTH FROM expired_date) = EXTRACT(MONTH FROM now())+1;
+   select name from  product where current_date  + interval '1 month' > expired_date;
+   select name from  product where (to_date((2021 || '-' || 9)::text, 'YYYY-MM') + interval  '1 month' - interval '1 day')::date  + interval '1 month' > expired_date;
 
 4. Написать запрос, который выводит самый дорогой продукт.
    select max(price) from product;
    select name, price from product where price = (select max(price) from product);
 
 5. Написать запрос, который выводит количество всех продуктов определенного типа.
-   select count(name) from type;
+   select count(p.name), t.name from product p join type t on p.type_id = t.id group by t.name;
 
 6. Написать запрос получение всех продуктов с типом "СЫР" и "МОЛОКО"
    select name from product where type_id in ((select id from type where name = 'Сыр'), (select id from type where name = 'Молоко'));
 
 7. Написать запрос, который выводит тип продуктов, которых осталось меньше 10 штук.  
-   select name from type where (select count(p.id) from product as p where p.type_id = type.id) < 10;
+  select count(p.name), t.name from product p join type t on p.type_id = t.id 
+group by t.name
+having count(p.name) < 10;
    
 8. Вывести все продукты и их тип.
-   select p.name, t.name from product as p left join type as t on t.id = p.type_id;
+   select p.name, t.name from product as p join type as t on t.id = p.type_id;
 
 
 
