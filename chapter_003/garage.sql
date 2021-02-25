@@ -27,13 +27,17 @@ insert into carBody(name) values('universal');
 insert into carBody(name) values('crossover');
 insert into carBody(name) values('miniven');
 insert into carBody(name) values('pikap');
+insert into carBody(name) values('sportcupe');
+insert into carBody(name) values('sportcar');
 
 insert into engine(name) values('gasoline');
 insert into engine(name) values('diesel');
+insert into engine(name) values('gas');
 
 insert into transmission(name) values('automatic');
 insert into transmission(name) values('mechanics');
 insert into transmission(name) values('variator');
+insert into transmission(name) values('robot');
 
 insert into car(name, carBody_id, engine_id, transmission_id) values('mercedes', 1, 1, 1);
 insert into car(name, carBody_id, engine_id, transmission_id) values('mercedes', 2, 1, 1);
@@ -42,5 +46,21 @@ insert into car(name, carBody_id, engine_id, transmission_id) values('jeep', 4, 
 insert into car(name, carBody_id, engine_id, transmission_id) values('jeep', 5, 2, 1);
 insert into car(name, carBody_id, engine_id, transmission_id) values('jeep', 6, 2, 2);
 insert into car(name, carBody_id, engine_id, transmission_id) values('hyundai', 1, 1, 1);
+
+1. Вывести список всех машин и все привязанные к ним детали:
+select car.name, c.name, e.name, t.name from car car join carbody c on
+car.carbody_id = c.id join engine e on car.engine_id = e.id
+join transmission t on car.transmission_id = t.id;
+
+2. Вывести отдельно детали, которые не используются в машине, кузова, двигатели, коробки передач:
+select e.name from engine e left join car car on car.engine_id = e.id
+where car.name IS NULL
+union
+select t.name from transmission t left join car car on car.transmission_id = t.id
+where car.name IS NULL
+union
+select c.name from carbody c left join car car on
+car.carbody_id = c.id 
+where car.name IS NULL;
 
 

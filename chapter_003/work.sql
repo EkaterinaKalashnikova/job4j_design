@@ -22,7 +22,7 @@ insert into emploees(name, departments_id) values('professor', 2);
 insert into emploees(name, departments_id) values('doctor', 3);
 insert into emploees(name, departments_id) values('nurse', 3);
 
---Выполнить запросы с left, rigth, full, cross соединениями:
+--Выполнить запросы с left, right, full, cross соединениями:
 1. select * from departments d left join emploees e on e.departments_id = d.id;
 1a. select * from emploees e left join departments d on d.id = e.departments_id;
 2. select * from emploees e right join departments d on e.departments_id = d.id;
@@ -58,4 +58,4 @@ insert into teens(name, gender) values('Edvard', 'male');
 insert into teens(name, gender) values('Anna', 'female');
 insert into teens(name, gender) values('Kira', 'female');
 
-select t1.name as nam, t2.gender as gend from teens t1 cross join teens t2;
+select  distinct t1.name as nam, t2.gender as gend from teens t1 cross join teens t2;
