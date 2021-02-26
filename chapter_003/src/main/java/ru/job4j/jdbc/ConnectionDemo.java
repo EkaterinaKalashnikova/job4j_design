@@ -11,16 +11,18 @@ public class ConnectionDemo {
         String password = "kindness";
         //устанавливаем соединение
         try (Connection connection = DriverManager.getConnection(url, login, password)) {
+            if (connection != null) {
             DatabaseMetaData metaData = connection.getMetaData();
-            try (ResultSet resultSet = metaData.getCatalogs()) {
-                while (resultSet.next()) {
-                    System.out.println(metaData.getUserName());
-                    System.out.println(metaData.getURL());
+                try (ResultSet resultSet = metaData.getCatalogs()) {
+                    while (resultSet.next()) {
+                        System.out.println(metaData.getUserName());
+                        System.out.println(metaData.getURL());
+                    }
+                    resultSet.close ();
+                    connection.close ();
+                } catch (SQLException e) {
+                    e.printStackTrace ();
                 }
-                resultSet.close();
-                connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
             }
         }
     }
