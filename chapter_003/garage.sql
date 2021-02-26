@@ -53,13 +53,10 @@ car.carbody_id = c.id join engine e on car.engine_id = e.id
 join transmission t on car.transmission_id = t.id;
 
 2. Вывести отдельно детали, которые не используются в машине, кузова, двигатели, коробки передач:
+select car.name, c.name from carbody c left join car car on
+car.carbody_id = c.id 
+where car.name IS NULL;
 select car. name, e.name from engine e left join car car on car.engine_id = e.id
 where car.name IS NULL;
 select car.name, t.name from transmission t left join car car on car.transmission_id = t.id
-where car.name IS NULL;
-select c.name from carbody c left join car car on
-car.carbody_id = c.id 
-where car.name IS NULL;
-select car.name, c.name from carbody c left join car car on
-car.carbody_id = c.id 
 where car.name IS NULL;
