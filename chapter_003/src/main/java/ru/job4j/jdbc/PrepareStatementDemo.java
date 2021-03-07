@@ -101,13 +101,10 @@ public class PrepareStatementDemo {
        City cityFour = new City(4, "Anapa", 90);
        City cityFive = new City(5, "Yeisk", 87);
        PrepareStatementDemo psd = new PrepareStatementDemo();
-      // psd.insert(cityOne);
-      // psd.update(cityTwo);
-       psd.delete(4);
-
-     //  psd.findAll();
-        for (City p : psd.findAll()) {
+      // psd.update(cityThree);
+       psd.findAll().forEach(System.out::println);
+      /*  for (City p : psd.findAll()) {
             System.out.println(p);
-        }
+        }*/
     }
 }
