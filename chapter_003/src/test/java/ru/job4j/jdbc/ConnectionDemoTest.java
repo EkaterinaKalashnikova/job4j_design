@@ -2,8 +2,6 @@ package ru.job4j.jdbc;
 
 import org.junit.Test;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -15,7 +13,7 @@ public class ConnectionDemoTest {
     public  void  whenLoadThenGetFile() throws IOException {
         ConnectionDemo connectionDemo = new ConnectionDemo();
         ClassLoader loader = ConnectionDemo.class.getClassLoader();
-        try (InputStream stream = loader.getResourceAsStream("app.properties")) {
+        try (InputStream stream = loader.getResourceAsStream("appJDBC.properties")) {
             connectionDemo.load(stream);
         }
         String url = connectionDemo.getValue("url");
