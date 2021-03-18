@@ -1,5 +1,7 @@
 package ru.job4j.db;
 
+import java.util.Objects;
+
 public class Item implements Comparable<Item> {
     private String id;
     private String name;
@@ -9,7 +11,8 @@ public class Item implements Comparable<Item> {
         this.name = name;
     }
 
-    public Item() {
+    public Item(String id) {
+        this.id = id;
     }
 
     public String getId() {
@@ -42,4 +45,17 @@ public class Item implements Comparable<Item> {
         return this.name.compareTo(item.getName());
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Item)) return false;
+        Item item = (Item) o;
+        return id.equals(item.id) &&
+                name.equals(item.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name);
+    }
 }
