@@ -2,10 +2,10 @@ package ru.job4j.db;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
 
 import java.sql.PreparedStatement;
 import java.util.List;
+import java.util.Objects;
 
 import static org.junit.Assert.*;
 
@@ -16,13 +16,12 @@ public class SqlTrackerTest {
         sqlTracker.init();
     }
 
-
     @Test
     public void add() {
         Item item = new Item("рихтовка", "0");
         Item item1 = sqlTracker.add(item);
         List<Item> itemList = sqlTracker.findAll();
-        Assertions.assertTrue(itemList.contains(item1));
+        assertTrue(itemList.contains(item1));
     }
 
     @Test
@@ -30,16 +29,14 @@ public class SqlTrackerTest {
         Item item = new Item("замена масла", "0");
         boolean b = sqlTracker.replace("6", item);
         List<Item> itemList = sqlTracker.findAll();
-        Assertions.assertEquals(itemList.contains(b), itemList.contains(6));
+        assertEquals(itemList.contains(b), itemList.contains(6));
     }
 
     @Test
     public void delete() {
         boolean b = sqlTracker.delete("7");
-        boolean b1 = sqlTracker.delete("8");
         List<Item> itemList = sqlTracker.findAll();
-        Assertions.assertFalse(itemList.contains(b));
-        Assertions.assertFalse(itemList.contains(b1));
+        assertFalse(itemList.contains(b));
     }
 
     @Test
@@ -58,6 +55,7 @@ public class SqlTrackerTest {
     public void findById() {
         List<Item> itemList = sqlTracker.findAll();
         Item byId = sqlTracker.findById("id");
-        System.out.println(itemList.add(byId));
+        itemList.add(byId);
+        itemList.forEach(System.out::println);
     }
 }
