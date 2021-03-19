@@ -1,7 +1,5 @@
 package ru.job4j.db;
 
-import ru.job4j.jdbc.City;
-
 import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
