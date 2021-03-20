@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.function.Consumer;
 
 public class ImportDB {
     private Properties cfg;
@@ -21,7 +22,14 @@ public class ImportDB {
     public List<User> load() throws IOException {
         List<User> users = new ArrayList<>();
         try (BufferedReader rd = new BufferedReader(new FileReader(dump))) {
-            /* rd.lines().forEach(...); */
+            String d = "";
+            String[] data = ";".split(d);
+            rd.lines().forEach(new Consumer<String>() {
+                @Override
+                public void accept(String d) {
+                    users.add(new User(data[0], data[1]));
+                }
+            });
         }
         return users;
     }
@@ -55,7 +63,7 @@ public class ImportDB {
 
     public static void main(String[] args) throws Exception {
         Properties cfg = new Properties();
-        try (FileInputStream in = new FileInputStream("./app.properties")) {
+        try (FileInputStream in = new FileInputStream(".\\appSpammer.properties")) {
             cfg.load(in);
         }
         ImportDB db = new ImportDB(cfg, "./dump.txt");

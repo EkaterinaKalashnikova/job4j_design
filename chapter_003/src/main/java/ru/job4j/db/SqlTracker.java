@@ -97,13 +97,13 @@ public class SqlTracker implements Store {
     @Override
     public List<Item> findByName(String key) {
         List<Item> result = new ArrayList<>();
-        try (PreparedStatement statement = cn.prepareStatement("select * from items where name = ?")) {
+        try (PreparedStatement statement = cn.prepareStatement("select it.id, it.name from items it where name = ?")) {
             statement.setString(1, key);
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
-                    key = resultSet.getString("name");
-                    statement.setString(1, key);
-                    Item item = new Item(key);
+                    String name = resultSet.getString("name");
+                    String id = resultSet.getString("id");
+                    Item item = new Item(name, id);
                     result.add(item);
                 }
             }
@@ -117,18 +117,17 @@ public class SqlTracker implements Store {
     public Item findById(String id) {
         List<Item> result = new ArrayList<>();
         try (PreparedStatement statement = cn.prepareStatement("select * from items where  id = ?")) {
-            statement.setInt(1, Integer.parseInt(id));
+            statement.setString(1, id);
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
-                    id = resultSet.getString("id");
-                    //statement.setInt(1, Integer.parseInt(id));
-                    Item item = new Item(id);
+                    String id1 = resultSet.getString("id");
+                    Item item = new Item(id1);
                     result.add(item);
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return  result.size() == 1 ? result.get(0) : null;
+        return result.size() == 1 ? result.get(0) : null;
     }
 }

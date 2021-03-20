@@ -47,15 +47,16 @@ public class SqlTrackerTest {
 
     @Test
     public void findByName() {
-        List<Item> byName = sqlTracker.findByName("key");
+        List<Item> byName = sqlTracker.findByName("рихтовка");
          byName.forEach(System.out::println);
     }
 
     @Test
     public void findById() {
-        List<Item> itemList = sqlTracker.findAll();
-        Item byId = sqlTracker.findById("id");
-        itemList.add(byId);
-        itemList.forEach(System.out::println);
+        List<Item> byId = (List<Item>) sqlTracker.findById("9");
+        System.out.println(byId);
+        /*List<Item> itemList = sqlTracker.findAll();
+        Item byId = sqlTracker.findById("9");
+        System.out.println(itemList.add(byId));*/
     }
 }

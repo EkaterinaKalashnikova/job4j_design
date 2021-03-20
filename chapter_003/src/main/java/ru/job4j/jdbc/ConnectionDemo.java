@@ -5,7 +5,7 @@ import java.sql.*;
 import java.util.Properties;
 
 public class ConnectionDemo {
-    private final Properties prs = new Properties ();
+    private final Properties prs = new Properties();
 
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
         //регистрируем драйвера
