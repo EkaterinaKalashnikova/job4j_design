@@ -53,10 +53,7 @@ public class SqlTrackerTest {
 
     @Test
     public void findById() {
-        List<Item> byId = (List<Item>) sqlTracker.findById("9");
+        Item byId =  sqlTracker.findById("9");
         System.out.println(byId);
-        /*List<Item> itemList = sqlTracker.findAll();
-        Item byId = sqlTracker.findById("9");
-        System.out.println(itemList.add(byId));*/
     }
 }

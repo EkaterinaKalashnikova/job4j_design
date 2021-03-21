@@ -117,7 +117,7 @@ public class SqlTracker implements Store {
     public Item findById(String id) {
         List<Item> result = new ArrayList<>();
         try (PreparedStatement statement = cn.prepareStatement("select * from items where  id = ?")) {
-            statement.setString(1, id);
+            statement.setInt(1, Integer.parseInt(id));
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     String id1 = resultSet.getString("id");

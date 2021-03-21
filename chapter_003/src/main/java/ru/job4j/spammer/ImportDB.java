@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 public class ImportDB {
     private Properties cfg;
@@ -22,14 +23,17 @@ public class ImportDB {
     public List<User> load() throws IOException {
         List<User> users = new ArrayList<>();
         try (BufferedReader rd = new BufferedReader(new FileReader(dump))) {
-            String d = "";
+            users = rd.lines().map(line -> line.split(";"))
+                    .map(array -> new User(array[0], array[1]))
+                    .collect(Collectors.toList());
+            /*String d = "";
             String[] data = ";".split(d);
             rd.lines().forEach(new Consumer<String>() {
                 @Override
                 public void accept(String d) {
                     users.add(new User(data[0], data[1]));
                 }
-            });
+            });*/
         }
         return users;
     }
@@ -63,10 +67,12 @@ public class ImportDB {
 
     public static void main(String[] args) throws Exception {
         Properties cfg = new Properties();
-        try (FileInputStream in = new FileInputStream(".\\appSpammer.properties")) {
+       // try (FileInputStream in = new FileInputStream("appSpammer.properties")) {
+        try (InputStream in = ImportDB.class.getClassLoader()
+                .getResourceAsStream("appSpammer.properties")) {
             cfg.load(in);
         }
-        ImportDB db = new ImportDB(cfg, "./dump.txt");
+        ImportDB db = new ImportDB(cfg, "dump.txt");
         db.save(db.load());
     }
 }
