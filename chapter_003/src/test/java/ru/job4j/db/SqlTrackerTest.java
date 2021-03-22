@@ -53,7 +53,7 @@ public class SqlTrackerTest {
 
     @Test
     public void findById() {
-        Item byId =  sqlTracker.findById("9");
+        Item byId =  sqlTracker.findById("1");
         System.out.println(byId);
     }
 }

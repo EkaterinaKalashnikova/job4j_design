@@ -46,7 +46,7 @@ public class ImportDB {
                 cfg.getProperty("jdbc.password")
         )) {
             for (User user : users) {
-                try (PreparedStatement ps = cnt.prepareStatement("insert info users ...")) {
+                try (PreparedStatement ps = cnt.prepareStatement("insert info users...")) {
                     ps.setString(1, user.name);
                     ps.setString(1, user.email);
                     ps.execute();
