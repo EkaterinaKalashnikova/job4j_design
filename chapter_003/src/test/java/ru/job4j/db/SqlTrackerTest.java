@@ -1,59 +1,64 @@
 package ru.job4j.db;
 
-import org.junit.Before;
+import org.junit.Assert;
 import org.junit.Test;
 
-import java.sql.PreparedStatement;
-import java.util.List;
-import java.util.Objects;
+import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.Properties;
 
-import static org.junit.Assert.*;
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
 
 public class SqlTrackerTest {
-    private SqlTracker sqlTracker = new SqlTracker();
-    @Before
-    public void before() {
-        sqlTracker.init();
+    public Connection init() {
+        try (InputStream in = SqlTracker.class.getClassLoader().getResourceAsStream("app.properties")) {
+            Properties config = new Properties();
+            config.load(in);
+            Class.forName(config.getProperty("driver-class-name"));
+            return DriverManager.getConnection(
+                    config.getProperty("url"),
+                    config.getProperty("username"),
+                    config.getProperty("password")
+            );
+        } catch (Exception e) {
+            throw new IllegalStateException(e);
+        }
+    }
+
+    @Test
+    public void createItem() throws SQLException {
+        try (SqlTracker tracker = new SqlTracker(ConnectionRollback.create(this.init()))) {
+            tracker.add(new Item("name"));
+            Assert.assertThat(tracker.findByName("name").size(), is(0));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
     public void add() {
-        Item item = new Item("рихтовка", "0");
-        Item item1 = sqlTracker.add(item);
-        List<Item> itemList = sqlTracker.findAll();
-        assertTrue(itemList.contains(item1));
     }
 
     @Test
     public void replace() {
-        Item item = new Item("замена масла", "0");
-        boolean b = sqlTracker.replace("6", item);
-        List<Item> itemList = sqlTracker.findAll();
-        assertEquals(itemList.contains(b), itemList.contains(6));
     }
 
     @Test
     public void delete() {
-        boolean b = sqlTracker.delete("7");
-        List<Item> itemList = sqlTracker.findAll();
-        assertFalse(itemList.contains(b));
     }
 
     @Test
     public void findAll() {
-        List<Item> all = sqlTracker.findAll();
-        all.forEach(System.out::println);
     }
 
     @Test
     public void findByName() {
-        List<Item> byName = sqlTracker.findByName("рихтовка");
-         byName.forEach(System.out::println);
     }
 
     @Test
     public void findById() {
-        Item byId =  sqlTracker.findById("1");
-        System.out.println(byId);
     }
 }
