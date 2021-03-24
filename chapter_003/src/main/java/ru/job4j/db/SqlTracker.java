@@ -10,11 +10,10 @@ public class SqlTracker implements Store, AutoCloseable {
     private Connection connection;
 
     public SqlTracker(Connection connection) {
-       this.connection = connection;
+        this.connection = connection;
     }
 
     public SqlTracker() {
-
     }
 
     public void init() {
@@ -40,21 +39,22 @@ public class SqlTracker implements Store, AutoCloseable {
     }
 
     @Override
-    public Item add(Item item)  {
-            try (PreparedStatement statement =
-                         connection.prepareStatement("insert into items (name) values(?)",
-                                 Statement.RETURN_GENERATED_KEYS)) {
-                statement.setString(1, item.getName());
-                statement.execute();
-                try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
-                    if (generatedKeys.next()) {
-                        item.setId(generatedKeys.getString(1));
-                    }
+    public Item add(Item item) {
+        try (PreparedStatement statement =
+                     connection.prepareStatement("insert into items (name) values(?)",
+                             Statement.RETURN_GENERATED_KEYS)) {
+            statement.setString(1, item.getName());
+            statement.executeUpdate();
+            try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    item.setId(generatedKeys.getString(1));
+                    return item;
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
             }
-        return item;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        throw new IllegalStateException("Could not create new user");
     }
 
     @Override
