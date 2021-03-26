@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
@@ -34,10 +35,10 @@ public class SqlTrackerTest {
     public void createItem()  {
         try (SqlTracker tracker = new SqlTracker(ConnectionRollback.create(this.init()))) {
             Item item = tracker.add(new Item("name"));
-            Item result = tracker.findById(item.getId());
-            Assert.assertThat(result.getId(), is(item.getId()));
-            Assert.assertThat(result.getName(), is(item.getName()));
-           // Assert.assertThat(tracker.findByName("name").size(), is(1));
+            Item rsl = tracker.findById(item.getId());
+            Assert.assertThat(rsl.getId(), is(item.getId()));
+            Assert.assertThat(rsl.getName(), is(item.getName()));
+            Assert.assertThat(tracker.findByName("name").size(), is(1));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -47,15 +48,17 @@ public class SqlTrackerTest {
     @Test
     public void updateItem() {
         try (SqlTracker tracker = new SqlTracker(ConnectionRollback.create(this.init()))) {
-            Item[] items = new Item[4];
-            items[0] = tracker.add(new Item("Anna", "1"));
-            items[1] = tracker.add(new Item("Mark", "2"));
-            Item expected = new Item("Lila", "2");
-            expected.setId(items[2].getId());
-            tracker.replace(items[2].getId(), expected);
-            Item result = tracker.findById(items[2].getId());
-            Assert.assertThat(result.getId(), is(expected.getId()));
-            Assert.assertThat(result.getName(), is(expected.getName()));
+            Item[] items = new Item[3];
+            items[0] = tracker.add(new Item("name", "1"));
+            items[1] = tracker.add(new Item("nameNew", "2"));
+            items[2] = tracker.add(new Item("nameNewTwo", "3"));
+            Item expected = new Item("name1", "1");
+            expected.setId(items[0].getId());
+            tracker.replace(items[0].getId(), expected);
+            Item rsl = tracker.findById(items[0].getId());
+            Assert.assertThat(rsl.getId(), is(expected.getId()));
+            Assert.assertThat(rsl.getName(), is(expected.getName()));
+           // System.out.println(rsl);
            } catch (Exception e) {
             e.printStackTrace();
         }
@@ -64,7 +67,7 @@ public class SqlTrackerTest {
     @Test
     public void removeItem() {
         try (SqlTracker tracker = new SqlTracker(ConnectionRollback.create(this.init()))) {
-            Item item = tracker.add(new Item("Mark", "2"));
+            Item item = tracker.add(new Item("name", "2"));
             Assert.assertNotNull(tracker.findById(item.getId()));
             tracker.delete(item.getId());
             Assert.assertNull(tracker.findById(item.getId()));
@@ -77,11 +80,12 @@ public class SqlTrackerTest {
     public void findAll() {
         try (SqlTracker tracker = new SqlTracker(ConnectionRollback.create(this.init()))) {
             Item[] items = new Item[2];
-            items[0] = tracker.add(new Item("Anna", "1"));
-            items[1] = tracker.add(new Item("Lila", "2"));
+            items[0] = tracker.add(new Item("name", "1"));
+            items[1] = tracker.add(new Item("name1", "2"));
             Item[] rsl = tracker.findAll().toArray(new Item[0]);
             for (int i = 0; i < items.length; i++) {
-                System.out.println(rsl);
+                System.out.println(Arrays.toString(rsl));
+                System.out.println();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -91,8 +95,8 @@ public class SqlTrackerTest {
     @Test
     public void findByName() {
         try (SqlTracker tracker = new SqlTracker(ConnectionRollback.create(this.init()))) {
-            Item item = tracker.add(new Item("Anna", "1"));
-            Item[] rsl = tracker.findByName("Anna").toArray(new Item[0]);
+            Item item = tracker.add(new Item("name", "1"));
+            Item[] rsl = tracker.findByName("name").toArray(new Item[0]);
             assertThat(rsl[0].getId(), is(item.getId()));
             assertThat(rsl[0].getName(), is(item.getName()));
         } catch (Exception e) {
