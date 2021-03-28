@@ -67,7 +67,7 @@ public class ImportDB {
 
     public static void main(String[] args) throws Exception {
         Properties cfg = new Properties();
-       // try (FileInputStream in = new FileInputStream("appSpammer.properties")) {
+        // try (FileInputStream in = new FileInputStream("appSpammer.properties")) {
         try (InputStream in = ImportDB.class.getClassLoader()
                 .getResourceAsStream("appSpammer.properties")) {
             cfg.load(in);
