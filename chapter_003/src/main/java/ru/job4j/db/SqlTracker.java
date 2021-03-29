@@ -107,13 +107,16 @@ public class SqlTracker implements Store, AutoCloseable  {
         List<Item> result = new ArrayList<>();
         try (PreparedStatement statement = connection.prepareStatement("select it.id, it.name from items it where name = ?")) {
             statement.setString(1, key);
-            try (ResultSet resultSet = statement.executeQuery()) {
+            ResultSet resultSet = statement.executeQuery();
+            try {
                 while (resultSet.next()) {
                     String name = resultSet.getString("name");
                     String id = resultSet.getString("id");
                     Item item = new Item(name, id);
                     result.add(item);
                 }
+            } finally {
+                resultSet.close();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -129,7 +132,8 @@ public class SqlTracker implements Store, AutoCloseable  {
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     String id1 = resultSet.getString("id");
-                    Item item = new Item(id1);
+                    String name = resultSet.getString("name");
+                    Item item = new Item(name, id1);
                     result.add(item);
                 }
             }

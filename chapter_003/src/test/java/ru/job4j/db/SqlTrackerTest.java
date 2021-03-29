@@ -47,32 +47,25 @@ public class SqlTrackerTest {
 
       @Test
     public void updateItem() {
-        try (SqlTracker tracker = new SqlTracker(ConnectionRollback.create(this.init()))) {
-            Item[] items = new Item[4];
-            items[0] = tracker.add(new Item("name", "1"));
-            items[1] = tracker.add(new Item("nameNew", "2"));
-            items[2] = tracker.add(new Item("nameNewTwo", "3"));
-            items[3] = tracker.add(new Item("nameNewThree", "4"));
-            Item expected = new Item("name1", "2");
-            expected.setId(items[1].getId());
-            tracker.replace(items[1].getId(), expected);
-            //Item rsl = tracker.findById(items[0].getId());
-            Item rsl = tracker.findById(items[1].getName());
-            Assert.assertThat(rsl.getId(), is(expected.getId()));
-            Assert.assertThat(rsl.getName(), is(expected.getName()));
-            System.out.println(rsl);
-           } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+          try (SqlTracker tracker = new SqlTracker(ConnectionRollback.create(this.init()))) {
+              Item item = tracker.add(new Item("name"));
+              Item replacement = new Item("new name", item.getId());
+              tracker.replace(item.getId(), replacement);
+              Item result = tracker.findById(item.getId());
+              Assert.assertEquals(replacement.getName(), result.getName());
+              Assert.assertEquals(replacement.getId(), result.getId());
+          } catch (Exception e) {
+              e.printStackTrace();
+          }
+      }
 
   @Test
     public void removeItem() {
         try (SqlTracker tracker = new SqlTracker(ConnectionRollback.create(this.init()))) {
-            Item item = tracker.add(new Item("name", "2"));
-            Assert.assertNotNull(tracker.findById(item.getId()));
-            tracker.delete(item.getId());
-            Assert.assertNull(tracker.findById(item.getId()));
+            Item item = tracker.add(new Item("name"));
+            Item result = tracker.findById(item.getId());
+            Assert.assertEquals(item.getName(), result.getName());
+            Assert.assertEquals(item.getId(), item.getId());
             } catch (Exception e) {
             e.printStackTrace();
         }
