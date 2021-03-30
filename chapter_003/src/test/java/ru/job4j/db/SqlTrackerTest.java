@@ -38,7 +38,7 @@ public class SqlTrackerTest {
             Item rsl = tracker.findById(item.getId());
             Assert.assertThat(rsl.getId(), is(item.getId()));
             Assert.assertThat(rsl.getName(), is(item.getName()));
-           // Assert.assertThat(tracker.findByName("name").size(), is(1));
+            Assert.assertThat(tracker.findByName("name").size(), is(1));
         } catch (Exception e) {
             e.printStackTrace();
         }
