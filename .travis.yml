@@ -8,8 +8,8 @@ services:
   - postgresql
 
 # Create a database
-before_script:
-  - psql -c 'create database travis_ci_test;' -U postgres
+before_install:
+  - psql -c 'create database tracker;' -U postgres
 
 # используем режим обычного пользователя для сборки проекта.
 sudo: false

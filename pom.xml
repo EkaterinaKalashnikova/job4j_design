@@ -19,20 +19,23 @@
   <profiles>
     <profile>
       <id>test</id>
-<!--      <activation>
+    <!--  <activation>
         <activeByDefault>true</activeByDefault>
       </activation>-->
       <properties>
-        <db.url>jdbc:postgresql://127.0.0.1:5432</db.url>
+        <db.url>jdbc:postgresql://127.0.0.1:5432/tracker</db.url>
         <db.username>postgres</db.username>
         <db.password>kindness</db.password>
         <db.driver>org.postgresql.Driver</db.driver>
       </properties>
     </profile>
     <profile>
-      <id>production</id>
+     <id>production</id>
+      <!--      <activation>
+             <activeByDefault>true</activeByDefault>
+           </activation>-->
       <properties>
-        <db.url>jdbc:postgresql://127.0.0.1:5432</db.url>
+        <db.url>jdbc:postgresql://localhost/tracker</db.url>
         <db.username>postgres</db.username>
         <db.password>kindness</db.password>
         <db.driver>org.postgresql.Driver</db.driver>
@@ -47,16 +50,16 @@
       <properties>
         <db.url>jdbc:postgresql://localhost/tracker</db.url>
         <db.username>postgres</db.username>
-        <db.password>kindness</db.password>
+        <db.password></db.password>
         <db.driver>org.postgresql.Driver</db.driver>
       </properties>
-    </profile>
+     </profile>
 
-  </profiles>
+   </profiles>
 
-  <name>job4j_design</name>
-  <description>A simple job4j_design.</description>
-  <!-- FIXME change it to the project's website -->
+   <name>job4j_design</name>
+   <description>A simple job4j_design.</description>
+   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
   <properties>
