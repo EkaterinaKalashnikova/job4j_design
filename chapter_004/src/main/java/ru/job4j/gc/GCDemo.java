@@ -20,8 +20,8 @@ public class GCDemo {
         for (int i = 0; i < 10000; i++) {
           //  new Person(i, "N" + i);
             new User(i, "N" + i);
-            new User1(i, "N" + i);
-            new User2(i, "N" + i);
+           // new User1(i, "N" + i);
+           // new User2(i, "N" + i);
             info();
         }
         //System.gc();

@@ -13,6 +13,9 @@ package ru.job4j.gc;
  Стоит также отметить, что в java размер любого объекта кратен 8 байтам!
  */
 
+
+import com.carrotsearch.sizeof.RamUsageEstimator;
+
 public class User {
     private int id;
     private String name;
@@ -23,34 +26,27 @@ public class User {
         this.name = name;
     }
 
+    public User(int m) {
+    }
+
+    public User(String str) {
+    }
+
     @Override
     protected void finalize() throws Throwable {
         System.out.printf("Removed %d %s%n ", id, name);
     }
 
-    private static void info() {
-        final long KB = 1000;
-        final long MB = KB * KB;
-        Runtime rt = Runtime.getRuntime();
-        final long freeMemory = rt.freeMemory();
-        final long totalMemory = rt.totalMemory();
-        final long maxMemory = rt.maxMemory();
-        System.out.println("=== memory state ===");
-        System.out.printf("Free: %d%n", freeMemory / MB);
-        System.out.printf("Total: %d%n", totalMemory / MB);
-        System.out.printf("Max: %d%n", maxMemory / MB);
-    }
-
-    public static void main(String[] args) {
-        info();
-        for (int i = 0; i < 10; i++) {
-            new User(i, "N" + i);
-        }
-        System.gc();
-        info();
-    }
     /* XmxNm выделем ключами нужные нам мегабайт памяти и при создании java- объектов
     сбободная память уменьшается, когда java поймет, что свободной памяти мало для создания объектов,
     сама вызыввает сборщик мусора
-     */
+      Если речь идет о 32-х разрядной системе, то размер заголовка — 8 байт,
+      если речь о 64-х разрядной системе, то соответственно — 16 байт
+
+      Объект будет весить:
+      1. заголовок - 16 байт, id(int) - 4 байт, (name(String) - 32 байт + 24 байт(char[]) = 56 байт)).
+       Итого: 76 байт
+      2. заголовок - 16 байт, id(int) - 4 байт, age(int) - 4 байта.
+       Итого: 32 байта
+  */
 }
