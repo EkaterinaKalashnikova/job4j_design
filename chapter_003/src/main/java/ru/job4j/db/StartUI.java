@@ -20,20 +20,26 @@ public class StartUI {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         Input input = new ConsoleInput();
         Input validate = new ValidateInput(input);
         MemTracker tracker = new MemTracker();
-        List<UserAction> actions = new ArrayList<>();
-      //  actions.add(new CreateAction());
-       // actions.add(new ListAction());
+        List<Item> actions = new ArrayList<>();
+        for (int i = 0; i < 100000; i++) {
+            //Thread.sleep(100);
+            Item item = new Item("Ekaterina" + i, i + "");
+            boolean items = actions.add(item);
+            System.out.println(items);
+        }
+        //  actions.add(new CreateAction());
+        // actions.add(new ListAction());
         //actions.add(new ChangeAction());
-       // actions.add(new DeleteAction());
-       // actions.add(new FindByIdAction());
-      //  actions.add(new FindByItemAction());
-       // new StartUI().init(validate, tracker, actions);
+        // actions.add(new DeleteAction());
+        // actions.add(new FindByIdAction());
+        //  actions.add(new FindByItemAction());
+        // new StartUI().init(validate, tracker, actions);
     }
 
-    public void init(Input validate, Store tracker, UserAction[] actions) {
+    void init(Input validate, Store tracker, UserAction[] actions) {
     }
 }
