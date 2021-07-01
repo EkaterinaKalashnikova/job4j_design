@@ -7,8 +7,8 @@ import java.util.concurrent.TimeUnit;
 public class StrongDemo {
     public static void main(String[] args) throws InterruptedException {
         //example1();
-        //example2();
-        example3();
+        example2();
+        //example3();
     }
 
     private static void example1() throws InterruptedException {
@@ -30,7 +30,7 @@ public class StrongDemo {
 
     private static void example2() throws InterruptedException {
         Object[] objects = new Object[100];
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 10; i++) {
             Object object = new Object() {
                 Object innerObject = new Object() {
                     @Override
@@ -41,7 +41,7 @@ public class StrongDemo {
             };
             objects[i] = object;
         }
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 10; i++) {
             objects[i] = null;
         }
         System.gc();
