@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Emulator {
-    public void init(Scanner scanner) throws IOException {
+    public void init(Scanner scanner)  {
         DirFileCache dirFileCache = null;
         boolean run = true;
         while (run) {
