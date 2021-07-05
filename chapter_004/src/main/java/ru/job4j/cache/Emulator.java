@@ -32,6 +32,8 @@ public class Emulator {
                 System.out.println(s);
             } else if (select == 4) {
                 run = false;
+            } else {
+                System.out.println("Ну и че те надо?");
             }
         }
     }

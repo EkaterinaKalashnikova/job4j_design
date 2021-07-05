@@ -18,24 +18,6 @@ public class DirFileCache extends AbstractCache<String, String> {
         this.cachingDir = cachingDir;
     }
 
-
-    @Override
-    public String get(String key) {
-        String strong = null;
-        if (cache.containsKey(key)) {
-            strong = cache.get(key).get();
-            if (strong == null) {
-                strong = load(key);
-                cache.put(key, new SoftReference<>(strong));
-            }
-        } else {
-            strong = load(key);
-            cache.put(key, new SoftReference<>(strong));
-        }
-        // return super.get(key);
-        return strong;
-    }
-
     @Override
     protected String load(String key) {
         String value;

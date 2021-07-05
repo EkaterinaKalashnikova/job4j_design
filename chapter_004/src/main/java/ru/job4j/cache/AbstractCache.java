@@ -10,28 +10,39 @@ public abstract class AbstractCache<K, V> {
 
     /**
      * Метод для вставки обьекта в кеш
-     * @param key ключ в кеше
+     *
+     * @param key   ключ в кеше
      * @param value данные
      */
     public void put(K key, V value) {
-       // SoftReference<V> reference = (SoftReference<V>) load(key);
+        // SoftReference<V> reference = (SoftReference<V>) load(key);
         SoftReference<V> reference = new SoftReference<>(value);
         cache.put(key, reference);
     }
 
     /**
      * получение значения по ключу
+     *
      * @param key ключ для поиска с кеша
      * @return Обьект данных храняшийся в кеше
      */
-    public Object get(K key) {
-        if (cache.get(key).get() == null) {
-        System.out.println("Файл загружен в кэш");
-        return load(key);
+    public V get(K key) {
+        V value = cache.getOrDefault(key, new SoftReference<>(null)).get();
+        if (value == null) {
+            value = load(key);
+            put(key, value);
+            System.out.println("Файл загружен в кэш");
+        }
+        return value;
     }
-        System.out.println("Содержимое файла получено из кэша");
-        return cache.get(key).get();
-}
 
     protected abstract V load(K key);
 }
+
+
+// if (cache.get(key).get() == null) {
+//        System.out.println("Файл загружен в кэш");
+//        return load(key);
+//    }
+//        System.out.println("Содержимое файла получено из кэша");
+//        return cache.get(key).get();
