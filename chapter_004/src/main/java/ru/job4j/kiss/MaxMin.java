@@ -7,30 +7,26 @@ import java.util.List;
 public class MaxMin {
 
     public <T> T max(List<T> value, Comparator<T> comparator) {
-        // return Collections.max(value, comparator);
-       T rslMax = value.get(0);
-        for (T v : value) {
-            if (comparator.compare(rslMax, v) < 0) {
-                 rslMax = v;
-            }
-        }
-        return rslMax;
+        return (T) findMinMax(value, comparator)[1];
     }
 
     public <T> T min(List<T> value, Comparator<T> comparator) {
-        //return Collections.min(value, comparator);
+        return (T) findMinMax(value, comparator)[0];
+    }
+
+    public <T> Object[] findMinMax(List<T> value, Comparator<T> comparator) {
+        T rslMax = value.get(0);
         T rslMin = value.get(0);
         for (T v : value) {
             if (comparator.compare(rslMin, v) > 0) {
                 rslMin = v;
+            } else if (comparator.compare(rslMax, v) < 0) {
+                rslMax = v;
             }
         }
-        return rslMin;
-    }
 
-//    public <T> T findMinMax() {
-//        return null;
-//    }
+        return new Object[]{rslMin, rslMax};
+    }
 
 
     public static void main(String[] args) {
