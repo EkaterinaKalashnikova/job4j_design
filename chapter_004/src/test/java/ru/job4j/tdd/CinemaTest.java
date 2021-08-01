@@ -38,20 +38,17 @@ public class CinemaTest {
         assertThat(ticket, is(new Ticket3D()));
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void buyErr(int row, int column) {
-        Account account = new AccountCinema();
+        Account account = new  AccountCinema();
         Account account1 = new AccountCinema();
         Cinema cinema = new Cinema3D();
         Calendar date = Calendar.getInstance();
         date.set(2020, 10, 10, 23, 00);
-        if (row >= 1 & row <= 15) {
-            if (column >= 1 & column <= 20) {
-                Ticket ticket = cinema.buy(account, 1, 1, date);
-                Ticket ticket1 = cinema.buy(account1, 1, 1, date);
-                assertThat(ticket, is(new Ticket3D()));
-                assertThat(ticket1, is(new Ticket3D()));
-            }
-        }
+        Ticket ticket = cinema.buy(account, -1, 1, date);
+        Ticket ticket1 = cinema.buy(account, 1, 1000, date);
+        assertThat(ticket, is(new Ticket3D()));
+        assertThat(ticket1, is(new Ticket3D()));
+
     }
 }
