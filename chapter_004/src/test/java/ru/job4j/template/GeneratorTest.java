@@ -10,8 +10,8 @@ import static org.junit.Assert.*;
 
 public class GeneratorTest {
 
-    /** @noinspection checkstyle:WhitespaceAfter*/
-    @Test
+
+    @Test(expected = IllegalArgumentException.class)
     public void produceKeyNotCard() {
         Map<String, String> valueMap = new HashMap<>();
         valueMap.put("name", "Ekaterina");
@@ -22,7 +22,7 @@ public class GeneratorTest {
         assertThat(result, is("Who are you?"));
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void produceExtraKeys() {
         Map<String, String> valueMap = new HashMap<>();
         valueMap.put("name", "Ekaterina");
