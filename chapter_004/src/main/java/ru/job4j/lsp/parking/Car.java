@@ -15,4 +15,16 @@ public abstract class Car {
         this.model = model;
         this.number = number;
     }
+
+    public String getModel() {
+        return model;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public int getSizeCar() {
+        return sizeCar;
+    }
 }

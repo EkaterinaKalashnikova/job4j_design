@@ -5,10 +5,6 @@ public class TruckCar extends Car {
         super(model, number, sizeCar);
     }
 
-    public TruckCar() {
-        super();
-    }
-
     public TruckCar(String model, String number) {
         super(model, number);
     }
