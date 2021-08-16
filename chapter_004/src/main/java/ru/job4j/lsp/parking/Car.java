@@ -15,6 +15,4 @@ public abstract class Car {
         this.model = model;
         this.number = number;
     }
-
-
 }
