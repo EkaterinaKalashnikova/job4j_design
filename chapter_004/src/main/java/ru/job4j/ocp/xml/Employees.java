@@ -21,7 +21,10 @@ public class Employees {
         return ells;
     }
 
-    public void setEmpls(List<Employee> ells) {
+//    public void setEmpls(List<Employee> ells) {
+//        this.ells = ells;
+//    }
+    public void setElls(List<Employee> ells) {
         this.ells = ells;
     }
 }

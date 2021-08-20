@@ -1,34 +1,45 @@
 package ru.job4j.lsp.parking;
 
-import java.util.List;
+import java.util.*;
+
+import static java.util.Objects.requireNonNull;
 
 public class ParkingCar implements Parking {
-    //Car[] placeCar = new Car[20];
-    private Car[] placePassengerCar;
-    private Car[] placeTruckCar;
+    private Car[] placesCars;
+    private int countFreePlace;
+    private List<Car> cars = new ArrayList<>();
+    private List<Car> trucks = new ArrayList<>();
 
-    public ParkingCar(int a, int b) {
-        placePassengerCar = new Car[a];
-        placeTruckCar = new Car[b];
+    public ParkingCar(Car[] placesCars) {
+        this.placesCars = placesCars;
     }
 
-    @Override
-    public Car register(String number) {
-        return null;
+    public ParkingCar(int a) {
+        placesCars = new Car[a];
+        countFreePlace = placesCars.length;
     }
 
     @Override
     public boolean addPark(Car car) {
-        return false;
+        if (car.getSizeCar() == 1 && (countFreePlace - car.getSizeCar()) > 0) {
+            cars.add(car);
+            countFreePlace = countFreePlace - 1;
+        } else {
+            if (car.getSizeCar() > 1 && (countFreePlace - car.getSizeCar()) > 0) {
+                trucks.add(car);
+                countFreePlace = countFreePlace - car.getSizeCar();
+            } else {
+                return false;
+            }
+        }
+        return true;
     }
 
-    @Override
-    public Car parkCar(Car car) {
-        return car;
-    }
 
-    @Override
     public List<Car> parkAllCars() {
-        return null;
+        List<Car> allCars = new ArrayList<>();
+        allCars.addAll(cars);
+        allCars.addAll(trucks);
+        return allCars;
     }
 }

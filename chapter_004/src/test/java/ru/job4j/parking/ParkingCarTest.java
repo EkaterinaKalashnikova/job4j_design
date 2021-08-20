@@ -13,9 +13,9 @@ public class ParkingCarTest {
 
     @Test
     public void whenParkAllCars() {
-        Parking parking = new ParkingCar(10, 5);
-        Car car1 = new PassengerCar("Hyundai", "123");
-        Car car2 = new TruckCar("Mercedes-Benz", "897");
+        Parking parking = new ParkingCar(20);
+        Car car1 = new PassengerCar("Hyundai", 123);
+        Car car2 = new TruckCar("Mercedes-Benz", 897, 2);
         Assert.assertTrue(parking.addPark(car1));
         Assert.assertTrue(parking.addPark(car2));
         List<Car> allCars = parking.parkAllCars();
@@ -25,27 +25,18 @@ public class ParkingCarTest {
 
     @Test
     public void whenParkNotCars() {
-        Parking parking = new ParkingCar(0,0);
-        Car car1 = new PassengerCar("Toyota", "843");
-        Car car2 = new TruckCar("Scania", "356", 3);
+        Parking parking = new ParkingCar(0);
+        Car car1 = new PassengerCar("Toyota", 843);
+        Car car2 = new TruckCar("Scania", 356, 3);
         Assert.assertFalse(parking.addPark(car1));
         Assert.assertFalse(parking.addPark(car2));
     }
 
     @Test
-    public void whenRegisterByNumber() {
-        Parking parking = new ParkingCar(9,7);
-        Car car = new PassengerCar("Toyota", "843");
-        parking.addPark(car);
-        Car expected = parking.register(car.getNumber());
-        Assert.assertThat(expected, is(car));
-    }
-
-    @Test
     public void whenTruckCarParkEnPlacePassengerCar() {
-        Parking parking = new ParkingCar(8,0);
-        Car car1 = new PassengerCar("Mazda", "607");
-        Car car2 = new TruckCar("MAN", "393", 2);
+        Parking parking = new ParkingCar(8);
+        Car car1 = new PassengerCar("Mazda", 607);
+        Car car2 = new TruckCar("MAN", 393, 2);
         parking.addPark(car1);
         parking.addPark(car2);
         List<Car> allCars = parking.parkAllCars();
@@ -54,9 +45,9 @@ public class ParkingCarTest {
 
     @Test
     public void whenTruckCarParkNotParking() {
-        Parking parking = new ParkingCar(8,0);
-        Car car1 = new PassengerCar("Mazda", "607");
-        Car car2 = new TruckCar("MAN", "393", 10);
+        Parking parking = new ParkingCar( 3);
+        Car car1 = new PassengerCar("Mazda", 607);
+        Car car2 = new TruckCar("MAN", 393, 10);
         parking.addPark(car1);
         parking.addPark(car2);
         List<Car> allCars = parking.parkAllCars();
