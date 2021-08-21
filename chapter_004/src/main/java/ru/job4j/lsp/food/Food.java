@@ -4,8 +4,8 @@ import java.time.LocalDateTime;
 
 public class Food {
     private String name;
-    private LocalDateTime expiryDate;
-    private LocalDateTime createDate;
+    private LocalDateTime expiryDate; //срок действия
+    private LocalDateTime createDate; //дата создания
     private double price;
     private double discount;
 
