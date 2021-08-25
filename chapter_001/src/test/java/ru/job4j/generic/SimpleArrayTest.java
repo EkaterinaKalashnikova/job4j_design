@@ -2,10 +2,13 @@ package ru.job4j.generic;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
+
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Objects;
 
+@Ignore
 public class SimpleArrayTest {
 
     @Test

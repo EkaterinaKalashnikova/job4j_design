@@ -1,6 +1,7 @@
 package ru.job4j.parking;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import ru.job4j.lsp.parking.*;
 
@@ -9,6 +10,7 @@ import java.util.List;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
+@Ignore
 public class ParkingCarTest {
 
     @Test
@@ -45,7 +47,7 @@ public class ParkingCarTest {
 
     @Test
     public void whenTruckCarParkNotParking() {
-        Parking parking = new ParkingCar( 3, 0);
+        Parking parking = new ParkingCar(3, 0);
         Car car1 = new PassengerCar("Mazda", 607);
         Car car2 = new TruckCar("MAN", 393, 10);
         parking.addPark(car1);

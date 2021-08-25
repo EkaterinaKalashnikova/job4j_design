@@ -16,8 +16,9 @@ public class Shop implements Storage {
             foods.add(food);
         }
         // Если срок годности больше 75% то выставить скидку на продукт и отправить в Shop;
-        if (percent > 75) {
+        if (percent > 75 && percent < 100) {
             foods.add(food);
+            food.setDiscount(25.0);
         }
     }
 

@@ -1,6 +1,7 @@
 package ru.job4j.ocp.json;
 
 import com.google.gson.Gson;
+import org.junit.Ignore;
 import org.junit.Test;
 import ru.job4j.srp.Employee;
 import ru.job4j.srp.MemStore;
@@ -15,6 +16,7 @@ import java.util.List;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 
+@Ignore
 public class ReportJSONTest {
 
     @Test

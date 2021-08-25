@@ -1,10 +1,13 @@
 package ru.job4j.nio;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
+
+@Ignore
 public class ShellFolderTest {
     @Test
     public void whenCdBack()  {

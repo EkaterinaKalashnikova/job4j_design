@@ -39,9 +39,7 @@ public abstract class Car {
             return false;
         }
         Car car = (Car) o;
-        return getSizeCar() == car.getSizeCar() &&
-                Objects.equals(getModel(), car.getModel()) &&
-                Objects.equals(getNumber(), car.getNumber());
+        return getSizeCar() == car.getSizeCar() && Objects.equals(getModel(), car.getModel()) && Objects.equals(getNumber(), car.getNumber());
     }
 
     @Override
