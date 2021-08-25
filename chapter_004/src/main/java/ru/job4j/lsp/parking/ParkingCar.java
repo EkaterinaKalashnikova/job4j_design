@@ -26,12 +26,12 @@ public class ParkingCar implements Parking {
         if (car.getSizeCar() == 1 && (countFreePlace - car.getSizeCar()) > 0) {
             cars.add(car);
             countFreePlace = countFreePlace - 1;
-        } else if (car.getSizeCar() > 1 && (countTruckPlace - 1) > 0) {
-            trucks.add(car);
-            countTruckPlace = countTruckPlace - 1;
         } else if (car.getSizeCar() > 1 && (countFreePlace - car.getSizeCar()) > 0) {
             trucks.add(car);
             countFreePlace = countFreePlace - car.getSizeCar();
+        } else if (car.getSizeCar() > 1 && (countTruckPlace - 1) > 0) {
+            trucks.add(car);
+            countTruckPlace = countTruckPlace - 1;
         } else {
             return false;
         }
