@@ -1,13 +1,21 @@
-package ru.job4j.lsp.food;
+package ru.job4j.lsp.products;
 
-import java.time.LocalDateTime;
+import java.util.Calendar;
 
 public class Food {
     private String name;
-    private LocalDateTime expiryDate; //срок действия
-    private LocalDateTime createDate; //дата создания
+    private Calendar expiryDate; //срок действия
+    private Calendar createDate; //дата создания
     private double price;
     private double discount;
+
+    public Food(String name, Calendar expiryDate, Calendar createDate, double price) {
+        this.name = name;
+        this.expiryDate = expiryDate;
+        this.createDate = createDate;
+        this.price = price;
+        this.discount = 0;
+    }
 
     public String getName() {
         return name;
@@ -17,19 +25,19 @@ public class Food {
         this.name = name;
     }
 
-    public LocalDateTime getExpiryDate() {
+    public Calendar getExpiryDate() {
         return expiryDate;
     }
 
-    public void setExpiryDate(LocalDateTime expiryDate) {
+    public void setExpiryDate(Calendar expiryDate) {
         this.expiryDate = expiryDate;
     }
 
-    public LocalDateTime getCreateDate() {
+    public Calendar getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(LocalDateTime createDate) {
+    public void setCreateDate(Calendar createDate) {
         this.createDate = createDate;
     }
 

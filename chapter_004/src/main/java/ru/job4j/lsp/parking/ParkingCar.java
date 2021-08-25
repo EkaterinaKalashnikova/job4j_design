@@ -10,10 +10,6 @@ public class ParkingCar implements Parking {
     private List<Car> cars = new ArrayList<>();
     private List<Car> trucks = new ArrayList<>();
 
-//    public ParkingCar(Car[] placesCars) {
-//        this.placesCars = placesCars;
-//    }
-
     /**
      * @param a количество легковых парковочных мест
      * @param b количество грузовых парковочных мест
