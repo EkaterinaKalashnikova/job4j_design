@@ -8,4 +8,7 @@ public interface Storage {
 
     //получение всех продуктов
    List<Food> getFoods();
+
+   //получить подходящий продукт
+    boolean isAppropriate(Food food);
 }

@@ -10,7 +10,7 @@ import java.util.List;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
-@Ignore
+//@Ignore
 public class ParkingCarTest {
 
     @Test
@@ -36,12 +36,14 @@ public class ParkingCarTest {
 
     @Test
     public void whenTruckCarParkEnPlacePassengerCar() {
-        Parking parking = new ParkingCar(8, 0);
+       // Parking parking = new ParkingCar(8, 0);
+        Parking parking = new ParkingCar(3, 0);
         Car car1 = new PassengerCar("Mazda", 607);
         Car car2 = new TruckCar("MAN", 393, 2);
         parking.addPark(car1);
         parking.addPark(car2);
         List<Car> allCars = parking.parkAllCars();
+        Assert.assertTrue(allCars.contains(car1));
         Assert.assertTrue(allCars.contains(car2));
     }
 

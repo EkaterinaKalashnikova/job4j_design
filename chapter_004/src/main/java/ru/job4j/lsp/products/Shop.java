@@ -22,8 +22,14 @@ public class Shop implements Storage {
         }
     }
 
+
     @Override
     public List<Food> getFoods() {
         return foods;
+    }
+
+    @Override
+    public boolean isAppropriate(Food food) {
+       return true;
     }
 }

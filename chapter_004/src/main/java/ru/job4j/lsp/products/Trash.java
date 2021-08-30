@@ -5,12 +5,11 @@ import java.util.Calendar;
 import java.util.List;
 
 public class Trash implements Storage {
-     List<Food> foods = new ArrayList<>();
+    List<Food> foods = new ArrayList<>();
 
     @Override
     public void add(Food food) {
-      //  Если срок годности вышел. Отправить продукт в мусорку.
-        if (Calendar.getInstance().getTimeInMillis() - food.getExpiryDate().getTimeInMillis() > 0) {
+        if (isAppropriate(food)) {
             foods.add(food);
         }
     }
@@ -18,5 +17,13 @@ public class Trash implements Storage {
     @Override
     public List<Food> getFoods() {
         return foods;
+    }
+
+    @Override
+    public boolean isAppropriate(Food food) {
+        //  Если срок годности вышел. Отправить продукт в мусорку.
+        if (Calendar.getInstance().getTimeInMillis() - food.getExpiryDate().getTimeInMillis() > 0) {
+            return true;
+        } else return false;
     }
 }
