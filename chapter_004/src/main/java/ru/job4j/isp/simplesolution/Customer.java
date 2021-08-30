@@ -1,4 +1,4 @@
-package ru.job4j.isp.simple;
+package ru.job4j.isp.simplesolution;
 
 public class Customer {
     private String name;

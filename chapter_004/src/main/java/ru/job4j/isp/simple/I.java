@@ -1,23 +1,12 @@
 package ru.job4j.isp.simple;
 
 import java.util.Date;
-import java.util.List;
 
-public class I implements I1, I2 {
-    private Customer customer;
-    private List<Product> products;
-
-    public I(Customer customer, List<Product> products) {
-        this.customer = customer;
-        this.products = products;
-    }
-
-    @Override
+public class I {
     public String getName() {
-        return customer.getName();
+        return "name";
     }
 
-    @Override
     public Date getDate() {
         return new Date();
     }

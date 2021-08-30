@@ -1,4 +1,4 @@
-package ru.job4j.isp.simple;
+package ru.job4j.isp.simplesolution;
 
 import java.util.Date;
 

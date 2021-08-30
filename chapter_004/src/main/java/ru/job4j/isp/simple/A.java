@@ -1,13 +1,13 @@
 package ru.job4j.isp.simple;
 
 public class A {
-    private I1 i1;
+    private I i;
 
-    public A(I1 i1) {
-        this.i1 = i1;
+    public A(I i) {
+        this.i = i;
     }
 
     public void callGetName() {
-        System.out.println(i1.getName());
+        System.out.println(i.getName());
     }
 }
