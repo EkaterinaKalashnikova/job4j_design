@@ -15,7 +15,8 @@ public class ParkingCarTest {
 
     @Test
     public void whenParkAllCars() {
-        Parking parking = new ParkingCar(10, 4);
+       // Parking parking = new ParkingCar(10, 4);
+        Parking parking = new ParkingCar(1, 1);
         Car car1 = new PassengerCar("Hyundai", 123);
         Car car2 = new TruckCar("Mercedes-Benz", 897, 2);
         Assert.assertTrue(parking.addPark(car1));
