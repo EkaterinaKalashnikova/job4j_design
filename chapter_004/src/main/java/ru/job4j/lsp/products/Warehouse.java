@@ -30,8 +30,6 @@ public class Warehouse implements Storage {
         int percent = (int) ((Calendar.getInstance().getTimeInMillis() - food.getCreateDate().getTimeInMillis())
                 * 100 / (food.getExpiryDate().getTimeInMillis() - food.getCreateDate().getTimeInMillis()));
         //Если срок годности израсходован меньше чем на 25% направить в Warehouse
-        if (percent < 25) {
-            return true;
-        } else return false;
+        return percent < 25;
     }
 }
