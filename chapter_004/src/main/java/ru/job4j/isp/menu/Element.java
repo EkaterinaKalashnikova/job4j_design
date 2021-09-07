@@ -6,14 +6,11 @@ import java.util.List;
 public class Element implements IElement {
     private String name; // name
     private List<IElement> iElements = new ArrayList<>();
+    private Action action;
 
-    public Element(String name) {
+    public Element(String name, Action action) {
         this.name = name;
-    }
-
-    public Element(String name, List<IElement> iElements) {
-        this.name = name;
-        this.iElements = iElements;
+        this.action = action;
     }
 
     @Override
@@ -44,17 +41,22 @@ public class Element implements IElement {
     @Override
     public IElement deletEl(IElement iElement) {
         IElement el = null;
-       if(iElements.remove(iElement)) {
+       if (iElements.remove(iElement)) {
            el = iElement;
        }
        return el;
     }
 
+    @Override
+    public void makeEl() {
+        action.changEl(this);
+    }
+
 
     @Override
     public String toString() {
-        return "Element{" +
-                "name='" + name + '\'' +
-                '}';
+        return "Element{"
+                + "name='" + name + '\''
+                + '}';
     }
 }

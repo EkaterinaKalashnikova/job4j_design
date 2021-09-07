@@ -38,20 +38,18 @@ public class StartMenu {
 
             } else if (select == 4) {
                 System.out.println("=== Add item ====");
-                String str = scanner.nextLine();
-                IElement addElement = ElementAct.addElement(str, element);
+                System.out.println("=== Enter a name for the new item ====");
+                String newEl = scanner.nextLine();
+                System.out.println("=== Where to add ====");
+                String parentEl = scanner.nextLine();
+                IElement addElement = ElementAct.addElement(newEl, ElementAct.findElement(parentEl, element));
                 System.out.println("Item was add: " + addElement);
 
             } else if (select == 5) {
                 System.out.println("=== Make action ====");
+                System.out.println("=== specify the name of the item ====");
                 String str = scanner.nextLine();
-                String str1 = scanner.nextLine();
-                IElement changeElement = ElementAct.changeElement(str, element, e -> e.setName(str));
-                IElement changeElement1 = ElementAct.changeElement(str1, element,
-                        IElement -> IElement.getElements().forEach(el -> {if (el.getName().equals(element.getName()))
-                         el.setName(str1);}));
-
-                System.out.println("Item was changed: " + changeElement + " on " + changeElement1);
+                ElementAct.changeElement(str, element);
 
             } else if (select == 6) {
                 System.out.println("=== Exit Program ====");
@@ -73,15 +71,15 @@ public class StartMenu {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        IElement iElement = new Element("Задача 1");
-        IElement iElement1 = new Element("Задача 1.1.");
-        IElement iElement2 = new Element("Задача 1.1.1.");
-        IElement iElement3 = new Element("Задача 1.1.2.");
-        IElement iElement4 = new Element("Задача 1.2.");
-        IElement iElement5 = new Element("Задача 1.3.");
-        IElement iElement6 = new Element("Задача 1.3.1");
-        IElement iElement7 = new Element("Задача 1.3.2");
-        IElement iElement8 = new Element("Задача 1.1.2.1");
+        IElement iElement = new Element("Задача 1", new Action1());
+        IElement iElement1 = new Element("Задача 1.1.", new Action2());
+        IElement iElement2 = new Element("Задача 1.1.1.", new Action3());
+        IElement iElement3 = new Element("Задача 1.1.2.", new Action1());
+        IElement iElement4 = new Element("Задача 1.2.", new Action1());
+        IElement iElement5 = new Element("Задача 1.3.", new Action2());
+        IElement iElement6 = new Element("Задача 1.3.1", new Action2());
+        IElement iElement7 = new Element("Задача 1.3.2", new Action3());
+        IElement iElement8 = new Element("Задача 1.1.2.1", new Action3());
         iElement3.addElements(iElement8);
         iElement5.addElements(iElement7);
         iElement5.addElements(iElement6);

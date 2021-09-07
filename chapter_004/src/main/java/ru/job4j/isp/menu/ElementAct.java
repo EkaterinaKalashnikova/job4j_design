@@ -1,26 +1,22 @@
 package ru.job4j.isp.menu;
 
-
 import java.util.*;
-import java.util.function.Consumer;
 
 public class ElementAct {
 
     public static IElement findElement(String name, IElement element) {
         IElement res = null;
-        Stack<IElement> ielementStack = new Stack<>();
-        ielementStack.push(element);
+        Stack<IElement> iElementStack = new Stack<>();
+        iElementStack.push(element);
         loop:
-        while (res == null && !ielementStack.isEmpty()) {
-            IElement ielement1 = ielementStack.pop();
-            if (ielement1.getName().equals(name)) {
-                res = ielement1;
+        while (res == null && !iElementStack.isEmpty()) {
+            IElement iElement1 = iElementStack.pop();
+            if (iElement1.getName().equals(name)) {
+                res = iElement1;
                 break loop;
             }
-//            if (ielement1.getElements().isEmpty()) {
-//                return null;
-//            }
-            for (IElement e : ielement1.getElements()) {
+
+            for (IElement e : iElement1.getElements()) {
                 res = findElement(name, e);
                 if (res != null) {
                     break;
@@ -43,24 +39,19 @@ public class ElementAct {
                     break loop;
                 }
             }
-//            if(deletEl != null) {
-//                break;
-//            }
             elementStack.addAll(parentEl.getElements());
         }
         return deletEl;
     }
 
     public static IElement addElement(String name, IElement element) {
-        IElement elementNew = new Element(name);
+        IElement elementNew = new Element(name, new Action3());
         element.addElements(elementNew);
         return elementNew;
     }
 
-    public static IElement changeElement(String name, IElement element, Consumer<IElement> elConsumer) {
-        findElement(name, element);
-        IElement elementUpdate = new Element(name);
-        elConsumer.accept(element);
-        return elementUpdate;
+    public static void changeElement(String name, IElement element) {
+        IElement changeElement = ElementAct.findElement(name, element);
+        changeElement.makeEl();
     }
 }

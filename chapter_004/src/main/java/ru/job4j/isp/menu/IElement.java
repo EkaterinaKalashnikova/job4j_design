@@ -14,4 +14,6 @@ public interface IElement {
     void setElements(List<IElement> elements);
 
     IElement deletEl(IElement iElement);
+
+    void makeEl();
 }
