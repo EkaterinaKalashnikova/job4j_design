@@ -10,7 +10,7 @@ public class OrderProcessor {
     }
 
     private boolean save(Order order) {
-        MySqlConnection connection = new MySqlConnection();
+        MySqlConnection connection = new MySqlConnection("s");
         // сохраняем заказ в базу данных
 
         return true;
