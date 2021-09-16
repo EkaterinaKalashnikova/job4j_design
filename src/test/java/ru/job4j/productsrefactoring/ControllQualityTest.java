@@ -15,9 +15,14 @@ class ControllQualityTest {
     @Test
     public void whenAddInWarehouse() {
         Calendar expireDate = Calendar.getInstance();
-        expireDate.set(2022, Calendar.NOVEMBER, 1);
+        expireDate.add(Calendar.DAY_OF_MONTH, 20);
+        //expireDate.set(2022, Calendar.NOVEMBER, 1);
+        //Calendar createDate = Calendar.getInstance();
+        //createDate.set(2021, Calendar.AUGUST, 1);
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Calendar createDate = Calendar.getInstance();
-        createDate.set(2021, Calendar.AUGUST, 1);
+        dateFormat.format(createDate.getTime());
+        createDate.add(Calendar.DATE, -5);
         Food food = new Food("Bread", expireDate, createDate, 27.0);
         Storage warehouse = new Warehouse();
         Storage shop = new Shop();
@@ -32,9 +37,14 @@ class ControllQualityTest {
     @Test
     public void whenAddInTrash() {
         Calendar expireDate = Calendar.getInstance();
-        expireDate.set(2021, Calendar.AUGUST, 1);
+        expireDate.add(Calendar.DAY_OF_MONTH, 0);
+     //   expireDate.set(2021, Calendar.AUGUST, 1);
+//        Calendar createDate = Calendar.getInstance();
+//        createDate.set(2021, Calendar.JUNE, 1);
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Calendar createDate = Calendar.getInstance();
-        createDate.set(2021, Calendar.JUNE, 1);
+        dateFormat.format(createDate.getTime());
+        createDate.add(Calendar.DATE, -5);
         Food food = new Food("Bread", expireDate, createDate, 27.0);
         Storage warehouse = new Warehouse();
         Storage shop = new Shop();
@@ -49,9 +59,14 @@ class ControllQualityTest {
     @Test
     public void whenAddInShopWithoutDiscount() {
         Calendar expireDate = Calendar.getInstance();
-        expireDate.set(2021, Calendar.DECEMBER, 1);
+        expireDate.add(Calendar.DAY_OF_MONTH, 20);
+      //  expireDate.set(2021, Calendar.DECEMBER, 1);
+//        Calendar createDate = Calendar.getInstance();
+//        createDate.set(2021, Calendar.FEBRUARY, 1);
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Calendar createDate = Calendar.getInstance();
-        createDate.set(2021, Calendar.FEBRUARY, 1);
+        dateFormat.format(createDate.getTime());
+        createDate.add(Calendar.DATE, -10);
         Food food = new Food("Bread", expireDate, createDate, 27.0);
         Storage warehouse = new Warehouse();
         Storage shop = new Shop();
@@ -66,9 +81,14 @@ class ControllQualityTest {
     @Test
     public void whenAddInShopWithDiscount() {
         Calendar expireDate = Calendar.getInstance();
-        expireDate.set(2021, Calendar.OCTOBER, 1);
+        expireDate.add(Calendar.DAY_OF_MONTH, 3);
+     //   expireDate.set(2021, Calendar.OCTOBER, 1);
+//        Calendar createDate = Calendar.getInstance();
+//        createDate.set(2021, Calendar.FEBRUARY, 1);
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Calendar createDate = Calendar.getInstance();
-        createDate.set(2021, Calendar.FEBRUARY, 1);
+        dateFormat.format(createDate.getTime());
+        createDate.add(Calendar.DATE, -10);
         Food food = new Food("Bread", expireDate, createDate, 27.0);
         Storage warehouse = new Warehouse();
         Storage shop = new Shop();
@@ -85,11 +105,18 @@ class ControllQualityTest {
         Calendar expireDate = Calendar.getInstance();
         Calendar expireDate1 = Calendar.getInstance();
         Calendar expireDate2 = Calendar.getInstance();
-        expireDate.set(2021, Calendar.OCTOBER, 1);
-        expireDate1.set(2021, Calendar.SEPTEMBER, 12);
-        expireDate2.set(2022, Calendar.FEBRUARY, 10);
+//        expireDate.set(2021, Calendar.OCTOBER, 1);
+//        expireDate1.set(2021, Calendar.SEPTEMBER, 12);
+//        expireDate2.set(2022, Calendar.FEBRUARY, 10);
+//        Calendar createDate = Calendar.getInstance();
+//        createDate.set(2021, Calendar.AUGUST, 1);
+        expireDate.add(Calendar.DAY_OF_MONTH, 15);
+        expireDate1.add(Calendar.DAY_OF_MONTH, 0);
+        expireDate2.add(Calendar.DAY_OF_YEAR, 90);
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Calendar createDate = Calendar.getInstance();
-        createDate.set(2021, Calendar.AUGUST, 1);
+        dateFormat.format(createDate.getTime());
+        createDate.add(Calendar.DATE, -10);
         Food food = new Food("Bread", expireDate, createDate, 27.0);
         Food food1 = new Food("Milk", expireDate1, createDate, 54.0);
         Food food2 = new Food("Cheese", expireDate2, createDate, 560.0);
