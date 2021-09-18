@@ -14,9 +14,6 @@ class ControlQualityTest {
     public void whenAddInWarehouse() {
         Calendar expireDate = Calendar.getInstance();
         expireDate.add(Calendar.DAY_OF_MONTH, 20);
-        //expireDate.set(2022, Calendar.NOVEMBER, 1);
-        //Calendar createDate = Calendar.getInstance();
-        //createDate.set(2021, Calendar.AUGUST, 1);
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Calendar createDate = Calendar.getInstance();
         dateFormat.format(createDate.getTime());
@@ -35,10 +32,7 @@ class ControlQualityTest {
     @Test
     public void whenAddInTrash() {
         Calendar expireDate = Calendar.getInstance();
-        expireDate.add(Calendar.DAY_OF_MONTH, 0);
-        //   expireDate.set(2021, Calendar.AUGUST, 1);
-//        Calendar createDate = Calendar.getInstance();
-//        createDate.set(2021, Calendar.JUNE, 1);
+        expireDate.add(Calendar.DAY_OF_MONTH, -1);
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Calendar createDate = Calendar.getInstance();
         dateFormat.format(createDate.getTime());
@@ -58,9 +52,6 @@ class ControlQualityTest {
     public void whenAddInShopWithoutDiscount() {
         Calendar expireDate = Calendar.getInstance();
         expireDate.add(Calendar.DAY_OF_MONTH, 20);
-        //  expireDate.set(2021, Calendar.DECEMBER, 1);
-//        Calendar createDate = Calendar.getInstance();
-//        createDate.set(2021, Calendar.FEBRUARY, 1);
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Calendar createDate = Calendar.getInstance();
         dateFormat.format(createDate.getTime());
@@ -80,9 +71,6 @@ class ControlQualityTest {
     public void whenAddInShopWithDiscount() {
         Calendar expireDate = Calendar.getInstance();
         expireDate.add(Calendar.DAY_OF_MONTH, 3);
-        //   expireDate.set(2021, Calendar.OCTOBER, 1);
-//        Calendar createDate = Calendar.getInstance();
-//        createDate.set(2021, Calendar.FEBRUARY, 1);
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Calendar createDate = Calendar.getInstance();
         dateFormat.format(createDate.getTime());
@@ -103,11 +91,6 @@ class ControlQualityTest {
         Calendar expireDate = Calendar.getInstance();
         Calendar expireDate1 = Calendar.getInstance();
         Calendar expireDate2 = Calendar.getInstance();
-//        expireDate.set(2021, Calendar.OCTOBER, 1);
-//        expireDate1.set(2021, Calendar.SEPTEMBER, 12);
-//        expireDate2.set(2022, Calendar.FEBRUARY, 10);
-//        Calendar createDate = Calendar.getInstance();
-//        createDate.set(2021, Calendar.AUGUST, 1);
         expireDate.add(Calendar.DAY_OF_MONTH, 15);
         expireDate1.add(Calendar.DAY_OF_MONTH, 0);
         expireDate2.add(Calendar.DAY_OF_YEAR, 90);
@@ -132,7 +115,7 @@ class ControlQualityTest {
         food5.setExpiryDate(expireDate2);
         food6.setExpiryDate(expireDate);
         controlQuality4.resort();
-        Assert.assertEquals(trash4.getFoods().get(0).getName(), "Bread");
+        Assert.assertTrue(trash4.getFoods().contains(food4));
         Assert.assertTrue(warehouse4.getFoods().contains(food5));
         Assert.assertTrue(shop4.getFoods().contains(food6));
     }
@@ -143,7 +126,7 @@ class ControlQualityTest {
         Calendar expireDate1 = Calendar.getInstance();
         Calendar expireDate2 = Calendar.getInstance();
         expireDate.add(Calendar.DAY_OF_MONTH, 15);
-        expireDate1.add(Calendar.DAY_OF_MONTH, 0);
+        expireDate1.add(Calendar.DAY_OF_MONTH, -1);
         expireDate2.add(Calendar.DAY_OF_YEAR, 90);
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Calendar createDate = Calendar.getInstance();
