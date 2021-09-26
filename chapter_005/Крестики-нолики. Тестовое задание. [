@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-09-26T14:33:08.615Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36" etag="LrMQfYQODv94U9XjdFnl" version="15.3.3" type="github">
+<mxfile host="app.diagrams.net" modified="2021-09-26T14:39:17.206Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36" etag="nfBbSgjuMpqqWz_HNud2" version="15.3.3" type="github">
   <diagram id="R2lEEEUBdFMjLlhIrx00" name="Page-1">
     <mxGraphModel dx="1038" dy="521" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0" extFonts="Permanent Marker^https://fonts.googleapis.com/css?family=Permanent+Marker">
       <root>
@@ -36,7 +36,7 @@
         <mxCell id="qCr-LrOZbu9Gcw4e8UhM-8" value="XZField" style="swimlane;shadow=1;hachureGap=4;pointerEvents=0;fillColor=#F694C1;strokeColor=#AF45ED;fontColor=#095C86;rounded=1;" vertex="1" parent="1">
           <mxGeometry x="80" y="620" width="200" height="200" as="geometry" />
         </mxCell>
-        <mxCell id="qCr-LrOZbu9Gcw4e8UhM-9" value="Vertical Container" style="swimlane;shadow=1;hachureGap=4;pointerEvents=0;fillColor=#F694C1;strokeColor=#AF45ED;fontColor=#095C86;rounded=1;" vertex="1" parent="1">
+        <mxCell id="qCr-LrOZbu9Gcw4e8UhM-9" value="ExceptionBase" style="swimlane;shadow=1;hachureGap=4;pointerEvents=0;fillColor=#F694C1;strokeColor=#AF45ED;fontColor=#095C86;rounded=1;" vertex="1" parent="1">
           <mxGeometry x="490" y="100" width="280" height="180" as="geometry" />
         </mxCell>
         <mxCell id="qCr-LrOZbu9Gcw4e8UhM-28" value="try {&#xa;//код программы&#xa;}&#xa;//обработка исключений типа ExceptionBase&#xa;catch(ExceptionBase err) {" style="text;whiteSpace=wrap;html=1;fontColor=#095C86;" vertex="1" parent="qCr-LrOZbu9Gcw4e8UhM-9">
