@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-09-26T15:55:27.275Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36" etag="kgtTJ29h4MZgzOrXAlzu" version="15.3.3" type="github">
+<mxfile host="app.diagrams.net" modified="2021-09-26T15:55:53.526Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36" etag="Ut8mlGbge-GrQiB3IkBj" version="15.3.3" type="github">
   <diagram id="R2lEEEUBdFMjLlhIrx00" name="Page-1">
     <mxGraphModel dx="1038" dy="521" grid="1" gridSize="12" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0" extFonts="Permanent Marker^https://fonts.googleapis.com/css?family=Permanent+Marker">
       <root>
@@ -53,14 +53,14 @@
         <mxCell id="vXg535TCqa2Rohelyjky-8" value="+ setElement()&lt;br&gt;+getElement()&lt;br&gt;+ findNextMove()&lt;br&gt;+ gameOver()" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;shadow=1;hachureGap=4;pointerEvents=0;fontColor=#003300;startSize=40;fontSize=14;" vertex="1" parent="qCr-LrOZbu9Gcw4e8UhM-8">
           <mxGeometry x="20" y="16" width="156" height="120" as="geometry" />
         </mxCell>
-        <mxCell id="qCr-LrOZbu9Gcw4e8UhM-9" value="ExceptionBase" style="swimlane;shadow=1;hachureGap=4;pointerEvents=0;fillColor=#F694C1;strokeColor=#AF45ED;fontColor=#095C86;rounded=1;fontSize=14;" vertex="1" parent="1">
-          <mxGeometry x="492" y="96" width="280" height="190" as="geometry" />
+        <mxCell id="qCr-LrOZbu9Gcw4e8UhM-9" value="ExceptionBase" style="swimlane;shadow=1;hachureGap=4;pointerEvents=0;fillColor=#F694C1;strokeColor=#AF45ED;fontColor=#095C86;rounded=1;fontSize=14;startSize=36;" vertex="1" parent="1">
+          <mxGeometry x="492" y="84" width="280" height="202" as="geometry" />
         </mxCell>
         <mxCell id="qCr-LrOZbu9Gcw4e8UhM-28" value="try {&#xa;//код программы&#xa;}&#xa;//обработка исключений типа ExceptionBase&#xa;catch(ExceptionBase err) {" style="text;whiteSpace=wrap;html=1;fontColor=#095C86;" vertex="1" parent="qCr-LrOZbu9Gcw4e8UhM-9">
-          <mxGeometry x="10" y="30" width="270" height="80" as="geometry" />
+          <mxGeometry x="10" y="48" width="270" height="80" as="geometry" />
         </mxCell>
         <mxCell id="qCr-LrOZbu9Gcw4e8UhM-29" value="//обработка исключений других типов&#xa;catch(…) {&#xa;}" style="text;whiteSpace=wrap;html=1;fontColor=#095C86;" vertex="1" parent="qCr-LrOZbu9Gcw4e8UhM-9">
-          <mxGeometry x="10" y="110" width="240" height="70" as="geometry" />
+          <mxGeometry x="10" y="128" width="240" height="70" as="geometry" />
         </mxCell>
         <mxCell id="qCr-LrOZbu9Gcw4e8UhM-26" style="edgeStyle=none;rounded=0;jumpSize=8;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.75;exitY=0;exitDx=0;exitDy=0;fontColor=#095C86;startArrow=diamond;startFill=0;endArrow=classic;endFill=1;endSize=4;sourcePerimeterSpacing=8;targetPerimeterSpacing=8;strokeColor=#B5739D;strokeWidth=2;fillColor=#F694C1;" edge="1" parent="1" source="qCr-LrOZbu9Gcw4e8UhM-10">
           <mxGeometry relative="1" as="geometry">
