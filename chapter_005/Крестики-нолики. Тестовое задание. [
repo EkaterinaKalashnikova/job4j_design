@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-09-26T15:47:29.814Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36" etag="9GzbwMNwpjsGZTmTtDpB" version="15.3.3" type="github">
+<mxfile host="app.diagrams.net" modified="2021-09-26T15:48:01.423Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36" etag="_p3N0_SlSNC5kakKAuC7" version="15.3.3" type="github">
   <diagram id="R2lEEEUBdFMjLlhIrx00" name="Page-1">
     <mxGraphModel dx="1038" dy="521" grid="1" gridSize="12" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0" extFonts="Permanent Marker^https://fonts.googleapis.com/css?family=Permanent+Marker">
       <root>
@@ -37,10 +37,10 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="qCr-LrOZbu9Gcw4e8UhM-7" value="XZGame" style="swimlane;shadow=1;hachureGap=4;pointerEvents=0;fillColor=#F694C1;strokeColor=#AF45ED;fontColor=#095C86;rounded=1;fontSize=14;" vertex="1" parent="1">
-          <mxGeometry x="80" y="360" width="208" height="190" as="geometry" />
+          <mxGeometry x="96" y="360" width="168" height="156" as="geometry" />
         </mxCell>
         <mxCell id="vXg535TCqa2Rohelyjky-4" value="+ init()&lt;br&gt;+ drawStates()&lt;br&gt;+ @Overrade messangeHandler()&lt;br&gt;+ draw()" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;shadow=1;hachureGap=4;pointerEvents=0;fontColor=#660000;startSize=40;fontSize=14;" vertex="1" parent="qCr-LrOZbu9Gcw4e8UhM-7">
-          <mxGeometry x="24" y="48" width="168" height="108" as="geometry" />
+          <mxGeometry x="10" y="24" width="168" height="108" as="geometry" />
         </mxCell>
         <mxCell id="qCr-LrOZbu9Gcw4e8UhM-24" style="edgeStyle=none;rounded=0;jumpSize=8;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.75;exitY=0;exitDx=0;exitDy=0;fontColor=#095C86;startArrow=diamond;startFill=0;endArrow=classic;endFill=1;endSize=4;sourcePerimeterSpacing=8;targetPerimeterSpacing=8;strokeColor=#B5739D;strokeWidth=2;fillColor=#F694C1;" edge="1" parent="1" source="qCr-LrOZbu9Gcw4e8UhM-8">
           <mxGeometry relative="1" as="geometry">
