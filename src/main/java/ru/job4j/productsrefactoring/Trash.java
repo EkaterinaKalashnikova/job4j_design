@@ -22,7 +22,7 @@ public class Trash implements Storage {
     @Override
     public boolean isAppropriate(Food food) {
         //  Если срок годности вышел. Отправить продукт в мусорку.
-        return Calendar.getInstance().getTimeInMillis() - food.getExpiryDate().getTimeInMillis() > 0;
+        return Calendar.getInstance().getTimeInMillis() - food.getExpiryDate().getTimeInMillis() >= 0;
     }
 
     @Override
