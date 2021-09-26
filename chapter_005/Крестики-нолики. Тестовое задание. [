@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-09-26T15:42:58.962Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36" etag="beTumgAZf-xmyiNTdWcZ" version="15.3.3" type="github">
+<mxfile host="app.diagrams.net" modified="2021-09-26T15:44:21.837Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36" etag="K6satTu9AC6c7juP2Jpi" version="15.3.3" type="github">
   <diagram id="R2lEEEUBdFMjLlhIrx00" name="Page-1">
     <mxGraphModel dx="1038" dy="521" grid="1" gridSize="12" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0" extFonts="Permanent Marker^https://fonts.googleapis.com/css?family=Permanent+Marker">
       <root>
@@ -8,7 +8,7 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="qCr-LrOZbu9Gcw4e8UhM-6" value="BaseWindowClass" style="swimlane;shadow=1;hachureGap=4;pointerEvents=0;fillColor=#F694C1;strokeColor=#AF45ED;fontColor=#330066;rounded=1;startSize=40;arcSize=20;whiteSpace=wrap;fontSize=14;" vertex="1" parent="1">
-          <mxGeometry x="80" y="84" width="208" height="216" as="geometry">
+          <mxGeometry x="80" y="84" width="220" height="216" as="geometry">
             <mxRectangle x="80" y="100" width="140" height="40" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
@@ -16,7 +16,10 @@
           <mxGeometry x="20" y="50" width="180" height="70" as="geometry" />
         </mxCell>
         <mxCell id="vXg535TCqa2Rohelyjky-17" value="&lt;p style=&quot;font-size: 14px;&quot;&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;+ abstract draw()&lt;/span&gt;&lt;/font&gt;&lt;/p&gt;&lt;p style=&quot;font-size: 14px;&quot;&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;+ run()&lt;/span&gt;&lt;/font&gt;&lt;/p&gt;&lt;p style=&quot;font-size: 14px;&quot;&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;&lt;span style=&quot;font-size: 14px; line-height: 70%;&quot;&gt;+ messageHandler()&lt;/span&gt;&lt;/font&gt;&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;shadow=1;hachureGap=4;pointerEvents=0;fontSize=14;fontColor=#003300;startSize=40;fontFamily=Verdana;" vertex="1" parent="qCr-LrOZbu9Gcw4e8UhM-6">
-          <mxGeometry x="20" y="120" width="200" height="80" as="geometry" />
+          <mxGeometry x="20" y="144" width="200" height="56" as="geometry" />
+        </mxCell>
+        <mxCell id="vXg535TCqa2Rohelyjky-20" value="" style="line;strokeWidth=2;html=1;hachureGap=4;pointerEvents=0;rounded=1;shadow=1;fontFamily=Verdana;fontSize=14;fontColor=#330066;startSize=40;fillColor=#F694C1;align=left;verticalAlign=top;" vertex="1" parent="qCr-LrOZbu9Gcw4e8UhM-6">
+          <mxGeometry x="12" y="120" width="204" height="10" as="geometry" />
         </mxCell>
         <mxCell id="qCr-LrOZbu9Gcw4e8UhM-14" style="edgeStyle=none;curved=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;endArrow=classic;sourcePerimeterSpacing=8;targetPerimeterSpacing=8;strokeColor=#B5739D;fontColor=#095C86;endFill=1;strokeWidth=2;" edge="1" parent="1" source="qCr-LrOZbu9Gcw4e8UhM-7" target="qCr-LrOZbu9Gcw4e8UhM-6">
           <mxGeometry relative="1" as="geometry" />
